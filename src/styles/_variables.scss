@@ -1,0 +1,82 @@
+// Colors
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-purple: #6a5dc2;
+$color-purple-pale: #b4a9ff;
+$color-purple-light: #dc5dfc;
+$color-purple-accent: #9747ff;
+
+$color-gray: #747474;
+$color-gray-silver: #777;
+$color-gray-base: #616161;
+$color-gray-medium: #3c3c3c;
+$color-gray-dark: #393b3c;
+$color-gray-black: #0a0b0b;
+
+$color-red-light: #ff7575;
+$color-red-dark: #c82020;
+
+$color-blue-light: #67a5eb;
+$color-blue-gray: #45526e;
+
+$color-gold: #a59400;
+$color-green-dark: #308e21;
+
+$color-white-15: rgba($color-white, 0.15);
+$color-white-25: rgba($color-white, 0.25);
+$color-white-33: rgba($color-white, 0.33);
+$color-white-50: rgba($color-white, 0.5);
+$color-white-70: rgba($color-white, 0.7);
+$color-white-80: rgba($color-white, 0.8);
+
+$color-black-40: rgba($color-black, 0.4);
+
+$color-gray-black-50: rgba($color-gray-black, 0.5); 
+$color-gray-black-90: rgba($color-gray-black, 0.9); 
+
+// Background gradients
+$bg-gradient-main:
+  linear-gradient(180deg, #000 0%, rgba(39, 36, 36, 0.7) 100%),
+  linear-gradient(
+    180deg,
+    rgba(39, 135, 245, 0.2) 0%,
+    rgba(163, 147, 245, 0.2) 100%
+  );
+
+// Border-radius
+$radius-xs: 6px;
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 28px;
+$radius-xxl: 50px;
+
+// Box shadow
+$box-shadow: 0 0 80px 0 rgba(255, 255, 255, 0.33);
+
+
+// Typography
+$ff-play: "Play", "Arial", sans-serif;
+
+$fw-normal: 400;
+$fw-bold: 700;
+
+$fz-xxs: 12px;
+$fz-xs: 14px;
+$fz-sm: 18px;
+$fz-md: 24px;
+$fz-xl: 40px;
+$fz-xxl: 48px;
+
+$lh-xs: 1.17;
+$lh-sm: 1.2;
+$lh-md: 1.33;
+$lh-lg: 1.43;
+
+// Viewport
+// $vp-tablet: 1023px;
+// $vp-mobile: 767px;
+
+// Transition
+$transition: ease-in 0.3s;

@@ -1,0 +1,98 @@
+@use "@styles/variables" as vars;
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  $root: &;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: vars.$fz-sm;
+    font-weight: vars.$fw-normal;
+    line-height: vars.$lh-md;
+    color: vars.$color-white-70;
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    min-width: 70px;
+    padding: 4px 12px;
+    border-radius: vars.$radius-md;
+    font-size: vars.$fz-sm;
+    font-weight: vars.$fw-bold;
+    line-height: vars.$lh-md;
+    color: vars.$color-white;
+    background-color: vars.$color-black;
+
+    &--low {
+      background-color: vars.$color-red-dark;
+    }
+
+    &--medium {
+      background-color: vars.$color-gray-silver;
+    }
+
+    &--good {
+      background-color: vars.$color-green-dark;
+    }
+
+    &--high {
+      background-color: vars.$color-gold;
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: vars.$fz-xxl;
+    font-weight: vars.$fw-bold;
+    line-height: vars.$lh-xs;
+    color: vars.$color-white;
+  }
+
+  &__desc {
+    margin: 0;
+    font-size: vars.$fz-md;
+    font-weight: vars.$fw-normal;
+    line-height: vars.$lh-md;
+    color: vars.$color-white-70;
+  }
+
+  // Kind
+  &--search {
+    gap: 8px;
+
+    #{$root}__top {
+      gap: 12px;
+      font-size: vars.$fz-xs;
+      line-height: vars.$lh-lg;
+    }
+
+    #{$root}__rating {
+      min-width: 47px;
+      padding: 2px 8px;
+      font-size: vars.$fz-xxs;
+    }
+
+    #{$root}__icon {
+      width: 10px;
+      height: 10px;
+    }
+
+    #{$root}__title {
+      font-size: vars.$fz-sm;
+      line-height: vars.$lh-md;
+    }
+  }
+}

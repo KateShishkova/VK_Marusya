@@ -1,0 +1,47 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  backdrop-filter: blur(20px);
+  padding: 24px 0;
+  min-height: 96px;
+  $root: &;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__logo-link {
+    margin: 0 80px 0 0;
+    width: max-content;
+  }
+
+  &__logo-image {
+    width: 144px;
+    height: 32px;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+  }
+
+  &__nav-item {
+    width: max-content;
+  }
+
+  &__nav-item--end {
+    margin: 0 0 0 auto;
+  }
+
+  &__nav-item--search {
+    width: 100%;
+    max-width: 655px;
+  }
+}

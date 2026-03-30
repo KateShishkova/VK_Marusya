@@ -1,0 +1,30 @@
+@use "@styles/variables" as vars;
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  font-size: vars.$fz-sm;
+  font-weight: vars.$fw-normal;
+  line-height: vars.$lh-md;
+  color: vars.$color-white;
+
+  &__label-wrapper {
+    display: flex;
+    gap: 8px;
+    width: 320px;
+  }
+
+  &__line {
+    align-self: flex-end;
+    flex: 1 1 auto;
+    min-width: 40px;
+    height: 1px;
+    margin-bottom: 5px;
+    background: repeating-linear-gradient(
+      to right,
+      vars.$color-white-50 0 2px,
+      transparent 2px 4px
+    );
+  }
+}

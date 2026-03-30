@@ -1,0 +1,40 @@
+@use "@styles/variables" as vars;
+
+.info {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: vars.$fz-md;
+  line-height: vars.$lh-md;
+  font-weight: vars.$fw-bold;
+  color: vars.$color-white;
+
+  &__icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: vars.$color-white-50;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__label {
+    font-size: vars.$fz-sm;
+    line-height: vars.$lh-md;
+  }
+}

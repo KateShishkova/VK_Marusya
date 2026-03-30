@@ -1,0 +1,41 @@
+@use "@styles/variables" as vars;
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  margin-top: 12px;
+
+  padding: 8px;
+  width: 100%;
+  border-radius: vars.$radius-sm;
+  color: vars.$color-white;
+  background-color: vars.$color-gray-dark;
+  overflow: hidden;
+}
+
+
+// CSSTransition classes
+.dropdownEnter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.dropdownEnterActive {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+.dropdownExit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.dropdownExitActive {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}

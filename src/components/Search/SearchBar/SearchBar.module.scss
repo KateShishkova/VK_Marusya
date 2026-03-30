@@ -1,0 +1,20 @@
+.search {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+  }
+
+  &__dropdown {
+    width: calc(559 / 655 * 100%);
+  }
+}

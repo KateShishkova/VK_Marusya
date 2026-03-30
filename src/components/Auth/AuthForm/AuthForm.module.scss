@@ -1,0 +1,38 @@
+@use "@styles/variables" as vars;
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+
+  &__logo {
+    width: 132px;
+    height: 29px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: vars.$fz-md;
+    font-weight: vars.$fw-bold;
+    line-height: vars.$lh-md;
+    color: inherit;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: vars.$fz-sm;
+    line-height: vars.$lh-md;
+    color: inherit;
+  }
+}

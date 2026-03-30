@@ -1,0 +1,36 @@
+@use "@styles/variables" as vars;
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(224px, auto));
+  justify-content: center;
+  gap: 64px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    position: relative;
+    display: flex;
+    min-height: 336px;
+    height: 100%;
+  }
+
+  &__index {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: vars.$radius-xxl;
+    min-width: 62px;
+    font-size: vars.$fz-md;
+    font-weight: vars.$fw-bold;
+    line-height: vars.$lh-md;
+    color: vars.$color-purple;
+    background-color: vars.$color-white;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,125 @@
+@use "@styles/variables" as vars;
+
+.custom-input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  $root: &;
+
+  &__field {
+    outline: none;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: vars.$radius-sm;
+    padding: 16px;
+    font-family: inherit;
+    font-size: vars.$fz-sm;
+    line-height: vars.$lh-md;
+    color: vars.$color-white;
+    background-color: vars.$color-gray-dark;
+    transition: border-color vars.$transition;
+
+    &::placeholder {
+      color: vars.$color-white-50;
+    }
+
+    &:hover,
+    &:focus-visible {
+      border-color: vars.$color-purple-pale;
+    }
+
+    &:hover + #{$root}__icon,
+    &:focus-visible + #{$root}__icon {
+      color: vars.$color-purple-pale;
+    }
+  }
+
+  &__error-text {
+    font-size: vars.$fz-sm;
+    line-height: vars.$lh-md;
+    color: vars.$color-red-light;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    color: vars.$color-white-50;
+    transition: color vars.$transition;
+  }
+
+  &__reset {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    color: vars.$color-white-50;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  // Has icons
+  &--icon {
+    #{$root}__field {
+      padding: 16px 16px 16px 52px;
+    }
+  }
+
+  &--reset {
+    #{$root}__field {
+      padding: 16px 52px;
+    }
+  }
+
+  // Theme
+  &--light {
+    #{$root}__field {
+      border: 1px solid vars.$color-black-40;
+      color: vars.$color-black;
+      background-color: vars.$color-white-15;
+
+      &::placeholder {
+        color: vars.$color-black-40;
+      }
+
+      &:hover,
+      &:focus-visible {
+        border-color: vars.$color-purple-pale;
+      }
+
+      &:hover + #{$root}__icon,
+      &:focus-visible + #{$root}__icon {
+        color: vars.$color-purple-pale;
+      }
+    }
+
+    #{$root}__icon {
+      color: vars.$color-black-40;
+    }
+  }
+
+  // State
+  &--error {
+    #{$root}__field,
+    #{$root}__field:hover,
+    #{$root}__field:focus-visible {
+      border-color: vars.$color-red-light;
+    }
+
+    #{$root}__icon {
+      color: vars.$color-red-light;
+    }
+
+    #{$root}__field:hover + #{$root}__icon,
+    #{$root}__field:focus-visible + #{$root}__icon {
+      color: vars.$color-red-light;
+    }
+  }
+}

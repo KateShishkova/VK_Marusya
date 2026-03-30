@@ -1,0 +1,58 @@
+@use "@styles/variables" as vars;
+
+.link {
+  width: 100%;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: vars.$fz-md;
+  font-weight: vars.$fw-normal;
+  line-height: vars.$lh-md;
+  color: vars.$color-white;
+  transition: color vars.$transition;
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    color: vars.$color-purple-pale;
+  }
+
+  &--active {
+    border-bottom: 1.5px solid vars.$color-purple-light;
+  }
+
+  &--icon {
+    padding: 0;
+    color: vars.$color-white-80;
+
+    svg {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &--img {
+    padding: 0;
+
+    img {
+      transition: transform vars.$transition;
+    }
+
+    &:hover img,
+    &:focus-visible img {
+      transform: scale(1.15);
+    }
+  }
+
+  &--icon-text {
+    gap: 8px;
+    padding: 8px 0 8px 32px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
