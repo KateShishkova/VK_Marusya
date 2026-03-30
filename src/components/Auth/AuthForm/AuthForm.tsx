@@ -21,7 +21,7 @@ export const AuthForm = () => {
       authContent = (
         <>
           <LoginForm />
-          <Button kind="plain" onClick={handleClick}>
+          <Button kind="plain" fontSize="small" onClick={handleClick}>
             Регистрация
           </Button>
         </>
@@ -33,7 +33,7 @@ export const AuthForm = () => {
         <>
           <h3 className={styles.auth__title}>Регистрация</h3>
           <RegisterForm onSuccessRegister={handleRegisterSuccess} />
-          <Button kind="plain" onClick={handleClick}>
+          <Button kind="plain" fontSize="small" onClick={handleClick}>
             У меня есть пароль
           </Button>
         </>

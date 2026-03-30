@@ -6,6 +6,10 @@ import { GENRES } from "@config/genres";
 import { YoutubePlayer } from "@components/Movie/YoutubePlayer";
 import { RegisterForm } from "@components/Auth/RegisterForm";
 import { AuthForm } from "@components/Auth/AuthForm";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@store/store";
+import { useFetchProfileQuery, useLogoutMutation } from "@api/authApi";
+import { resetUser } from "@store/userSlice";
 
 const movie = {
   id: 1207898,
@@ -327,7 +331,23 @@ const user = {
 };
 
 function App() {
+  useFetchProfileQuery();
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const { isAuth, user } = useSelector((state: RootState) => state.user);
+
+  const [logout] = useLogoutMutation();
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      dispatch(resetUser());
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <Layout>
@@ -340,7 +360,8 @@ function App() {
         </Popup>
       )}
 
-      
+      <Button onClick={() => console.log(isAuth, user)}>user</Button>
+      <Button onClick={handleLogout}>logout</Button>
     </Layout>
   );
 }

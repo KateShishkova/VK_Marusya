@@ -12,6 +12,7 @@ interface ICustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   iconName?: string;
   hasReset?: boolean;
   theme?: "dark" | "light";
+  paddingSize?: "medium" | "small";
 }
 
 export const CustomInput: FC<ICustomInputProps> = ({
@@ -22,6 +23,7 @@ export const CustomInput: FC<ICustomInputProps> = ({
   iconName,
   hasReset = type === "search",
   theme = "dark",
+  paddingSize = 'medium',
   className,
   ...props
 }) => {
@@ -30,6 +32,7 @@ export const CustomInput: FC<ICustomInputProps> = ({
   const finalClassName = clsx(
     styles[`custom-input`],
     theme !== "dark" && styles[`custom-input--${theme}`],
+    paddingSize !== 'medium' && styles[`custom-input--${paddingSize}`],
     hasIcon && styles["custom-input--icon"],
     errorMessage && styles["custom-input--error"],
     hasReset && styles["custom-input--reset"],

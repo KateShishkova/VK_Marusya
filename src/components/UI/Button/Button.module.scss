@@ -36,6 +36,15 @@
     }
   }
 
+  // Font size
+  &--font-medium {
+    font-size: vars.$fz-md;
+  }
+
+  &--font-small {
+    font-size: vars.$fz-sm;
+  }
+
   // Shape
   &--rectangle-small {
     padding: 15px 21px;

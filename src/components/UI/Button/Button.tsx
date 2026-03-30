@@ -6,6 +6,7 @@ type TPlainButtonProps = {
   kind: "plain";
   type?: "submit" | "reset" | "button";
 
+  fontSize?: "medium" | "small";
   children: React.ReactNode;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">;
 
@@ -21,10 +22,22 @@ type TRegularButtonProps = {
 type TButtonProps = TPlainButtonProps | TRegularButtonProps;
 
 export const Button: FC<TButtonProps> = (props) => {
+  // Kind === "plain"
   if (props.kind === "plain") {
-    const { className, children, type = "button", ...rest } = props;
-    
-    const finalClassName = clsx(styles.btn, styles["btn--plain"], className);
+    const {
+      type = "button",
+      fontSize = "medium",
+      children,
+      className,
+      ...rest
+    } = props;
+
+    const finalClassName = clsx(
+      styles.btn,
+      styles[`btn--font-${fontSize}`],
+      styles["btn--plain"],
+      className,
+    );
 
     return (
       <button className={finalClassName} type={type} {...rest}>
@@ -35,11 +48,11 @@ export const Button: FC<TButtonProps> = (props) => {
 
   // Kind === "button"
   const {
+    type = "button",
     shape = "rectangle",
     background = "primary",
-    className,
     children,
-    type = "button",
+    className,
     ...rest
   } = props;
 

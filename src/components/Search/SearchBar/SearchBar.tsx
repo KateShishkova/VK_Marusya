@@ -32,6 +32,7 @@ export const SearchBar = () => {
           type="search"
           placeholder="Поиск"
           iconName="search"
+          paddingSize="small"
           value={searchValue}
           onChange={handleInputChange}
           onFocus={handleInputFocus}

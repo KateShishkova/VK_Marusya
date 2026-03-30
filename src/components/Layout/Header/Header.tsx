@@ -50,16 +50,7 @@ export const Header: FC = () => {
             >
               <SearchBar />
             </div>
-            {/* <CustomLink
-              className={clsx(
-                styles["header__nav-item"],
-                styles["header__nav-item--end"],
-              )}
-              href="#"
-            >
-              Войти
-            </CustomLink> */}
-
+            
             {isAuth ? (
               <CustomLink
                 className={clsx(

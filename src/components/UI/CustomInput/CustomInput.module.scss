@@ -105,6 +105,18 @@
     }
   }
 
+  // Padding size
+  &--small {
+    #{$root}__field {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    #{$root}__icon {
+      top: 12px;
+    }
+  }
+
   // State
   &--error {
     #{$root}__field,
