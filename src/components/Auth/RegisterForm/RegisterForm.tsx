@@ -1,5 +1,4 @@
 import type { FC, HTMLAttributes } from "react";
-import { useState } from "react";
 import styles from "./RegisterForm.module.scss";
 import clsx from "clsx";
 import { CustomInput } from "@components/UI/CustomInput";
@@ -8,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userRegisterSchema, type TUserRegister } from "@schemas/user.schema";
 import { useRegisterUserMutation } from "@api/authApi";
+import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 interface IRegisterForm extends HTMLAttributes<HTMLFormElement> {
   onSuccessRegister?: () => void;
@@ -26,19 +26,14 @@ export const RegisterForm: FC<IRegisterForm> = ({
     resolver: zodResolver(userRegisterSchema),
   });
 
-  const [registerUser, { isLoading }] = useRegisterUserMutation();
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [registerUser, { isLoading, isError, error }] =
+    useRegisterUserMutation();
 
   const onSubmit = async (data: TUserRegister) => {
-    setSubmitError(null);
     try {
       await registerUser(data).unwrap();
       onSuccessRegister?.();
-    } catch (e: any) {
-      const message =
-        e?.data?.message || e?.message || "Произошла ошибка регистрации";
-      setSubmitError(message);
-    }
+    } catch (e) {}
   };
 
   const finalClassName = clsx(styles.form, className);
@@ -92,8 +87,13 @@ export const RegisterForm: FC<IRegisterForm> = ({
         />
       </div>
 
-      {submitError && (
-        <div className={styles["form__submit-error"]}>{submitError}</div>
+      {isError && (
+        <div className={styles["form__submit-error"]}>
+          {getRtkErrorMessage(
+            error,
+            "Произошла ошибка. Проверьте введённые данные или попробуйте позже.",
+          )}
+        </div>
       )}
 
       <Button background="accent" type="submit" disabled={isLoading}>

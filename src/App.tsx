@@ -7,8 +7,8 @@ import { YoutubePlayer } from "@components/Movie/YoutubePlayer";
 import { RegisterForm } from "@components/Auth/RegisterForm";
 import { AuthForm } from "@components/Auth/AuthForm";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@store/store";
-import { useFetchProfileQuery, useLogoutMutation } from "@api/authApi";
+import type { AppDispatch, RootState } from "@store/store";
+import { authApi, useFetchProfileQuery, useLogoutMutation } from "@api/authApi";
 import { resetUser } from "@store/userSlice";
 
 const movie = {
@@ -331,19 +331,18 @@ const user = {
 };
 
 function App() {
-  useFetchProfileQuery();
+  const { refetch } = useFetchProfileQuery();
 
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   const { isAuth, user } = useSelector((state: RootState) => state.user);
 
   const [logout] = useLogoutMutation();
-  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     try {
       await logout().unwrap();
-      dispatch(resetUser());
+      refetch();
     } catch (e) {
       console.error(e);
     }
@@ -351,14 +350,14 @@ function App() {
 
   return (
     <Layout>
-      <Button background="accent" onClick={() => setIsOpen(true)}>
+      {/* <Button background="accent" onClick={() => setIsOpen(true)}>
         Открыть модальное окно
       </Button>
       {isOpen && (
-        <Popup kind="video" onClose={() => setIsOpen(false)}>
+        <Popup onClose={() => setIsOpen(false)}>
           <AuthForm />
         </Popup>
-      )}
+      )} */}
 
       <Button onClick={() => console.log(isAuth, user)}>user</Button>
       <Button onClick={handleLogout}>logout</Button>

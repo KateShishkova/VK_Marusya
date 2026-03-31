@@ -1,4 +1,4 @@
-import { useState, type FC, type HTMLAttributes } from "react";
+import { type FC, type HTMLAttributes } from "react";
 import styles from "./LoginForm.module.scss";
 import clsx from "clsx";
 import { CustomInput } from "@components/UI/CustomInput";
@@ -6,7 +6,10 @@ import { Button } from "@components/UI/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userLoginSchema, type TUserLogin } from "@schemas/user.schema";
-import { useLoginMutation } from "@api/authApi";
+import { authApi, useLoginMutation } from "@api/authApi";
+import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "@store/store";
 
 interface ILoginForm extends HTMLAttributes<HTMLFormElement> {}
 
@@ -19,18 +22,18 @@ export const LoginForm: FC<ILoginForm> = ({ className, ...props }) => {
     resolver: zodResolver(userLoginSchema),
   });
 
-  const [login, { isLoading }] = useLoginMutation();
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [login, { isLoading, isError, error }] = useLoginMutation();
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = async (data: TUserLogin) => {
-    setSubmitError(null);
     try {
       await login(data).unwrap();
-    } catch (e: any) {
-      const message =
-        e?.data?.message || e?.message || "Произошла ошибка регистрации";
-      setSubmitError(message);
-    }
+      await dispatch(
+        authApi.endpoints.fetchProfile.initiate(undefined, {
+          forceRefetch: true,
+        }),
+      );
+    } catch (e) {}
   };
 
   const finalClassName = clsx(styles.form, className);
@@ -60,8 +63,13 @@ export const LoginForm: FC<ILoginForm> = ({ className, ...props }) => {
         />
       </div>
 
-      {submitError && (
-        <div className={styles["form__submit-error"]}>{submitError}</div>
+      {isError && (
+        <div className={styles["form__submit-error"]}>
+          {getRtkErrorMessage(
+            error,
+            "Произошла ошибка. Проверьте введённые данные или попробуйте позже.",
+          )}
+        </div>
       )}
 
       <Button background="accent" type="submit" disabled={isLoading}>

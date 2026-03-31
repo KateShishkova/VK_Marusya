@@ -1,4 +1,4 @@
-import { useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import styles from "./Header.module.scss";
 import clsx from "clsx";
 import { CustomLink } from "@components/UI/CustomLink";
@@ -12,6 +12,10 @@ import { Button } from "@components/UI/Button";
 export const Header: FC = () => {
   const { isAuth, user } = useSelector((state: RootState) => state.user);
   const [isAuthModalOpen, setAuthModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (isAuth) setAuthModalOpen(false);
+  }, [isAuth]);
 
   return (
     <header className={styles.header}>
@@ -50,7 +54,7 @@ export const Header: FC = () => {
             >
               <SearchBar />
             </div>
-            
+
             {isAuth ? (
               <CustomLink
                 className={clsx(
@@ -80,7 +84,6 @@ export const Header: FC = () => {
                 )}
               </>
             )}
-
           </nav>
         </div>
       </div>
