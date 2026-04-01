@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "@store/store";
 import { authApi, useFetchProfileQuery, useLogoutMutation } from "@api/authApi";
 import { resetUser } from "@store/userSlice";
+import { MainPage } from "@pages/MainPage";
 
 const movie = {
   id: 1207898,
@@ -359,8 +360,10 @@ function App() {
         </Popup>
       )} */}
 
-      <Button onClick={() => console.log(isAuth, user)}>user</Button>
-      <Button onClick={handleLogout}>logout</Button>
+      {/* <Button onClick={() => console.log(isAuth, user)}>user</Button>
+      <Button onClick={handleLogout}>logout</Button> */}
+
+      <MainPage />
     </Layout>
   );
 }

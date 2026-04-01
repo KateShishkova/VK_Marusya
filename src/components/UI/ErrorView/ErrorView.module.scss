@@ -1,0 +1,44 @@
+@use "@styles/variables" as vars;
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  $root: &;
+
+  &__title {
+    margin: 0;
+    font-size: vars.$fz-xl;
+    line-height: vars.$lh-sm;
+    font-weight: vars.$fw-bold;
+    color: vars.$color-white;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: vars.$fz-md;
+    line-height: vars.$lh-md;
+    color: vars.$color-white-70;
+    text-align: center;
+  }
+
+  &--section {
+    align-items: flex-start;
+
+    #{$root}__content {
+      align-items: flex-start;
+    }
+
+    #{$root}__btn {
+      align-items: flex-end;
+    }
+  }
+}

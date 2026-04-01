@@ -1,16 +1,16 @@
 @use "@styles/variables" as vars;
 
 .banner {
-  padding: 32px 0 0 0;
   display: grid;
   grid-template-columns: 1fr 680px;
 
   &__left {
-    padding: 74px 0 0 0;
+    align-self: center;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 60px;
+    min-height: 404px;
   }
 
   &__action-wrapper {
