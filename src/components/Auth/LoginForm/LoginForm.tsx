@@ -6,10 +6,8 @@ import { Button } from "@components/UI/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userLoginSchema, type TUserLogin } from "@schemas/user.schema";
-import { authApi, useLoginMutation } from "@api/authApi";
+import { useLoginMutation } from "@api/authApi";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "@store/store";
 
 interface ILoginForm extends HTMLAttributes<HTMLFormElement> {}
 
@@ -23,16 +21,10 @@ export const LoginForm: FC<ILoginForm> = ({ className, ...props }) => {
   });
 
   const [login, { isLoading, isError, error }] = useLoginMutation();
-  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = async (data: TUserLogin) => {
     try {
       await login(data).unwrap();
-      await dispatch(
-        authApi.endpoints.fetchProfile.initiate(undefined, {
-          forceRefetch: true,
-        }),
-      );
     } catch (e) {}
   };
 

@@ -332,7 +332,7 @@ const user = {
 };
 
 function App() {
-  const { refetch } = useFetchProfileQuery();
+  useFetchProfileQuery();
 
   // const [isOpen, setIsOpen] = useState(false);
 
@@ -343,10 +343,7 @@ function App() {
   const handleLogout = async () => {
     try {
       await logout().unwrap();
-      refetch();
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) {}
   };
 
   return (
@@ -360,10 +357,10 @@ function App() {
         </Popup>
       )} */}
 
-      {/* <Button onClick={() => console.log(isAuth, user)}>user</Button>
-      <Button onClick={handleLogout}>logout</Button> */}
+      <Button onClick={() => console.log(isAuth, user)}>user</Button>
+      <Button onClick={handleLogout}>logout</Button>
 
-      <MainPage />
+      {/* <MainPage /> */}
     </Layout>
   );
 }
