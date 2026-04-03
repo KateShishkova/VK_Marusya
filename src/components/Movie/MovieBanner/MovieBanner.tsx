@@ -4,23 +4,26 @@ import { useState, type FC } from "react";
 import { MovieInfo } from "../MovieInfo";
 import styles from "./MovieBanner.module.scss";
 import type { TMovieResponse } from "@schemas/movie.schema";
+import clsx from "clsx";
 
 interface IMovieBannerProps {
   movie: TMovieResponse;
   kind?: "banner" | "page";
+  isFetching?: boolean;
+  onRefetchMovie?: () => void;
   onOpenTrailer?: () => void;
   onOpenMoviePage?: () => void;
   onToggleFavorite?: () => void;
-  onRefetchMovie?: () => void;
 }
 
 export const MovieBanner: FC<IMovieBannerProps> = ({
   movie,
   kind = "banner",
+  isFetching = false,
+  onRefetchMovie,
   onOpenTrailer,
   onOpenMoviePage,
   onToggleFavorite,
-  onRefetchMovie,
 }) => {
   const [imgError, setImgError] = useState(false);
 
@@ -53,7 +56,13 @@ export const MovieBanner: FC<IMovieBannerProps> = ({
             onClick={onRefetchMovie}
             aria-label="Обновить"
           >
-            <Icon name="refresh" />
+            <Icon
+              name="refresh"
+              className={clsx(
+                styles["banner__refetch-icon"],
+                isFetching && styles["banner__refetch-icon--active"],
+              )}
+            />
           </Button>
         </div>
       );

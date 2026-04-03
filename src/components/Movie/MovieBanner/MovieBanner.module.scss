@@ -46,4 +46,19 @@
     text-align: center;
     padding: 10px;
   }
+
+  &__refetch-icon {
+    transition: color vars.$transition;
+  }
+
+  &__refetch-icon--active {
+    color: vars.$color-purple-pale;
+    animation: spin 1.5s linear infinite;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
