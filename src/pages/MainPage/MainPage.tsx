@@ -15,6 +15,7 @@ export const MainPage = () => {
     isLoading: isRandomLoading,
     isError: isRandomError,
     error: randomError,
+    refetch: randomRefetch,
   } = useGetRandomMovieQuery();
   const {
     data: topMovies,
@@ -47,15 +48,15 @@ export const MainPage = () => {
 
   return (
     <>
-      {!isRandomError && randomMovie && (
+      {randomMovie && (
         <section className={randomMovieStyles.section}>
           <div className="container">
-            <MovieBanner movie={randomMovie} />
+            <MovieBanner movie={randomMovie} onRefetchMovie={randomRefetch} />
           </div>
         </section>
       )}
 
-      {!isTopMoviesError && topMovies && (
+      {topMovies && (
         <section className={topMoviesStyles.section}>
           <div className="container">
             <div className={topMoviesStyles.section__wrapper}>

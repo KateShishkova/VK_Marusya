@@ -27,7 +27,7 @@ export const MovieCard: FC<IMovieCardProps> = ({
           onError={() => setImgError(true)}
         />
       ) : (
-        <span className={styles.card__error}>Постер отсутствует</span>
+        <span className={styles.card__error}>{movie.title}</span>
       )}
     </div>
   );

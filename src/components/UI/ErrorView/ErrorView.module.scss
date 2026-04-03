@@ -38,7 +38,11 @@
     }
 
     #{$root}__btn {
-      align-items: flex-end;
+      align-self: flex-end;
+    }
+
+    #{$root}__text {
+      text-align: left;
     }
   }
 }

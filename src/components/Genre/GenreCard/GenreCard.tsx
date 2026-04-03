@@ -23,7 +23,7 @@ export const GenreCard: FC<IGenreCardProps> = ({ genre }) => {
             onError={() => setImgError(true)}
           />
         ) : (
-          <span className={styles.card__error}>Постер отсутствует</span>
+          <span className={styles.card__error}>{genre.ru}</span>
         )}
       </div>
       <div className={styles.card__content}>

@@ -1,24 +1,23 @@
-import type { SerializedError } from "@reduxjs/toolkit";
-import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-
 export const getRtkErrorMessage = (
-  error: FetchBaseQueryError | SerializedError | undefined,
+  error: unknown,
   defaultMessage = "Произошла ошибка",
 ): string => {
-  if (!error) return "Неизвестная ошибка";
+  if (!error) return defaultMessage;
   if (typeof error === "string") return error;
-  if (typeof error === "object") {
-    if ("data" in error && typeof error.data === "object" && error.data) {
-      if ("message" in error.data) {
-        return (error.data as any).message;
-      }
-      if ("error" in error.data) {
-        return (error.data as any).error;
+  if (typeof error === "object" && error !== null) {
+    // RTK Query FetchBaseQueryError
+    if ("status" in error && "data" in error) {
+      if (typeof error.data === "string") return error.data;
+      if (
+        typeof error.data === "object" &&
+        error.data !== null &&
+        "message" in error.data
+      ) {
+        return String(error.data.message);
       }
     }
-    if ("error" in error && typeof error.error === "string") {
-      return error.error;
-    }
+    // SerializedError
+    if ("message" in error) return String((error as any).message);
   }
   return defaultMessage;
 };
