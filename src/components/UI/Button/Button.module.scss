@@ -2,7 +2,7 @@
 
 .btn {
   border: 1px solid vars.$color-black-40;
-  border-radius: 28px;
+  border-radius: vars.$radius-xl;
   padding: 15px 46px;
   display: flex;
   align-items: center;

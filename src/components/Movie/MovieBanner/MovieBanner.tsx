@@ -5,6 +5,7 @@ import { MovieInfo } from "../MovieInfo";
 import styles from "./MovieBanner.module.scss";
 import type { TMovieResponse } from "@schemas/movie.schema";
 import clsx from "clsx";
+import { CustomLink } from "@components/UI/CustomLink";
 
 interface IMovieBannerProps {
   movie: TMovieResponse;
@@ -12,7 +13,6 @@ interface IMovieBannerProps {
   isFetching?: boolean;
   onRefetchMovie?: () => void;
   onOpenTrailer?: () => void;
-  onOpenMoviePage?: () => void;
   onToggleFavorite?: () => void;
 }
 
@@ -22,7 +22,6 @@ export const MovieBanner: FC<IMovieBannerProps> = ({
   isFetching = false,
   onRefetchMovie,
   onOpenTrailer,
-  onOpenMoviePage,
   onToggleFavorite,
 }) => {
   const [imgError, setImgError] = useState(false);
@@ -32,18 +31,13 @@ export const MovieBanner: FC<IMovieBannerProps> = ({
     case "banner":
       actionContent = (
         <div className={styles["banner__action-wrapper"]}>
-          <Button
-            className={styles.banner__btn}
-            background="accent"
-            onClick={onOpenTrailer}
-          >
+          <Button background="accent" onClick={onOpenTrailer}>
             Трейлер
           </Button>
-          <Button className={styles.banner__btn} onClick={onOpenMoviePage}>
+          <CustomLink href="#" kind="btn">
             О&nbsp;фильме
-          </Button>
+          </CustomLink>
           <Button
-            className={styles.banner__btn}
             shape="rectangle-small"
             onClick={onToggleFavorite}
             aria-label="Добавить в избранные"
@@ -51,7 +45,6 @@ export const MovieBanner: FC<IMovieBannerProps> = ({
             <Icon name="heart" />
           </Button>
           <Button
-            className={styles.banner__btn}
             shape="rectangle-small"
             onClick={onRefetchMovie}
             aria-label="Обновить"
@@ -71,15 +64,10 @@ export const MovieBanner: FC<IMovieBannerProps> = ({
     case "page":
       actionContent = (
         <div className={styles["banner__action-wrapper"]}>
-          <Button
-            className={styles.banner__btn}
-            background="accent"
-            onClick={onOpenTrailer}
-          >
+          <Button background="accent" onClick={onOpenTrailer}>
             Трейлер
           </Button>
           <Button
-            className={styles.banner__btn}
             shape="rectangle-small"
             onClick={onToggleFavorite}
             aria-label="Добавить в избранные"

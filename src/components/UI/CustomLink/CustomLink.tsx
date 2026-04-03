@@ -5,7 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 
 interface ICustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
-  kind?: "text" | "icon" | "img" | "icon-text";
+  kind?: "text" | "icon" | "img" | "icon-text" | "btn";
   isActive?: boolean;
 }
 
