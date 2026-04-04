@@ -5,4 +5,5 @@ export type GetMoviesParams = {
   genre?: string;
 };
 
-export type MovieIdParam = number | string;
+export type MovieId = string;
+export type MovieParams = { id: MovieId };

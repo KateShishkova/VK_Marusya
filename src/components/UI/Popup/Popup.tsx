@@ -5,7 +5,7 @@ import { Button } from "../Button";
 import { Icon } from "../Icon";
 import clsx from "clsx";
 
-interface IPopupProps {
+export interface IPopupProps {
   children: ReactNode;
   kind?: "default" | "video";
   onClose?: () => void;

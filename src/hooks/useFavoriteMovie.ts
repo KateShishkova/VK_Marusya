@@ -1,4 +1,4 @@
-import type { MovieIdParam } from "@api/types";
+import type { MovieId } from "@api/types";
 import { useSelector } from "react-redux";
 import type { RootState } from "@store/store";
 import {
@@ -9,13 +9,12 @@ import { useState } from "react";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 export const useFavoriteMovie = (
-  movieId: MovieIdParam,
+  movieId: MovieId,
   onAuthRequired: () => void,
 ) => {
   const isAuth = useSelector((state: RootState) => state.user.isAuth);
-  const favorites = useSelector(
-    (state: RootState) => state.user.user?.favorites ?? [],
-  );
+  const favorites =
+    useSelector((state: RootState) => state.user.user?.favorites) || [];
 
   const [postFavoriteMovie] = usePostFavoriteMovieMutation();
   const [deleteFavoriteMovie] = useDeleteFavoriteMovieMutation();
@@ -34,9 +33,9 @@ export const useFavoriteMovie = (
 
     try {
       if (isFavorite) {
-        await deleteFavoriteMovie(movieId).unwrap();
+        await deleteFavoriteMovie(String(movieId)).unwrap();
       } else {
-        await postFavoriteMovie(movieId).unwrap();
+        await postFavoriteMovie({ id: String(movieId) }).unwrap();
       }
     } catch (error) {
       setError(

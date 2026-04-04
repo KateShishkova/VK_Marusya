@@ -1,22 +1,17 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_CONFIG } from "@config/api";
 import {
   movieResponseSchema,
   type TMovieListResponse,
   type TMovieResponse,
 } from "@schemas/movie.schema";
-import type { GetMoviesParams, MovieIdParam } from "./types";
+import type { GetMoviesParams, MovieId } from "./types";
 import {
   genreResponseSchema,
   type TGenreListResponse,
 } from "@schemas/genre.schema";
+import { baseApi } from "./baseApi";
 
-export const movieApi = createApi({
-  reducerPath: "movieApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_CONFIG.BASE_URL,
-    credentials: "include",
-  }),
+export const movieApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getMovies: builder.query<TMovieListResponse, GetMoviesParams>({
       query: (params = {}) => ({
@@ -46,7 +41,7 @@ export const movieApi = createApi({
         genreResponseSchema.array().parse(response),
     }),
 
-    getMovieById: builder.query<TMovieResponse, MovieIdParam>({
+    getMovieById: builder.query<TMovieResponse, MovieId>({
       query: (movieId) => ({
         url: API_CONFIG.PATHS.MOVIE.BY_ID(movieId),
         method: "GET",

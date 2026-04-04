@@ -1,4 +1,3 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_CONFIG } from "@config/api";
 import {
   userResponseSchema,
@@ -6,14 +5,9 @@ import {
   type TUserRegister,
   type TUserResponse,
 } from "@schemas/user.schema";
+import { baseApi } from "./baseApi";
 
-export const authApi = createApi({
-  reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_CONFIG.BASE_URL,
-    credentials: "include",
-  }),
-  tagTypes: ['User'],
+export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<void, TUserLogin>({
       query: (body) => ({
@@ -21,14 +15,14 @@ export const authApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
         url: API_CONFIG.PATHS.AUTH.LOGOUT,
         method: "GET",
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
     registerUser: builder.mutation<void, TUserRegister>({
       query: (body) => ({
@@ -44,7 +38,7 @@ export const authApi = createApi({
       }),
       transformResponse: (response: unknown) =>
         userResponseSchema.parse(response),
-      providesTags: ['User'],
+      providesTags: ["User"],
     }),
   }),
 });

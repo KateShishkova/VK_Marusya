@@ -1,14 +1,21 @@
-import { Popup } from "@components/UI/Popup";
+import { Popup, type IPopupProps } from "@components/UI/Popup";
 import { useCallback, useState, type ReactNode } from "react";
 
-export const useModal = (modalContent: ReactNode = null) => {
+type TPopupKind = IPopupProps["kind"];
+
+export const useModal = (
+  modalContent: ReactNode = null,
+  kind: TPopupKind = "default",
+) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => setIsOpen(true), []);
   const closeModal = useCallback(() => setIsOpen(false), []);
 
   const Modal = isOpen ? (
-    <Popup onClose={closeModal}>{modalContent}</Popup>
+    <Popup kind={kind} onClose={closeModal}>
+      {modalContent}
+    </Popup>
   ) : null;
 
   return { openModal, closeModal, Modal };

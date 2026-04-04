@@ -1,18 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_CONFIG } from "@config/api";
 import {
   movieResponseSchema,
   type TMovieListResponse,
 } from "@schemas/movie.schema";
-import type { MovieIdParam } from "./types";
+import type { MovieId, MovieParams } from "./types";
+import { baseApi } from "./baseApi";
 
-export const favoritesApi = createApi({
-  reducerPath: "favoritesApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_CONFIG.BASE_URL,
-    credentials: "include",
-  }),
-  tagTypes: ["User"],
+export const favoritesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getFavorites: builder.query<TMovieListResponse, void>({
       query: () => ({
@@ -22,7 +16,7 @@ export const favoritesApi = createApi({
       transformResponse: (response: unknown) =>
         movieResponseSchema.array().parse(response),
     }),
-    postFavoriteMovie: builder.mutation<void, MovieIdParam>({
+    postFavoriteMovie: builder.mutation<void, MovieParams>({
       query: (body) => ({
         url: API_CONFIG.PATHS.FAVORITES.ROOT,
         method: "POST",
@@ -30,7 +24,7 @@ export const favoritesApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
-    deleteFavoriteMovie: builder.mutation<void, MovieIdParam>({
+    deleteFavoriteMovie: builder.mutation<void, MovieId>({
       query: (movieId) => ({
         url: API_CONFIG.PATHS.FAVORITES.BY_ID(movieId),
         method: "DELETE",
