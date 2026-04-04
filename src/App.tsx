@@ -356,11 +356,12 @@ function App() {
           <AuthForm />
         </Popup>
       )} */}
+      
+      <MainPage />
 
       <Button onClick={() => console.log(isAuth, user)}>user</Button>
       <Button onClick={handleLogout}>logout</Button>
 
-      {/* <MainPage /> */}
     </Layout>
   );
 }

@@ -48,5 +48,5 @@ export const useFavoriteMovie = (
     }
   };
 
-  return { isAuth, isFavorite, handleToggleFavorite, error };
+  return { isFavorite, handleToggleFavorite, error };
 };

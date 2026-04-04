@@ -1,21 +1,16 @@
-import { useEffect, useState, type FC } from "react";
+import { type FC } from "react";
 import styles from "./Header.module.scss";
 import clsx from "clsx";
 import { CustomLink } from "@components/UI/CustomLink";
 import { SearchBar } from "@components/Search/SearchBar/SearchBar";
 import { useSelector } from "react-redux";
 import type { RootState } from "@store/store";
-import { Popup } from "@components/UI/Popup";
-import { AuthForm } from "@components/Auth/AuthForm";
 import { Button } from "@components/UI/Button";
+import { useAuthModal } from "@hooks/useAuthModal";
 
 export const Header: FC = () => {
   const { isAuth, user } = useSelector((state: RootState) => state.user);
-  const [isAuthModalOpen, setAuthModalOpen] = useState(false);
-
-  useEffect(() => {
-    if (isAuth) setAuthModalOpen(false);
-  }, [isAuth]);
+  const { openAuthModal, AuthModal } = useAuthModal();
 
   return (
     <header className={styles.header}>
@@ -63,7 +58,7 @@ export const Header: FC = () => {
                 )}
                 href="#"
               >
-                {user?.name}
+                {user?.name ?? "Профиль"}
               </CustomLink>
             ) : (
               <>
@@ -73,15 +68,11 @@ export const Header: FC = () => {
                     styles["header__nav-item"],
                     styles["header__nav-item--end"],
                   )}
-                  onClick={() => setAuthModalOpen(true)}
+                  onClick={openAuthModal}
                 >
                   Войти
                 </Button>
-                {isAuthModalOpen && (
-                  <Popup onClose={() => setAuthModalOpen(false)}>
-                    <AuthForm />
-                  </Popup>
-                )}
+                {AuthModal}
               </>
             )}
           </nav>
