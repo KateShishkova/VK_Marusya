@@ -1,25 +1,20 @@
 import { AuthForm } from "@components/Auth/AuthForm";
-import { Popup } from "@components/UI/Popup";
 import type { RootState } from "@store/store";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useModal } from "./useModal";
 
 export const useAuthModal = () => {
   const isAuth = useSelector((state: RootState) => state.user.isAuth);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openAuthModal = useCallback(() => setIsOpen(true), []);
-  const closeAuthModal = useCallback(() => setIsOpen(false), []);
+  const { openModal, closeModal, Modal } = useModal(<AuthForm />);
 
   useEffect(() => {
-    if (isAuth) setIsOpen(false);
-  }, [isAuth]);
+    if (isAuth) closeModal();
+  }, [isAuth, closeModal]);
 
-  const AuthModal = isOpen ? (
-    <Popup onClose={closeAuthModal}>
-      <AuthForm />
-    </Popup>
-  ) : null;
-
-  return { openAuthModal, closeAuthModal, AuthModal };
+  return {
+    openAuthModal: openModal,
+    closeAuthModal: closeModal,
+    AuthModal: Modal,
+  };
 };
