@@ -336,7 +336,7 @@ function App() {
 
   // const [isOpen, setIsOpen] = useState(false);
 
-  // const { isAuth, user } = useSelector((state: RootState) => state.user);
+  const { isAuth, user } = useSelector((state: RootState) => state.user);
 
   const [logout] = useLogoutMutation();
 
@@ -357,10 +357,10 @@ function App() {
         </Popup>
       )} */}
 
-      {/* <Button onClick={() => console.log(isAuth, user)}>user</Button>
-      <Button onClick={handleLogout}>logout</Button> */}
+      <Button onClick={() => console.log(isAuth, user)}>user</Button>
+      <Button onClick={handleLogout}>logout</Button>
 
-      <MainPage />
+      {/* <MainPage /> */}
     </Layout>
   );
 }

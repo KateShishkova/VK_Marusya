@@ -12,6 +12,7 @@ export const favoritesApi = createApi({
     baseUrl: API_CONFIG.BASE_URL,
     credentials: "include",
   }),
+  tagTypes: ["User"],
   endpoints: (builder) => ({
     getFavorites: builder.query<TMovieListResponse, void>({
       query: () => ({
@@ -27,12 +28,14 @@ export const favoritesApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
     deleteFavoriteMovie: builder.mutation<void, MovieIdParam>({
       query: (movieId) => ({
         url: API_CONFIG.PATHS.FAVORITES.BY_ID(movieId),
         method: "DELETE",
       }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
