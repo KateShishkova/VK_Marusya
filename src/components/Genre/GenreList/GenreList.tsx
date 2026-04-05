@@ -1,12 +1,16 @@
 import type { FC } from "react";
 import { GenreCard } from "../GenreCard";
 import styles from "./GenreList.module.scss";
-import { GENRES } from "@config/genres";
+import type { TGenre } from "@schemas/genre.schema";
 
-export const GenreList: FC = () => {
+interface IGenreListProps {
+  list: TGenre[];
+}
+
+export const GenreList: FC<IGenreListProps> = ({list}) => {
   return (
     <ul className={styles.list}>
-      {GENRES.map((genre, index) => {
+      {list.map((genre, index) => {
         return (
           <li className={styles.list__item} key={index}>
             <GenreCard genre={genre} />

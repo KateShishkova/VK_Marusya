@@ -8,6 +8,7 @@ import topMoviesStyles from "./TopMovies.module.scss";
 import clsx from "clsx";
 import { ErrorView } from "@components/UI/ErrorView";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
+import { ListView } from "@components/UI/ListView";
 
 export const MainPage = () => {
   const {
@@ -69,7 +70,10 @@ export const MainPage = () => {
           <div className="container">
             <div className={topMoviesStyles.section__wrapper}>
               <h2 className={topMoviesStyles.section__title}>Топ 10 фильмов</h2>
-              <MovieList list={topMovies} kind="rating" />
+              <ListView
+                list={topMovies}
+                renderList={(list) => <MovieList list={list} kind="rating" />}
+              />
             </div>
           </div>
         </section>
