@@ -5,7 +5,7 @@ import {
   useDeleteFavoriteMovieMutation,
   usePostFavoriteMovieMutation,
 } from "@api/favoritesApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 export const useFavoriteMovie = (
@@ -19,12 +19,16 @@ export const useFavoriteMovie = (
   const [postFavoriteMovie] = usePostFavoriteMovieMutation();
   const [deleteFavoriteMovie] = useDeleteFavoriteMovieMutation();
 
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setError(undefined);
+  }, [movieId]);
 
   const isFavorite = favorites.includes(String(movieId));
 
   const handleToggleFavorite = async () => {
-    setError(null);
+    setError(undefined);
 
     if (!isAuth) {
       onAuthRequired();

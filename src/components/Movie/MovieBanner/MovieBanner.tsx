@@ -15,6 +15,7 @@ interface IMovieBannerProps {
   movie: TMovieResponse;
   kind?: "banner" | "page";
   isFetching?: boolean;
+  fetchingError?: string;
   onRefetchMovie?: () => void;
 }
 
@@ -22,6 +23,7 @@ export const MovieBanner: FC<IMovieBannerProps> = ({
   movie,
   kind = "banner",
   isFetching = false,
+  fetchingError,
   onRefetchMovie,
 }) => {
   const { openModal: openTrailer, Modal: TrailerModal } = useModal(
@@ -94,7 +96,7 @@ export const MovieBanner: FC<IMovieBannerProps> = ({
   switch (kind) {
     case "banner":
       actionsContent = (
-        <div className={styles["banner__action-wrapper"]}>
+        <div className={styles["banner__actions-content"]}>
           {trailerAction}
           {aboutAction}
           {favoriteAction}
@@ -105,19 +107,23 @@ export const MovieBanner: FC<IMovieBannerProps> = ({
 
     case "page":
       actionsContent = (
-        <div className={styles["banner__action-wrapper"]}>
+        <div className={styles["banner__actions-content"]}>
           {trailerAction}
           {favoriteAction}
         </div>
       );
       break;
   }
+  const errorMessage = favoriteError || fetchingError;
 
   return (
     <div className={styles.banner}>
       <div className={styles.banner__left}>
         <MovieInfo movie={movie} />
-        {actionsContent}
+        <div className={styles["banner__actions-wrapper"]}>
+          {actionsContent}
+          {errorMessage && <span className={styles["banner__error"]}>{errorMessage}</span>}
+        </div>
       </div>
       <div className={styles.banner__right}>
         {!imgError && movie.backdropUrl ? (

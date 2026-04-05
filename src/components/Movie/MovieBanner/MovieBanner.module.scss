@@ -13,11 +13,24 @@
     min-height: 404px;
   }
 
-  &__action-wrapper {
+  &__actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__actions-content {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 16px;
+  }
+
+  &__error {
+    font-size: vars.$fz-sm;
+    line-height: vars.$lh-md;
+    color: vars.$color-red-light;
   }
 
   &__right {

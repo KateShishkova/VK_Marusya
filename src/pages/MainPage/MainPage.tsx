@@ -52,7 +52,14 @@ export const MainPage = () => {
       {randomMovie && (
         <section className={randomMovieStyles.section}>
           <div className="container">
-            <MovieBanner movie={randomMovie} onRefetchMovie={randomRefetch} isFetching={isRandomFetching} />
+            <MovieBanner
+              movie={randomMovie}
+              onRefetchMovie={randomRefetch}
+              isFetching={isRandomFetching}
+              fetchingError={
+                isRandomError ? getRtkErrorMessage(randomError) : undefined
+              }
+            />
           </div>
         </section>
       )}
