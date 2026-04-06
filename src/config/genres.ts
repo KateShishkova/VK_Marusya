@@ -1,6 +1,6 @@
-import type { TGenre } from "@schemas/genre.schema";
+import type { Genre } from "@schemas/genre.schema";
 
-export const GENRES: TGenre[] = [
+export const GENRES: Genre[] = [
   {
     en: "drama",
     ru: "Драма",

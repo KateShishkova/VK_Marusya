@@ -3,17 +3,20 @@ import { Icon } from "../Icon";
 import styles from "./Loader.module.scss";
 import clsx from "clsx";
 
-interface ILoader extends HTMLAttributes<HTMLSpanElement> {
-  size?: 'small' | 'medium';
+interface LoaderProps extends HTMLAttributes<HTMLSpanElement> {
+  size?: "small" | "medium";
 }
 
-export const Loader: FC<ILoader> = ({ size = 'medium', className, ...props }) => {
+export const Loader: FC<LoaderProps> = ({
+  size = "medium",
+  className,
+  ...props
+}) => {
   const finalClassName = clsx(
     styles.loader,
     styles[`loader--${size}`],
+    className,
   );
-  
-  return (
-    <Icon className={finalClassName} name="spinner" {...props} />
-  );
+
+  return <Icon className={finalClassName} name="spinner" {...props} />;
 };

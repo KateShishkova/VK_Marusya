@@ -1,4 +1,4 @@
-export interface ISocial {
+export interface Social {
   id: number;
   name: string;
   iconName: string;

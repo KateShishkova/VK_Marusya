@@ -5,15 +5,15 @@ import { CustomInput } from "@components/UI/CustomInput";
 import { Button } from "@components/UI/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userRegisterSchema, type TUserRegister } from "@schemas/user.schema";
+import { userRegisterSchema, type UserRegister } from "@schemas/user.schema";
 import { useRegisterUserMutation } from "@api/authApi";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
-interface IRegisterForm extends HTMLAttributes<HTMLFormElement> {
+interface RegisterFormProps extends HTMLAttributes<HTMLFormElement> {
   onSuccessRegister?: () => void;
 }
 
-export const RegisterForm: FC<IRegisterForm> = ({
+export const RegisterForm: FC<RegisterFormProps> = ({
   onSuccessRegister,
   className,
   ...props
@@ -22,18 +22,16 @@ export const RegisterForm: FC<IRegisterForm> = ({
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<TUserRegister>({
+  } = useForm<UserRegister>({
     resolver: zodResolver(userRegisterSchema),
   });
 
   const [registerUser, { isLoading, isError, error }] =
     useRegisterUserMutation();
 
-  const onSubmit = async (data: TUserRegister) => {
-    try {
-      await registerUser(data).unwrap();
-      onSuccessRegister?.();
-    } catch (e) {}
+  const onSubmit = async (data: UserRegister) => {
+    await registerUser(data).unwrap();
+    onSuccessRegister?.();
   };
 
   const finalClassName = clsx(styles.form, className);

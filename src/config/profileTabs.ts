@@ -1,6 +1,6 @@
-import type { IProfileTab } from "types/profileTab";
+import type { ProfileTab } from "@app-types/profileTab";
 
-export const PROFILE_TABS: IProfileTab[] = [
+export const PROFILE_TABS: ProfileTab[] = [
   {
     iconName: "heart",
     label: "Избранные фильмы",

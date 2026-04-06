@@ -1,13 +1,13 @@
 import { MovieInfo } from "@components/Movie/MovieInfo";
 import { useState, type FC } from "react";
 import styles from "./SearchCard.module.scss";
-import type { TMovieResponse } from "@schemas/movie.schema";
+import type { MovieResponse } from "@schemas/movie.schema";
 
-interface ISearchCardProps {
-  movie: TMovieResponse;
+interface SearchCardProps {
+  movie: MovieResponse;
 }
 
-export const SearchCard: FC<ISearchCardProps> = ({ movie }) => {
+export const SearchCard: FC<SearchCardProps> = ({ movie }) => {
   const [imgError, setImgError] = useState(false);
 
   return (

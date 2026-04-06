@@ -2,14 +2,14 @@ import type { FC } from "react";
 import styles from "./UserInfoItem.module.scss";
 import { Icon } from "@components/UI/Icon";
 
-interface IUserInfoItemProps {
+interface UserInfoItemProps {
   iconName?: string | null;
   iconContent?: string | null;
   label: string;
   value: string;
 }
 
-export const UserInfoItem: FC<IUserInfoItemProps> = ({
+export const UserInfoItem: FC<UserInfoItemProps> = ({
   iconName,
   iconContent,
   label,

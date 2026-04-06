@@ -3,7 +3,7 @@ import styles from "./CustomLink.module.scss";
 import clsx from "clsx";
 import { Link as RouterLink } from "react-router-dom";
 
-interface ICustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface CustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   kind?: "text" | "icon" | "img" | "icon-text" | "btn";
   isActive?: boolean;
@@ -13,7 +13,7 @@ const isInternalLink = (href: string) => {
   return /^\/(?!\/)/.test(href);
 };
 
-export const CustomLink: FC<ICustomLinkProps> = ({
+export const CustomLink: FC<CustomLinkProps> = ({
   href,
   children,
   kind = "text",

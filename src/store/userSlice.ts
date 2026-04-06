@@ -1,9 +1,9 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { TUserResponse } from "@schemas/user.schema";
+import type { UserResponse } from "@schemas/user.schema";
 import { authApi } from "@api/authApi";
 
 type UserState = {
-  user: TUserResponse | null;
+  user: UserResponse | null;
   isAuth: boolean;
 };
 
@@ -25,7 +25,7 @@ const userSlice = createSlice({
     builder
       .addMatcher(
         authApi.endpoints.fetchProfile.matchFulfilled,
-        (state, action: PayloadAction<TUserResponse>) => {
+        (state, action: PayloadAction<UserResponse>) => {
           state.user = action.payload;
           state.isAuth = true;
         },

@@ -1,14 +1,14 @@
 import { API_CONFIG } from "@config/api";
 import {
   movieResponseSchema,
-  type TMovieListResponse,
+  type MovieListResponse,
 } from "@schemas/movie.schema";
 import type { MovieId, MovieParams } from "./types";
 import { baseApi } from "./baseApi";
 
 export const favoritesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getFavorites: builder.query<TMovieListResponse, void>({
+    getFavorites: builder.query<MovieListResponse, void>({
       query: () => ({
         url: API_CONFIG.PATHS.FAVORITES.ROOT,
         method: "GET",

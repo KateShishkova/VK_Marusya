@@ -4,7 +4,7 @@ import { Icon } from "../Icon";
 import styles from "./CustomInput.module.scss";
 import { Button } from "../Button";
 
-interface ICustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   type: "text" | "email" | "password" | "search";
   placeholder: string;
@@ -15,7 +15,7 @@ interface ICustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   paddingSize?: "medium" | "small";
 }
 
-export const CustomInput: FC<ICustomInputProps> = ({
+export const CustomInput: FC<CustomInputProps> = ({
   name,
   type,
   placeholder,

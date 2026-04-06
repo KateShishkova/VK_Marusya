@@ -2,15 +2,15 @@ import { useState, type FC } from "react";
 import styles from "./MovieCard.module.scss";
 import { Button } from "@components/UI/Button";
 import { Icon } from "@components/UI/Icon";
-import type { TMovieResponse } from "@schemas/movie.schema";
+import type { MovieResponse } from "@schemas/movie.schema";
 
-interface IMovieCardProps {
-  movie: TMovieResponse;
+interface MovieCardProps {
+  movie: MovieResponse;
   kind?: "default" | "favorite";
   onRemoveFavorite?: () => void;
 }
 
-export const MovieCard: FC<IMovieCardProps> = ({
+export const MovieCard: FC<MovieCardProps> = ({
   movie,
   kind = "default",
   onRemoveFavorite,

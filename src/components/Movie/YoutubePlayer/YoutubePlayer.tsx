@@ -2,13 +2,13 @@ import { useEffect, useState, type FC } from "react";
 import styles from "./YoutubePlayer.module.scss";
 import { Loader } from "@components/UI/Loader";
 import clsx from "clsx";
-import type { TMovieResponse } from "@schemas/movie.schema";
+import type { MovieResponse } from "@schemas/movie.schema";
 
-interface IYoutubePlayerProps {
-  movie: TMovieResponse;
+interface YoutubePlayerProps {
+  movie: MovieResponse;
 }
 
-export const YoutubePlayer: FC<IYoutubePlayerProps> = ({ movie }) => {
+export const YoutubePlayer: FC<YoutubePlayerProps> = ({ movie }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 

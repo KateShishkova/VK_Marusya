@@ -1,7 +1,7 @@
-import { Popup, type IPopupProps } from "@components/UI/Popup";
+import { Popup, type PopupProps } from "@components/UI/Popup";
 import { useCallback, useState, type ReactNode } from "react";
 
-type TPopupKind = IPopupProps["kind"];
+type TPopupKind = PopupProps["kind"];
 
 export const useModal = (
   modalContent: ReactNode = null,

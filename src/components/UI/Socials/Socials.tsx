@@ -5,9 +5,9 @@ import { SOCIALS } from "@config/socials";
 import styles from "./Socials.module.scss";
 import clsx from "clsx";
 
-interface ISocials extends HTMLAttributes<HTMLUListElement> {}
+type SocialsProps = HTMLAttributes<HTMLUListElement>;
 
-export const Socials: FC<ISocials> = ({ className, ...props }) => {
+export const Socials: FC<SocialsProps> = ({ className, ...props }) => {
   const finalClassName = clsx(styles.socials, className);
 
   return (

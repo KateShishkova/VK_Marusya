@@ -8,7 +8,7 @@ export const genreSchema = z.object({
 	img: z.string(),
 });
 
-export type TGenreResponse = z.infer<typeof genreResponseSchema>;
-export type TGenreListResponse = TGenreResponse[];
+export type GenreResponse = z.infer<typeof genreResponseSchema>;
+export type GenreListResponse = GenreResponse[];
 
-export type TGenre = z.infer<typeof genreSchema>;
+export type Genre = z.infer<typeof genreSchema>;

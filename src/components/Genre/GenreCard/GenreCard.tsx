@@ -1,12 +1,12 @@
 import { useState, type FC } from "react";
 import styles from "./GenreCard.module.scss";
-import type { TGenre } from "@schemas/genre.schema";
+import type { Genre } from "@schemas/genre.schema";
 
-interface IGenreCardProps {
-  genre: TGenre;
+interface GenreCardProps {
+  genre: Genre;
 }
 
-export const GenreCard: FC<IGenreCardProps> = ({ genre }) => {
+export const GenreCard: FC<GenreCardProps> = ({ genre }) => {
   const [imgError, setImgError] = useState(false);
 
   return (

@@ -2,13 +2,13 @@ import { PROFILE_DETAILS } from "@config/profileDetails";
 import type { FC } from "react";
 import { UserInfoItem } from "../UserInfoItem";
 import styles from "./UserInfoList.module.scss";
-import type { TUserResponse } from "@schemas/user.schema";
+import type { UserResponse } from "@schemas/user.schema";
 
-interface IUserInfoListProps {
-  user: TUserResponse;
+interface UserInfoListProps {
+  user: UserResponse;
 }
 
-export const UserInfoList: FC<IUserInfoListProps> = ({ user }) => {
+export const UserInfoList: FC<UserInfoListProps> = ({ user }) => {
   return (
     <ul className={styles.info}>
       {PROFILE_DETAILS.map((detail) => {

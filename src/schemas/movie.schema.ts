@@ -29,5 +29,5 @@ export const movieResponseSchema = z.object({
   awardsSummary: z.string().optional().nullable(),
 });
 
-export type TMovieResponse = z.infer<typeof movieResponseSchema>;
-export type TMovieListResponse = TMovieResponse[];
+export type MovieResponse = z.infer<typeof movieResponseSchema>;
+export type MovieListResponse = MovieResponse[];

@@ -5,27 +5,25 @@ import { CustomInput } from "@components/UI/CustomInput";
 import { Button } from "@components/UI/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userLoginSchema, type TUserLogin } from "@schemas/user.schema";
+import { userLoginSchema, type UserLogin } from "@schemas/user.schema";
 import { useLoginMutation } from "@api/authApi";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
-interface ILoginForm extends HTMLAttributes<HTMLFormElement> {}
+type LoginFormProps = HTMLAttributes<HTMLFormElement>;
 
-export const LoginForm: FC<ILoginForm> = ({ className, ...props }) => {
+export const LoginForm: FC<LoginFormProps> = ({ className, ...props }) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<TUserLogin>({
+  } = useForm<UserLogin>({
     resolver: zodResolver(userLoginSchema),
   });
 
   const [login, { isLoading, isError, error }] = useLoginMutation();
 
-  const onSubmit = async (data: TUserLogin) => {
-    try {
-      await login(data).unwrap();
-    } catch (e) {}
+  const onSubmit = async (data: UserLogin) => {
+    await login(data).unwrap();
   };
 
   const finalClassName = clsx(styles.form, className);

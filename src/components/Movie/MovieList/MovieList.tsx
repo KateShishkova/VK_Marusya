@@ -1,14 +1,14 @@
 import type { FC } from "react";
 import { MovieCard } from "../MovieCard";
 import styles from "./MovieList.module.scss";
-import type { TMovieResponse } from "@schemas/movie.schema";
+import type { MovieResponse } from "@schemas/movie.schema";
 
-interface IMovieListProps {
-  list: TMovieResponse[];
+interface MovieListProps {
+  list: MovieResponse[];
   kind?: "default" | "favorite" | "rating";
 }
 
-export const MovieList: FC<IMovieListProps> = ({ list, kind = "default" }) => {
+export const MovieList: FC<MovieListProps> = ({ list, kind = "default" }) => {
   const handleRemoveFavorite = () => {
     console.log("remove favorite");
   };

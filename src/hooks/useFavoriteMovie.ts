@@ -5,7 +5,7 @@ import {
   useDeleteFavoriteMovieMutation,
   usePostFavoriteMovieMutation,
 } from "@api/favoritesApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 export const useFavoriteMovie = (
@@ -19,16 +19,17 @@ export const useFavoriteMovie = (
   const [postFavoriteMovie] = usePostFavoriteMovieMutation();
   const [deleteFavoriteMovie] = useDeleteFavoriteMovieMutation();
 
-  const [error, setError] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    setError(undefined);
-  }, [movieId]);
+  const [errorMovieId, setErrorMovieId] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(
+    undefined,
+  );
 
   const isFavorite = favorites.includes(String(movieId));
+  const error = errorMovieId === String(movieId) ? errorMessage : undefined;
 
   const handleToggleFavorite = async () => {
-    setError(undefined);
+    setErrorMovieId(null);
+    setErrorMessage(undefined);
 
     if (!isAuth) {
       onAuthRequired();
@@ -42,7 +43,8 @@ export const useFavoriteMovie = (
         await postFavoriteMovie({ id: String(movieId) }).unwrap();
       }
     } catch (error) {
-      setError(
+      setErrorMovieId(String(movieId));
+      setErrorMessage(
         getRtkErrorMessage(
           error,
           "Ошибка при изменении списка избранных фильмов",

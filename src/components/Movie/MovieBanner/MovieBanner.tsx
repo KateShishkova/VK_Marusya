@@ -3,7 +3,7 @@ import { Icon } from "@components/UI/Icon";
 import { useState, type FC } from "react";
 import { MovieInfo } from "../MovieInfo";
 import styles from "./MovieBanner.module.scss";
-import type { TMovieResponse } from "@schemas/movie.schema";
+import type { MovieResponse } from "@schemas/movie.schema";
 import clsx from "clsx";
 import { CustomLink } from "@components/UI/CustomLink";
 import { useModal } from "@hooks/useModal";
@@ -11,15 +11,15 @@ import { YoutubePlayer } from "../YoutubePlayer";
 import { useFavoriteMovie } from "@hooks/useFavoriteMovie";
 import { useAuthModal } from "@hooks/useAuthModal";
 
-interface IMovieBannerProps {
-  movie: TMovieResponse;
+interface MovieBannerProps {
+  movie: MovieResponse;
   kind?: "banner" | "page";
   isFetching?: boolean;
   fetchingError?: string;
   onRefetchMovie?: () => void;
 }
 
-export const MovieBanner: FC<IMovieBannerProps> = ({
+export const MovieBanner: FC<MovieBannerProps> = ({
   movie,
   kind = "banner",
   isFetching = false,

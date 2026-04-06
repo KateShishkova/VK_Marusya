@@ -2,13 +2,13 @@ import type { FC } from "react";
 import styles from "./MovieDetails.module.scss";
 import { MovieDetailsRow } from "../MovieDetailsRow";
 import { MOVIE_DETAIL } from "@config/movieDetails";
-import type { TMovieResponse } from "@schemas/movie.schema";
+import type { MovieResponse } from "@schemas/movie.schema";
 
-interface IMovieDetailsProps {
-  movie: TMovieResponse;
+interface MovieDetailsProps {
+  movie: MovieResponse;
 }
 
-export const MovieDetails: FC<IMovieDetailsProps> = ({ movie }) => {
+export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
   return (
     <div className={styles.details}>
       <h2 className={styles.details__title}>О фильме</h2>

@@ -1,8 +1,8 @@
 import { getFullName } from "@utils/getFullName";
 import { getUserInitials } from "@utils/getUserInitials";
-import type { IProfileDetail } from "types/profileDetail";
+import type { ProfileDetail } from "@app-types/profileDetail";
 
-export const PROFILE_DETAILS: IProfileDetail[] = [
+export const PROFILE_DETAILS: ProfileDetail[] = [
   {
     iconName: null,
     getIconContent: getUserInitials,

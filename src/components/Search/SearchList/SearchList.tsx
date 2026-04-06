@@ -1,13 +1,13 @@
 import type { FC } from "react";
 import styles from "./SearchList.module.scss";
 import { SearchCard } from "../SearchCard";
-import type { TMovieResponse } from "@schemas/movie.schema";
+import type { MovieResponse } from "@schemas/movie.schema";
 
-interface ISearchListProps {
-  list: TMovieResponse[];
+interface SearchListProps {
+  list: MovieResponse[];
 }
 
-export const SearchList: FC<ISearchListProps> = ({ list }) => {
+export const SearchList: FC<SearchListProps> = ({ list }) => {
   return (
     <ul className={styles.list}>
       {list.map((movie) => {

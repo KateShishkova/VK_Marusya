@@ -5,13 +5,13 @@ import { Button } from "../Button";
 import { Icon } from "../Icon";
 import clsx from "clsx";
 
-export interface IPopupProps {
+export interface PopupProps {
   children: ReactNode;
   kind?: "default" | "video";
   onClose?: () => void;
 }
 
-export const Popup: FC<IPopupProps> = ({
+export const Popup: FC<PopupProps> = ({
   children,
   kind = "default",
   onClose,

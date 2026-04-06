@@ -4,14 +4,14 @@ import styles from "./PageView.module.scss";
 import clsx from "clsx";
 import { ErrorView } from "../ErrorView";
 
-interface IPageViewProps {
+interface PageViewProps {
   isLoading?: boolean;
   error?: string | undefined;
   onRetry?: () => void;
   children: ReactNode;
 }
 
-export const PageView: FC<IPageViewProps> = ({
+export const PageView: FC<PageViewProps> = ({
   isLoading,
   error,
   onRetry,

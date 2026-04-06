@@ -3,13 +3,13 @@ import styles from "./ErrorView.module.scss";
 import clsx from "clsx";
 import { Button } from "../Button";
 
-interface IErrorViewProps extends HTMLAttributes<HTMLDivElement> {
+interface ErrorViewProps extends HTMLAttributes<HTMLDivElement> {
   kind?: "page" | "section";
   message?: string;
   onRetry?: () => void;
 }
 
-export const ErrorView: FC<IErrorViewProps> = ({
+export const ErrorView: FC<ErrorViewProps> = ({
   kind = "page",
   message,
   onRetry,

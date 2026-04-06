@@ -1,19 +1,19 @@
 import { useCallback } from "react";
 
-interface IPageRequestItem {
+interface PageRequestItem {
   hasData: boolean;
   isFetching: boolean;
   isError: boolean;
   refetch: () => void;
 }
 
-interface IUsePageRequestStateOptions {
+interface UsePageRequestStateOptions {
   errorMessage?: string;
 }
 
 export const usePageRequestState = (
-  requests: IPageRequestItem[],
-  options?: IUsePageRequestStateOptions,
+  requests: PageRequestItem[],
+  options?: UsePageRequestStateOptions,
 ) => {
   const hasPageData = requests.some((request) => request.hasData);
 

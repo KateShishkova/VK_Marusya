@@ -33,6 +33,6 @@ export const userLoginSchema = userRegisterBaseSchema.omit({
 });
 
 // Extracted types
-export type TUserResponse = z.infer<typeof userResponseSchema>;
-export type TUserRegister = z.infer<typeof userRegisterSchema>;
-export type TUserLogin = z.infer<typeof userLoginSchema>;
+export type UserResponse = z.infer<typeof userResponseSchema>;
+export type UserRegister = z.infer<typeof userRegisterSchema>;
+export type UserLogin = z.infer<typeof userLoginSchema>;

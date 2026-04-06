@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, FC } from "react";
 import styles from "./Button.module.scss";
 import clsx from "clsx";
 
-type TPlainButtonProps = {
+type PlainButtonProps = {
   kind: "plain";
   type?: "submit" | "reset" | "button";
 
@@ -10,7 +10,7 @@ type TPlainButtonProps = {
   children: React.ReactNode;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">;
 
-type TRegularButtonProps = {
+type RegularButtonProps = {
   kind?: "regular";
   type?: "submit" | "reset" | "button";
 
@@ -19,9 +19,9 @@ type TRegularButtonProps = {
   children: React.ReactNode;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">;
 
-type TButtonProps = TPlainButtonProps | TRegularButtonProps;
+type ButtonProps = PlainButtonProps | RegularButtonProps;
 
-export const Button: FC<TButtonProps> = (props) => {
+export const Button: FC<ButtonProps> = (props) => {
   // Kind === "plain"
   if (props.kind === "plain") {
     const {

@@ -4,14 +4,14 @@ import styles from "./MovieInfo.module.scss";
 import { getRatingClass } from "@utils/getRatingClass";
 import { Icon } from "@components/UI/Icon";
 import { getFormatRuntime } from "@utils/getFormatRuntime";
-import type { TMovieResponse } from "@schemas/movie.schema";
+import type { MovieResponse } from "@schemas/movie.schema";
 
-interface IMovieInfoProps {
-  movie: TMovieResponse;
+interface MovieInfoProps {
+  movie: MovieResponse;
   kind?: "banner" | "search";
 }
 
-export const MovieInfo: FC<IMovieInfoProps> = ({ movie, kind = "banner" }) => {
+export const MovieInfo: FC<MovieInfoProps> = ({ movie, kind = "banner" }) => {
   const finalClassName = clsx(
     styles.info,
     kind !== "banner" && styles[`info--${kind}`],

@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import styles from "./MovieDetailsRow.module.scss";
 
-interface IMovieDetailsRowProps {
+interface MovieDetailsRowProps {
   label: string;
   value: string;
 }
 
-export const MovieDetailsRow: FC<IMovieDetailsRowProps> = ({
+export const MovieDetailsRow: FC<MovieDetailsRowProps> = ({
   label,
   value,
 }) => {

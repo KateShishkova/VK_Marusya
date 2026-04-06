@@ -4,10 +4,10 @@ import { RegisterForm } from "../RegisterForm";
 import styles from "./AuthForm.module.scss";
 import { Button } from "@components/UI/Button";
 
-type TAuthState = "login" | "register" | "successRegister";
+type AuthState = "login" | "register" | "successRegister";
 
 export const AuthForm = () => {
-  const [authType, setAuthType] = useState<TAuthState>("login");
+  const [authType, setAuthType] = useState<AuthState>("login");
 
   const handleClick = () => {
     setAuthType((prevState) => (prevState === "login" ? "register" : "login"));

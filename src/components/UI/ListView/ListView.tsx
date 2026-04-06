@@ -4,7 +4,7 @@ import { Loader } from "../Loader";
 import clsx from "clsx";
 import { ErrorView } from "../ErrorView";
 
-interface IListViewProps<T> {
+interface ListViewProps<T> {
   list: T[];
   renderList: (list: T[]) => ReactNode;
   isLoading?: boolean;
@@ -20,7 +20,7 @@ export const ListView = <T,>({
   error,
   onRetry,
   emptyText = "Список пуст...",
-}: IListViewProps<T>) => {
+}: ListViewProps<T>) => {
   if (isLoading) {
     return (
       <div className={clsx(styles["list-view"], styles["list-view--loader"])}>

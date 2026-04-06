@@ -4,13 +4,13 @@ import styles from "./Dropdown.module.scss";
 import clsx from "clsx";
 import { CSSTransition } from "react-transition-group";
 
-interface IDropdownProps extends HTMLAttributes<HTMLDivElement> {
+interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
   children: ReactNode;
   onClose?: () => void;
 }
 
-export const Dropdown: FC<IDropdownProps> = ({
+export const Dropdown: FC<DropdownProps> = ({
   open,
   children,
   onClose,
