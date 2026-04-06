@@ -1,14 +1,13 @@
 import { useGetRandomMovieQuery, useGetTop10MoviesQuery } from "@api/movieApi";
 import { MovieBanner } from "@components/Movie/MovieBanner";
 import { MovieList } from "@components/Movie/MovieList";
-import { Loader } from "@components/UI/Loader";
-import mainPageStyles from "./MainPage.module.scss";
+import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
+import { ListView } from "@components/UI/ListView";
+import { PageView } from "@components/UI/PageView";
+
 import randomMovieStyles from "./RandomMovie.module.scss";
 import topMoviesStyles from "./TopMovies.module.scss";
 import clsx from "clsx";
-import { ErrorView } from "@components/UI/ErrorView";
-import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
-import { ListView } from "@components/UI/ListView";
 
 export const MainPage = () => {
   const {
@@ -26,32 +25,10 @@ export const MainPage = () => {
     error: topMoviesError,
   } = useGetTop10MoviesQuery();
 
-  if (isRandomLoading || isTopMoviesLoading) {
-    return (
-      <section className={mainPageStyles.section}>
-        <div className={clsx("container", mainPageStyles.section__container)}>
-          <Loader />
-        </div>
-      </section>
-    );
-  }
-
-  if (isRandomError && isTopMoviesError) {
-    return (
-      <section className={mainPageStyles.section}>
-        <div className={clsx("container", mainPageStyles.section__container)}>
-          <ErrorView
-            message={`${getRtkErrorMessage(randomError)} ${getRtkErrorMessage(topMoviesError)}`}
-          />
-        </div>
-      </section>
-    );
-  }
-
-  return (
+  const pageContent = (
     <>
       {randomMovie && (
-        <section className={randomMovieStyles.section}>
+        <section className={clsx("section", randomMovieStyles.section)}>
           <div className="container">
             <MovieBanner
               movie={randomMovie}
@@ -66,7 +43,7 @@ export const MainPage = () => {
       )}
 
       {topMovies && (
-        <section className={topMoviesStyles.section}>
+        <section className={clsx("section", topMoviesStyles.section)}>
           <div className="container">
             <div className={topMoviesStyles.section__wrapper}>
               <h2 className={topMoviesStyles.section__title}>Топ 10 фильмов</h2>
@@ -79,5 +56,15 @@ export const MainPage = () => {
         </section>
       )}
     </>
+  );
+
+  return (
+    <PageView
+      isLoading={isRandomLoading || isTopMoviesLoading}
+      isError={isRandomError && isTopMoviesError}
+      error={`${getRtkErrorMessage(randomError)} ${getRtkErrorMessage(topMoviesError)}`}
+    >
+      {pageContent}
+    </PageView>
   );
 };

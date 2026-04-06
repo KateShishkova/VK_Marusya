@@ -2,8 +2,6 @@
 
 .section {
   padding: 40px 0 120px;
-  opacity: 0;
-  animation: 0.5s linear 0.1s fadeIn forwards;
 
   &__wrapper {
     display: flex;
@@ -17,14 +15,5 @@
     line-height: vars.$lh-sm;
     font-weight: vars.$fw-bold;
     color: vars.$color-white;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
