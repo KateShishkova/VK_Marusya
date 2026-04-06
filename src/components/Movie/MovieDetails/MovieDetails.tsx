@@ -13,9 +13,9 @@ export const MovieDetails: FC<IMovieDetailsProps> = ({ movie }) => {
     <div className={styles.details}>
       <h2 className={styles.details__title}>О фильме</h2>
       <ul className={styles.details__list}>
-        {MOVIE_DETAIL.map((detail, index) => {
+        {MOVIE_DETAIL.map((detail) => {
           return (
-            <li  key={index}>
+            <li  key={detail.label}>
               <MovieDetailsRow
                 label={detail.label}
                 value={detail.getValue(movie)}

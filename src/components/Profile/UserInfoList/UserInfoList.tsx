@@ -11,9 +11,9 @@ interface IUserInfoListProps {
 export const UserInfoList: FC<IUserInfoListProps> = ({ user }) => {
   return (
     <ul className={styles.info}>
-      {PROFILE_DETAILS.map((detail, index) => {
+      {PROFILE_DETAILS.map((detail) => {
         return (
-          <li className={styles.info__item} key={index}>
+          <li className={styles.info__item} key={detail.label}>
             <UserInfoItem
               iconName={detail.iconName ? detail.iconName : undefined}
               iconContent={

@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Button } from "../Button";
 
 interface IErrorViewProps extends HTMLAttributes<HTMLDivElement> {
-  kind?: "page" | "section" | "component";
+  kind?: "page" | "section";
   message?: string;
   onRetry?: () => void;
 }
@@ -61,15 +61,6 @@ export const ErrorView: FC<IErrorViewProps> = ({
           {titleEl}
           {messageEl}
           {onRetry && retryBtn}
-        </>
-      );
-      break;
-
-    case "component":
-      contentEl = (
-        <>
-          {titleEl}
-          {messageEl}
         </>
       );
       break;

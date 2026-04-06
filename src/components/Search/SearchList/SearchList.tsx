@@ -12,7 +12,7 @@ export const SearchList: FC<ISearchListProps> = ({ list }) => {
     <ul className={styles.list}>
       {list.map((movie) => {
         return (
-          <li className={styles.list__item}>
+          <li className={styles.list__item} key={movie.id}>
             <SearchCard movie={movie} />
           </li>
         );

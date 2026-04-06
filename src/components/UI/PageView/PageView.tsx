@@ -6,32 +6,32 @@ import { ErrorView } from "../ErrorView";
 
 interface IPageViewProps {
   isLoading?: boolean;
-  isError?: boolean;
   error?: string | undefined;
+  onRetry?: () => void;
   children: ReactNode;
 }
 
 export const PageView: FC<IPageViewProps> = ({
   isLoading,
-  isError,
   error,
+  onRetry,
   children,
 }) => {
   if (isLoading) {
     return (
       <section className={styles.section}>
-        <div className={clsx("contsiner", styles.section__container)}>
+        <div className={clsx("container", styles.section__container)}>
           <Loader />
         </div>
       </section>
     );
   }
 
-  if (isError) {
+  if (error) {
     return (
       <section className={styles.section}>
-        <div className={clsx("contsiner", styles.section__container)}>
-          <ErrorView message={error} />
+        <div className={clsx("container", styles.section__container)}>
+          <ErrorView message={error} onRetry={onRetry} />
         </div>
       </section>
     );

@@ -47,18 +47,4 @@
       align-self: flex-end;
     }
   }
-
-  &--component {
-    flex-direction: row;
-    gap: 10px;
-
-    #{$root}__title {
-      font-size: vars.$fz-md;
-      line-height: vars.$lh-md;
-    }
-
-    #{$root}__text {
-      text-transform: lowercase;
-    }
-  }
 }

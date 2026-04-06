@@ -9,6 +9,7 @@ interface IListViewProps<T> {
   renderList: (list: T[]) => ReactNode;
   isLoading?: boolean;
   error?: string | undefined;
+  onRetry?: () => void;
   emptyText?: string;
 }
 
@@ -17,6 +18,7 @@ export const ListView = <T,>({
   renderList,
   isLoading,
   error,
+  onRetry,
   emptyText = "Список пуст...",
 }: IListViewProps<T>) => {
   if (isLoading) {
@@ -30,7 +32,7 @@ export const ListView = <T,>({
   if (error) {
     return (
       <div className={styles["list-view"]}>
-        <ErrorView kind="component" message={error} />
+        <ErrorView kind="section" message={error} onRetry={onRetry} />
       </div>
     );
   }

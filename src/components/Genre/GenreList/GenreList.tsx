@@ -10,9 +10,9 @@ interface IGenreListProps {
 export const GenreList: FC<IGenreListProps> = ({list}) => {
   return (
     <ul className={styles.list}>
-      {list.map((genre, index) => {
+      {list.map((genre) => {
         return (
-          <li className={styles.list__item} key={index}>
+          <li className={styles.list__item} key={genre.en}>
             <GenreCard genre={genre} />
           </li>
         );

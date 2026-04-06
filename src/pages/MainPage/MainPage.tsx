@@ -4,65 +4,97 @@ import { MovieList } from "@components/Movie/MovieList";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 import { ListView } from "@components/UI/ListView";
 import { PageView } from "@components/UI/PageView";
+import { ErrorView } from "@components/UI/ErrorView";
+import { usePageRequestState } from "@hooks/usePageRequestState";
 
+import clsx from "clsx";
 import randomMovieStyles from "./RandomMovie.module.scss";
 import topMoviesStyles from "./TopMovies.module.scss";
-import clsx from "clsx";
 
 export const MainPage = () => {
   const {
     data: randomMovie,
-    isLoading: isRandomLoading,
+    isFetching: isRandomFetching,
     isError: isRandomError,
     error: randomError,
-    isFetching: isRandomFetching,
     refetch: randomRefetch,
   } = useGetRandomMovieQuery();
   const {
     data: topMovies,
-    isLoading: isTopMoviesLoading,
+    isFetching: isTopMoviesFetching,
     isError: isTopMoviesError,
     error: topMoviesError,
+    refetch: topMoviesRefetch,
   } = useGetTop10MoviesQuery();
+
+  const pageState = usePageRequestState(
+    [
+      {
+        hasData: randomMovie !== undefined,
+        isFetching: isRandomFetching,
+        isError: isRandomError,
+        refetch: randomRefetch,
+      },
+      {
+        hasData: topMovies !== undefined,
+        isFetching: isTopMoviesFetching,
+        isError: isTopMoviesError,
+        refetch: topMoviesRefetch,
+      },
+    ],
+    {
+      errorMessage: "Не удалось загрузить главную страницу.",
+    },
+  );
 
   const pageContent = (
     <>
-      {randomMovie && (
-        <section className={clsx("section", randomMovieStyles.section)}>
-          <div className="container">
+      <section className={clsx("section", randomMovieStyles.section)}>
+        <div className="container">
+          {randomMovie ? (
             <MovieBanner
               movie={randomMovie}
               onRefetchMovie={randomRefetch}
               isFetching={isRandomFetching}
-              fetchingError={
-                isRandomError ? getRtkErrorMessage(randomError) : undefined
+            />
+          ) : (
+            isRandomError && (
+              <ErrorView
+                kind="section"
+                message={getRtkErrorMessage(randomError)}
+                onRetry={randomRefetch}
+              />
+            )
+          )}
+        </div>
+      </section>
+
+      <section className={clsx("section", topMoviesStyles.section)}>
+        <div className="container">
+          <div className={topMoviesStyles.section__wrapper}>
+            <h2 className={topMoviesStyles.section__title}>Топ 10 фильмов</h2>
+            <ListView
+              list={topMovies ?? []}
+              isLoading={!topMovies && isTopMoviesFetching}
+              error={
+                isTopMoviesError
+                  ? getRtkErrorMessage(topMoviesError)
+                  : undefined
               }
+              onRetry={topMoviesRefetch}
+              renderList={(list) => <MovieList list={list} kind="rating" />}
             />
           </div>
-        </section>
-      )}
-
-      {topMovies && (
-        <section className={clsx("section", topMoviesStyles.section)}>
-          <div className="container">
-            <div className={topMoviesStyles.section__wrapper}>
-              <h2 className={topMoviesStyles.section__title}>Топ 10 фильмов</h2>
-              <ListView
-                list={topMovies}
-                renderList={(list) => <MovieList list={list} kind="rating" />}
-              />
-            </div>
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
     </>
   );
 
   return (
     <PageView
-      isLoading={isRandomLoading || isTopMoviesLoading}
-      isError={isRandomError && isTopMoviesError}
-      error={`${getRtkErrorMessage(randomError)} ${getRtkErrorMessage(topMoviesError)}`}
+      isLoading={pageState.isPageLoading}
+      error={pageState.pageError}
+      onRetry={pageState.retryAll}
     >
       {pageContent}
     </PageView>
