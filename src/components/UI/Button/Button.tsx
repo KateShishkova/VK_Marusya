@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import type { ButtonHTMLAttributes, FC } from "react";
 import styles from "./Button.module.scss";
-import clsx from "clsx";
 
 type PlainButtonProps = {
   kind: "plain";

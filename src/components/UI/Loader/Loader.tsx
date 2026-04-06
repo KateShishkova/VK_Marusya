@@ -1,7 +1,7 @@
+import clsx from "clsx";
 import type { FC, HTMLAttributes } from "react";
 import { Icon } from "../Icon";
 import styles from "./Loader.module.scss";
-import clsx from "clsx";
 
 interface LoaderProps extends HTMLAttributes<HTMLSpanElement> {
   size?: "small" | "medium";

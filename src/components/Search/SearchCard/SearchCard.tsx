@@ -1,7 +1,7 @@
-import { MovieInfo } from "@components/Movie/MovieInfo";
 import { useState, type FC } from "react";
-import styles from "./SearchCard.module.scss";
+import { MovieInfo } from "@components/Movie/MovieInfo";
 import type { MovieResponse } from "@schemas/movie.schema";
+import styles from "./SearchCard.module.scss";
 
 interface SearchCardProps {
   movie: MovieResponse;

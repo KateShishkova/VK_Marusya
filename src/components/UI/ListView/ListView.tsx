@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
-import styles from "./ListView.module.scss";
-import { Loader } from "../Loader";
 import clsx from "clsx";
+import type { ReactNode } from "react";
+import { Loader } from "../Loader";
 import { ErrorView } from "../ErrorView";
+import styles from "./ListView.module.scss";
 
 interface ListViewProps<T> {
   list: T[];

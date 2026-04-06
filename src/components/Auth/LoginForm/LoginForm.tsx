@@ -1,13 +1,15 @@
-import { type FC, type HTMLAttributes } from "react";
-import styles from "./LoginForm.module.scss";
 import clsx from "clsx";
-import { CustomInput } from "@components/UI/CustomInput";
-import { Button } from "@components/UI/Button";
+import { type FC, type HTMLAttributes } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userLoginSchema, type UserLogin } from "@schemas/user.schema";
+
 import { useLoginMutation } from "@api/authApi";
+import { Button } from "@components/UI/Button";
+import { CustomInput } from "@components/UI/CustomInput";
+import { userLoginSchema, type UserLogin } from "@schemas/user.schema";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
+
+import styles from "./LoginForm.module.scss";
 
 type LoginFormProps = HTMLAttributes<HTMLFormElement>;
 

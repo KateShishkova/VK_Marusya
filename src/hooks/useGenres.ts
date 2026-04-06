@@ -1,7 +1,7 @@
+import { useMemo } from "react";
 import { useGetMovieGenresQuery } from "@api/movieApi";
 import { GENRES } from "@config/genres";
 import type { Genre } from "@schemas/genre.schema";
-import { useMemo } from "react";
 
 export const useGenres = () => {
   const { data, isLoading, error, isError } = useGetMovieGenresQuery();

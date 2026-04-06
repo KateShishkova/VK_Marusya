@@ -1,6 +1,6 @@
+import type { ProfileDetail } from "@app-types/profileDetail";
 import { getFullName } from "@utils/getFullName";
 import { getUserInitials } from "@utils/getUserInitials";
-import type { ProfileDetail } from "@app-types/profileDetail";
 
 export const PROFILE_DETAILS: ProfileDetail[] = [
   {
@@ -10,7 +10,7 @@ export const PROFILE_DETAILS: ProfileDetail[] = [
     getValue: getFullName,
   },
   {
-    iconName: 'email',
+    iconName: "email",
     getIconContent: null,
     label: "Электронная почта",
     getValue: (user) => user.email,

@@ -1,11 +1,11 @@
-import { Popup, type PopupProps } from "@components/UI/Popup";
 import { useCallback, useState, type ReactNode } from "react";
+import { Popup, type PopupProps } from "@components/UI/Popup";
 
-type TPopupKind = PopupProps["kind"];
+type PopupKind = PopupProps["kind"];
 
 export const useModal = (
   modalContent: ReactNode = null,
-  kind: TPopupKind = "default",
+  kind: PopupKind = "default",
 ) => {
   const [isOpen, setIsOpen] = useState(false);
 

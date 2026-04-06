@@ -1,8 +1,8 @@
 import { useState, type FC } from "react";
-import styles from "./MovieCard.module.scss";
 import { Button } from "@components/UI/Button";
 import { Icon } from "@components/UI/Icon";
 import type { MovieResponse } from "@schemas/movie.schema";
+import styles from "./MovieCard.module.scss";
 
 interface MovieCardProps {
   movie: MovieResponse;

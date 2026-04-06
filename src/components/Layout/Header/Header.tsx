@@ -1,12 +1,14 @@
-import { type FC } from "react";
-import styles from "./Header.module.scss";
 import clsx from "clsx";
-import { CustomLink } from "@components/UI/CustomLink";
-import { SearchBar } from "@components/Search/SearchBar/SearchBar";
+import { type FC } from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "@store/store";
+
 import { Button } from "@components/UI/Button";
+import { CustomLink } from "@components/UI/CustomLink";
+import { SearchBar } from "@components/Search/SearchBar";
 import { useAuthModal } from "@hooks/useAuthModal";
+import type { RootState } from "@store/store";
+
+import styles from "./Header.module.scss";
 
 export const Header: FC = () => {
   const { isAuth, user } = useSelector((state: RootState) => state.user);

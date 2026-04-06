@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import styles from "./Footer.module.scss";
 import { Socials } from "@components/UI/Socials";
+import styles from "./Footer.module.scss";
 
 export const Footer: FC = () => {
   return (

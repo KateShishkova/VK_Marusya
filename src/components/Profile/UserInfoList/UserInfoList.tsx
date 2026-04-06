@@ -1,8 +1,9 @@
-import { PROFILE_DETAILS } from "@config/profileDetails";
 import type { FC } from "react";
+import { PROFILE_DETAILS } from "@config/profileDetails";
+import type { UserResponse } from "@schemas/user.schema";
+
 import { UserInfoItem } from "../UserInfoItem";
 import styles from "./UserInfoList.module.scss";
-import type { UserResponse } from "@schemas/user.schema";
 
 interface UserInfoListProps {
   user: UserResponse;

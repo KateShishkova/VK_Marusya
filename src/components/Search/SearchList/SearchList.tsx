@@ -1,7 +1,8 @@
 import type { FC } from "react";
-import styles from "./SearchList.module.scss";
-import { SearchCard } from "../SearchCard";
 import type { MovieResponse } from "@schemas/movie.schema";
+
+import { SearchCard } from "../SearchCard";
+import styles from "./SearchList.module.scss";
 
 interface SearchListProps {
   list: MovieResponse[];

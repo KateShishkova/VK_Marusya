@@ -4,12 +4,12 @@ import {
   type MovieListResponse,
   type MovieResponse,
 } from "@schemas/movie.schema";
-import type { GetMoviesParams, MovieId } from "./types";
 import {
   genreResponseSchema,
   type GenreListResponse,
 } from "@schemas/genre.schema";
 import { baseApi } from "./baseApi";
+import type { GetMoviesParams, MovieId } from "./types";
 
 export const movieApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

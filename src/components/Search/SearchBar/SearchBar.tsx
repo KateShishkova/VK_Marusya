@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent } from "react";
-import styles from "./SearchBar.module.scss";
 import { CustomInput } from "@components/UI/CustomInput";
 import { Dropdown } from "@components/UI/Dropdown";
+import styles from "./SearchBar.module.scss";
 
 export const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");

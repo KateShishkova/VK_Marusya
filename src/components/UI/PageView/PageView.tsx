@@ -1,8 +1,8 @@
+import clsx from "clsx";
 import type { FC, ReactNode } from "react";
+import { ErrorView } from "../ErrorView";
 import { Loader } from "../Loader";
 import styles from "./PageView.module.scss";
-import clsx from "clsx";
-import { ErrorView } from "../ErrorView";
 
 interface PageViewProps {
   isLoading?: boolean;

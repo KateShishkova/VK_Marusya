@@ -1,7 +1,7 @@
-import type { AnchorHTMLAttributes, FC } from "react";
-import styles from "./CustomLink.module.scss";
 import clsx from "clsx";
+import type { AnchorHTMLAttributes, FC } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import styles from "./CustomLink.module.scss";
 
 interface CustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;

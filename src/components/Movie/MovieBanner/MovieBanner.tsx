@@ -1,15 +1,17 @@
-import { Button } from "@components/UI/Button";
-import { Icon } from "@components/UI/Icon";
-import { useState, type FC } from "react";
-import { MovieInfo } from "../MovieInfo";
-import styles from "./MovieBanner.module.scss";
-import type { MovieResponse } from "@schemas/movie.schema";
 import clsx from "clsx";
+import { useState, type FC } from "react";
+
+import { Button } from "@components/UI/Button";
 import { CustomLink } from "@components/UI/CustomLink";
-import { useModal } from "@hooks/useModal";
-import { YoutubePlayer } from "../YoutubePlayer";
-import { useFavoriteMovie } from "@hooks/useFavoriteMovie";
+import { Icon } from "@components/UI/Icon";
 import { useAuthModal } from "@hooks/useAuthModal";
+import { useFavoriteMovie } from "@hooks/useFavoriteMovie";
+import { useModal } from "@hooks/useModal";
+import type { MovieResponse } from "@schemas/movie.schema";
+
+import { MovieInfo } from "../MovieInfo";
+import { YoutubePlayer } from "../YoutubePlayer";
+import styles from "./MovieBanner.module.scss";
 
 interface MovieBannerProps {
   movie: MovieResponse;
@@ -122,7 +124,9 @@ export const MovieBanner: FC<MovieBannerProps> = ({
         <MovieInfo movie={movie} />
         <div className={styles["banner__actions-wrapper"]}>
           {actionsContent}
-          {errorMessage && <span className={styles["banner__error"]}>{errorMessage}</span>}
+          {errorMessage && (
+            <span className={styles["banner__error"]}>{errorMessage}</span>
+          )}
         </div>
       </div>
       <div className={styles.banner__right}>

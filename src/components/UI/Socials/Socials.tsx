@@ -1,9 +1,10 @@
+import clsx from "clsx";
 import type { FC, HTMLAttributes } from "react";
+import { SOCIALS } from "@config/socials";
+
 import { CustomLink } from "../CustomLink";
 import { Icon } from "../Icon";
-import { SOCIALS } from "@config/socials";
 import styles from "./Socials.module.scss";
-import clsx from "clsx";
 
 type SocialsProps = HTMLAttributes<HTMLUListElement>;
 

@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import styles from "./UserInfoItem.module.scss";
 import { Icon } from "@components/UI/Icon";
+import styles from "./UserInfoItem.module.scss";
 
 interface UserInfoItemProps {
   iconName?: string | null;

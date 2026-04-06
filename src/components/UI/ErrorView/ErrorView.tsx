@@ -1,7 +1,7 @@
-import type { FC, HTMLAttributes } from "react";
-import styles from "./ErrorView.module.scss";
 import clsx from "clsx";
+import type { FC, HTMLAttributes } from "react";
 import { Button } from "../Button";
+import styles from "./ErrorView.module.scss";
 
 interface ErrorViewProps extends HTMLAttributes<HTMLDivElement> {
   kind?: "page" | "section";

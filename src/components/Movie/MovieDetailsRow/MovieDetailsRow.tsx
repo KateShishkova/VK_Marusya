@@ -6,10 +6,7 @@ interface MovieDetailsRowProps {
   value: string;
 }
 
-export const MovieDetailsRow: FC<MovieDetailsRowProps> = ({
-  label,
-  value,
-}) => {
+export const MovieDetailsRow: FC<MovieDetailsRowProps> = ({ label, value }) => {
   return (
     <div className={styles.row}>
       <div className={styles["row__label-wrapper"]}>

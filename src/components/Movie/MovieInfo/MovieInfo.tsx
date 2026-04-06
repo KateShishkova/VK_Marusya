@@ -1,10 +1,12 @@
-import type { FC } from "react";
 import clsx from "clsx";
-import styles from "./MovieInfo.module.scss";
-import { getRatingClass } from "@utils/getRatingClass";
+import type { FC } from "react";
+
 import { Icon } from "@components/UI/Icon";
-import { getFormatRuntime } from "@utils/getFormatRuntime";
 import type { MovieResponse } from "@schemas/movie.schema";
+import { getRatingClass } from "@utils/getRatingClass";
+import { getFormatRuntime } from "@utils/getFormatRuntime";
+
+import styles from "./MovieInfo.module.scss";
 
 interface MovieInfoProps {
   movie: MovieResponse;

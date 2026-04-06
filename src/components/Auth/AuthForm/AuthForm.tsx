@@ -1,8 +1,10 @@
 import { useState } from "react";
+
+import { Button } from "@components/UI/Button";
+
 import { LoginForm } from "../LoginForm";
 import { RegisterForm } from "../RegisterForm";
 import styles from "./AuthForm.module.scss";
-import { Button } from "@components/UI/Button";
 
 type AuthState = "login" | "register" | "successRegister";
 

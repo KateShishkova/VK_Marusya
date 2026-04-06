@@ -1,8 +1,8 @@
+import clsx from "clsx";
 import { useRef, useEffect } from "react";
 import type { FC, HTMLAttributes, ReactNode } from "react";
-import styles from "./Dropdown.module.scss";
-import clsx from "clsx";
 import { CSSTransition } from "react-transition-group";
+import styles from "./Dropdown.module.scss";
 
 interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;

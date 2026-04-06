@@ -1,6 +1,6 @@
 import { useState, type FC } from "react";
-import styles from "./GenreCard.module.scss";
 import type { Genre } from "@schemas/genre.schema";
+import styles from "./GenreCard.module.scss";
 
 interface GenreCardProps {
   genre: Genre;

@@ -7,4 +7,4 @@ export const getFormatRuntime = (minutes: number): string => {
   }
 
   return `${mins} мин`;
-}
+};

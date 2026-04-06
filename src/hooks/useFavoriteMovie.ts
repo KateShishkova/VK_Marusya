@@ -1,11 +1,12 @@
-import type { MovieId } from "@api/types";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "@store/store";
+
 import {
   useDeleteFavoriteMovieMutation,
   usePostFavoriteMovieMutation,
 } from "@api/favoritesApi";
-import { useState } from "react";
+import type { MovieId } from "@api/types";
+import type { RootState } from "@store/store";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 export const useFavoriteMovie = (

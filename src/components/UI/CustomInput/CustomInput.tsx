@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import type { FC, InputHTMLAttributes } from "react";
+import { Button } from "../Button";
 import { Icon } from "../Icon";
 import styles from "./CustomInput.module.scss";
-import { Button } from "../Button";
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -23,7 +23,7 @@ export const CustomInput: FC<CustomInputProps> = ({
   iconName,
   hasReset = type === "search",
   theme = "dark",
-  paddingSize = 'medium',
+  paddingSize = "medium",
   className,
   ...props
 }) => {
@@ -32,7 +32,7 @@ export const CustomInput: FC<CustomInputProps> = ({
   const finalClassName = clsx(
     styles[`custom-input`],
     theme !== "dark" && styles[`custom-input--${theme}`],
-    paddingSize !== 'medium' && styles[`custom-input--${paddingSize}`],
+    paddingSize !== "medium" && styles[`custom-input--${paddingSize}`],
     hasIcon && styles["custom-input--icon"],
     errorMessage && styles["custom-input--error"],
     hasReset && styles["custom-input--reset"],

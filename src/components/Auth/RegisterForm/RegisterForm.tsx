@@ -1,13 +1,15 @@
-import type { FC, HTMLAttributes } from "react";
-import styles from "./RegisterForm.module.scss";
 import clsx from "clsx";
-import { CustomInput } from "@components/UI/CustomInput";
-import { Button } from "@components/UI/Button";
+import type { FC, HTMLAttributes } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userRegisterSchema, type UserRegister } from "@schemas/user.schema";
+
 import { useRegisterUserMutation } from "@api/authApi";
+import { Button } from "@components/UI/Button";
+import { CustomInput } from "@components/UI/CustomInput";
+import { userRegisterSchema, type UserRegister } from "@schemas/user.schema";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
+
+import styles from "./RegisterForm.module.scss";
 
 interface RegisterFormProps extends HTMLAttributes<HTMLFormElement> {
   onSuccessRegister?: () => void;

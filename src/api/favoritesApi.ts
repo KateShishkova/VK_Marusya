@@ -3,8 +3,8 @@ import {
   movieResponseSchema,
   type MovieListResponse,
 } from "@schemas/movie.schema";
-import type { MovieId, MovieParams } from "./types";
 import { baseApi } from "./baseApi";
+import type { MovieId, MovieParams } from "./types";
 
 export const favoritesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

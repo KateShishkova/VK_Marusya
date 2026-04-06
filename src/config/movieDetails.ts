@@ -1,9 +1,9 @@
-import { getFormatCurrency } from "@utils/getFormatCurrency";
 import type { MovieDetail } from "@app-types/movieDetail";
+import { getFormatCurrency } from "@utils/getFormatCurrency";
 
 const missingData = "Данные отсутствуют";
 
-export const MOVIE_DETAIL: MovieDetail[] = [
+export const MOVIE_DETAILS: MovieDetail[] = [
   {
     label: "Язык оригинала",
     getValue: (movie) => movie.language ?? missingData,

@@ -1,13 +1,14 @@
+import clsx from "clsx";
+
 import { useGetRandomMovieQuery, useGetTop10MoviesQuery } from "@api/movieApi";
-import { MovieBanner } from "@components/Movie/MovieBanner";
-import { MovieList } from "@components/Movie/MovieList";
-import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
+import { ErrorView } from "@components/UI/ErrorView";
 import { ListView } from "@components/UI/ListView";
 import { PageView } from "@components/UI/PageView";
-import { ErrorView } from "@components/UI/ErrorView";
+import { MovieBanner } from "@components/Movie/MovieBanner";
+import { MovieList } from "@components/Movie/MovieList";
 import { usePageRequestState } from "@hooks/usePageRequestState";
+import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
-import clsx from "clsx";
 import randomMovieStyles from "./RandomMovie.module.scss";
 import topMoviesStyles from "./TopMovies.module.scss";
 

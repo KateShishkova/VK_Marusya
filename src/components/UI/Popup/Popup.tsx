@@ -1,9 +1,9 @@
+import clsx from "clsx";
 import { useRef, useEffect, useState } from "react";
 import type { FC, ReactNode, MouseEvent, SyntheticEvent } from "react";
-import styles from "./Popup.module.scss";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
-import clsx from "clsx";
+import styles from "./Popup.module.scss";
 
 export interface PopupProps {
   children: ReactNode;

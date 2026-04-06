@@ -1,8 +1,8 @@
-import { useEffect, useState, type FC } from "react";
-import styles from "./YoutubePlayer.module.scss";
-import { Loader } from "@components/UI/Loader";
 import clsx from "clsx";
+import { useEffect, useState, type FC } from "react";
+import { Loader } from "@components/UI/Loader";
 import type { MovieResponse } from "@schemas/movie.schema";
+import styles from "./YoutubePlayer.module.scss";
 
 interface YoutubePlayerProps {
   movie: MovieResponse;

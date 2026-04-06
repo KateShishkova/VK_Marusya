@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-interface PageRequestItem {
+interface PageRequestStateItem {
   hasData: boolean;
   isFetching: boolean;
   isError: boolean;
@@ -12,7 +12,7 @@ interface UsePageRequestStateOptions {
 }
 
 export const usePageRequestState = (
-  requests: PageRequestItem[],
+  requests: PageRequestStateItem[],
   options?: UsePageRequestStateOptions,
 ) => {
   const hasPageData = requests.some((request) => request.hasData);

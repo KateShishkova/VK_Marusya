@@ -1,7 +1,8 @@
 import type { FC } from "react";
+import type { MovieResponse } from "@schemas/movie.schema";
+
 import { MovieCard } from "../MovieCard";
 import styles from "./MovieList.module.scss";
-import type { MovieResponse } from "@schemas/movie.schema";
 
 interface MovieListProps {
   list: MovieResponse[];
