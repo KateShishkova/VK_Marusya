@@ -4,7 +4,8 @@ import { GENRES } from "@config/genres";
 import type { Genre } from "@schemas/genre.schema";
 
 export const useGenres = () => {
-  const { data, isLoading, error, isError } = useGetMovieGenresQuery();
+  const { data, isLoading, isFetching, error, isError, refetch } =
+    useGetMovieGenresQuery();
 
   const genres: Genre[] = useMemo(() => {
     if (!data) return [];
@@ -14,5 +15,5 @@ export const useGenres = () => {
       .filter(Boolean) as Genre[];
   }, [data]);
 
-  return { genres, isLoading, error, isError };
+  return { genres, isLoading, isFetching, error, isError, refetch };
 };
