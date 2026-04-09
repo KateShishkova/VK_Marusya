@@ -7,6 +7,7 @@ import { GenreMoviesPage } from "@pages/GenreMoviesPage";
 import { FavoriteMoviesPage } from "@pages/FavoriteMoviesPage";
 import { PATHS } from "@config/paths";
 import { MovieInfoPage } from "@pages/MovieInfoPage";
+import { NotFoundPage } from "@pages/NotFoundPage";
 
 function App() {
   useFetchProfileQuery();
@@ -27,6 +28,8 @@ function App() {
             path={PATHS.PROFILE.FAVORITES}
             element={<FavoriteMoviesPage />}
           />
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
