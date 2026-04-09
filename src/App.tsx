@@ -1,10 +1,12 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useFetchProfileQuery } from "@api/authApi";
 import { Layout } from "@components/Layout/Layout";
 import { MainPage } from "@pages/MainPage";
 import { GenresPage } from "@pages/GenresPage";
 import { GenreMoviesPage } from "@pages/GenreMoviesPage";
 import { FavoriteMoviesPage } from "@pages/FavoriteMoviesPage";
+import { PATHS } from "@config/paths";
+import { MovieInfoPage } from "@pages/MovieInfoPage";
 
 function App() {
   useFetchProfileQuery();
@@ -13,10 +15,18 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/genres" element={<GenresPage />} />
-          <Route path="/genres/:genreEn" element={<GenreMoviesPage />} />
-          <Route path="/favorites" element={<FavoriteMoviesPage />} />
+          <Route path={PATHS.HOME} element={<MainPage />} />
+          <Route path={PATHS.GENRES.ROOT} element={<GenresPage />} />
+          <Route path={PATHS.GENRES.BY_GENRE} element={<GenreMoviesPage />} />
+          <Route
+            path={PATHS.MOVIES.ROOT}
+            element={<Navigate to={PATHS.HOME} replace />}
+          />
+          <Route path={PATHS.MOVIES.BY_ID} element={<MovieInfoPage />} />
+          <Route
+            path={PATHS.PROFILE.FAVORITES}
+            element={<FavoriteMoviesPage />}
+          />
         </Routes>
       </Layout>
     </BrowserRouter>
