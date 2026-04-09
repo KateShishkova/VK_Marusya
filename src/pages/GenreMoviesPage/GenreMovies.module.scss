@@ -9,10 +9,23 @@
     gap: 64px;
   }
 
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__back {
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
   &__title {
     margin: 0;
-    font-size: vars.$fz-xxl;
-    line-height: vars.$lh-xs;
+    font-size: vars.$fz-xl;
+    line-height: vars.$lh-sm;
     font-weight: vars.$fw-bold;
     color: vars.$color-white;
   }

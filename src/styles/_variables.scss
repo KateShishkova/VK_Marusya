@@ -53,7 +53,8 @@ $radius-xl: 28px;
 $radius-xxl: 50px;
 
 // Box shadow
-$box-shadow: 0 0 80px 0 rgba(255, 255, 255, 0.33);
+$box-shadow-default: 0 0 80px 0 rgba(255, 255, 255, 0.33);
+$box-shadow-error: 0 0 80px 0 rgba(200, 32, 32, 0.33);
 
 
 // Typography

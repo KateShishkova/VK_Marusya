@@ -15,6 +15,7 @@ export const favoritesApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: unknown) =>
         movieResponseSchema.array().parse(response),
+      providesTags: ["Favorites"],
     }),
     postFavoriteMovie: builder.mutation<void, MovieParams>({
       query: (body) => ({
@@ -22,14 +23,14 @@ export const favoritesApi = baseApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Favorites"],
     }),
     deleteFavoriteMovie: builder.mutation<void, MovieId>({
       query: (movieId) => ({
         url: API_CONFIG.PATHS.FAVORITES.BY_ID(movieId),
         method: "DELETE",
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Favorites"],
     }),
   }),
 });

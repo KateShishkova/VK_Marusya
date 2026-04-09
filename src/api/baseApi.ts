@@ -7,6 +7,6 @@ export const baseApi = createApi({
     baseUrl: API_CONFIG.BASE_URL,
     credentials: "include",
   }),
-  tagTypes: ["User"],
+  tagTypes: ["User", "Favorites"],
   endpoints: () => ({}),
 });

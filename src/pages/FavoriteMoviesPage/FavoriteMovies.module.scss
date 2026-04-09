@@ -9,11 +9,7 @@
     gap: 64px;
   }
 
-  &__title {
-    margin: 0;
-    font-size: vars.$fz-xxl;
-    line-height: vars.$lh-xs;
-    font-weight: vars.$fw-bold;
-    color: vars.$color-white;
+  &__error {
+    color: vars.$color-red-dark;
   }
 }

@@ -35,13 +35,13 @@ export const MovieBanner: FC<MovieBannerProps> = ({
 
   const { openAuthModal, AuthModal } = useAuthModal();
 
-  const {
-    isFavorite,
-    handleToggleFavorite,
-    error: favoriteError,
-  } = useFavoriteMovie(String(movie.id), openAuthModal);
+  const { isFavorite, handleToggleFavorite, getFavoriteError } =
+    useFavoriteMovie(openAuthModal);
 
   const [imgError, setImgError] = useState(false);
+
+  const movieId = String(movie.id);
+  const favorite = isFavorite(movieId);
 
   // Actions
   const trailerAction = (
@@ -63,14 +63,14 @@ export const MovieBanner: FC<MovieBannerProps> = ({
     <>
       <Button
         shape="rectangle-small"
-        onClick={handleToggleFavorite}
+        onClick={() => handleToggleFavorite(movieId)}
         aria-label="Добавить в избранные"
       >
         <Icon
-          name={isFavorite ? "heart-filled" : "heart"}
+          name={favorite ? "heart-filled" : "heart"}
           className={clsx(
             styles["banner__favorite-icon"],
-            isFavorite && styles["banner__favorite-icon--active"],
+            favorite && styles["banner__favorite-icon--active"],
           )}
         />
       </Button>
@@ -116,7 +116,7 @@ export const MovieBanner: FC<MovieBannerProps> = ({
       );
       break;
   }
-  const errorMessage = favoriteError || fetchingError;
+  const errorMessage = getFavoriteError(movieId) || fetchingError;
 
   return (
     <div className={styles.banner}>

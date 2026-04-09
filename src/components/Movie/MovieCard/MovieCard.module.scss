@@ -33,7 +33,7 @@
     flex-direction: column;
     border: 1px solid vars.$color-white-25;
     border-radius: vars.$radius-md;
-    box-shadow: vars.$box-shadow;
+    box-shadow: vars.$box-shadow-default;
     background-color: vars.$color-gray-medium;
     overflow: hidden;
     transition: border-color vars.$transition;
@@ -54,6 +54,15 @@
     right: -20px;
     visibility: hidden;
     opacity: 0;
-    transition: visibility vars.$transition, opacity vars.$transition, color vars.$transition;
+    transition:
+      visibility vars.$transition,
+      opacity vars.$transition,
+      color vars.$transition;
+  }
+
+  &--error {
+    #{$root}__wrapper {
+      box-shadow: vars.$box-shadow-error;
+    }
   }
 }

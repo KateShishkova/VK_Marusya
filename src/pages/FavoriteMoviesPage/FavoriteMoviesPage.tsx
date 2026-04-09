@@ -1,32 +1,28 @@
 import clsx from "clsx";
-import { useNavigate, useParams } from "react-router-dom";
 
-import { useGetMoviesQuery } from "@api/movieApi";
+import { useGetFavoritesQuery } from "@api/favoritesApi";
 import { MovieList } from "@components/Movie/MovieList";
-import { Button } from "@components/UI/Button";
-import { Icon } from "@components/UI/Icon";
 import { ListView } from "@components/UI/ListView";
 import { PageView } from "@components/UI/PageView";
-import { GENRES } from "@config/genres";
+import { useAuthModal } from "@hooks/useAuthModal";
+import { useFavoriteMovie } from "@hooks/useFavoriteMovie";
 import { usePageRequestState } from "@hooks/usePageRequestState";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
-import moviesStyles from "./GenreMovies.module.scss";
+import moviesStyles from "./FavoriteMovies.module.scss";
 
-export const GenreMoviesPage = () => {
-  const { genreEn } = useParams();
-  const navigate = useNavigate();
-
-  const genreObj = GENRES.find((genre) => genre.en === genreEn);
-  const title = genreObj?.ru ?? genreEn;
-
+export const FavoriteMoviesPage = () => {
   const {
     data: movies,
     isFetching: isMoviesFetching,
     isError: isMoviesError,
     error: moviesError,
     refetch: moviesRefetch,
-  } = useGetMoviesQuery({ genre: genreEn });
+  } = useGetFavoritesQuery();
+
+  const { openAuthModal, AuthModal } = useAuthModal();
+  const { handleDeleteFavorite, hasFavoriteError, hasAnyFavoriteErrors } =
+    useFavoriteMovie(openAuthModal);
 
   const pageState = usePageRequestState(
     [
@@ -38,7 +34,8 @@ export const GenreMoviesPage = () => {
       },
     ],
     {
-      errorMessage: `Не удалось загрузить страницу со списком фильмов выбранного жанра (${title}).`,
+      errorMessage:
+        "Не удалось загрузить страницу со списком избранных фильмов.",
     },
   );
 
@@ -46,24 +43,28 @@ export const GenreMoviesPage = () => {
     <section className={clsx("section", moviesStyles.section)}>
       <div className="container">
         <div className={moviesStyles.section__wrapper}>
-          <div className={moviesStyles.section__top}>
-            <Button
-              className={moviesStyles.section__back}
-              kind="plain"
-              aria-label="Вернуться назад"
-              onClick={() => navigate(-1)}
-            >
-              <Icon name="arrow-back" />
-            </Button>
-            <h2 className={moviesStyles.section__title}>{title}</h2>
-          </div>
+          {hasAnyFavoriteErrors() && (
+            <div className={moviesStyles.section__error}>
+              Не удалось удалить один или несколько фильмов из избранного.
+            </div>
+          )}
+
           <ListView
             list={movies ?? []}
             isLoading={!movies && isMoviesFetching}
             error={isMoviesError ? getRtkErrorMessage(moviesError) : undefined}
             onRetry={moviesRefetch}
-            renderList={(list) => <MovieList list={list} />}
+            renderList={(list) => (
+              <MovieList
+                list={list}
+                kind="favorite"
+                onRemoveFavorite={handleDeleteFavorite}
+                hasFavoriteError={hasFavoriteError}
+              />
+            )}
           />
+
+          {AuthModal}
         </div>
       </div>
     </section>
