@@ -2,6 +2,8 @@ import clsx from "clsx";
 import { type FC } from "react";
 import { useSelector } from "react-redux";
 
+import logoMd from '@assets/images/logo--md.png'
+
 import { Button } from "@components/UI/Button";
 import { CustomLink } from "@components/UI/CustomLink";
 import { SearchBar } from "@components/Search/SearchBar";
@@ -26,7 +28,7 @@ export const Header: FC = () => {
           >
             <img
               className={styles["header__logo-image"]}
-              src="src/assets/images/logo--md.png"
+              src={logoMd}
               alt="Логотип ВK Маруся"
               width={144}
               height={32}

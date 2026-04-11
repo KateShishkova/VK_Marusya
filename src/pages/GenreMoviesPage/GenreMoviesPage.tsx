@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import { useGetMoviesQuery } from "@api/movieApi";
 import { MovieList } from "@components/Movie/MovieList";
@@ -8,6 +8,7 @@ import { Icon } from "@components/UI/Icon";
 import { ListView } from "@components/UI/ListView";
 import { PageView } from "@components/UI/PageView";
 import { GENRES } from "@config/genres";
+import { PATHS } from "@config/paths";
 import { usePageRequestState } from "@hooks/usePageRequestState";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
@@ -18,7 +19,12 @@ export const GenreMoviesPage = () => {
   const navigate = useNavigate();
 
   const genreObj = GENRES.find((genre) => genre.en === genreEn);
-  const title = genreObj?.ru ?? genreEn;
+
+  if (!genreObj) {
+    return <Navigate to={PATHS.NOT_FOUND} replace />;
+  }
+
+  const title = genreObj.ru;
 
   const {
     data: movies,

@@ -13,4 +13,6 @@ export const PATHS = {
     FAVORITES: "/profile/favorites",
     SETTINGS: "/profile/settings",
   },
+
+  NOT_FOUND: "/404",
 };

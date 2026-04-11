@@ -1,104 +1,30 @@
 import type { Genre } from "@schemas/genre.schema";
+import { genresImages } from "./genresImages";
 
-export const GENRES: Genre[] = [
-  {
-    en: "drama",
-    ru: "Драма",
-    img: "src/assets/images/genres/drama.jpg",
-  },
-  {
-    en: "comedy",
-    ru: "Комедия",
-    img: "src/assets/images/genres/comedy.jpg",
-  },
-  {
-    en: "crime",
-    ru: "Детектив",
-    img: "src/assets/images/genres/crime.jpg",
-  },
-  {
-    en: "family",
-    ru: "Семейное",
-    img: "src/assets/images/genres/family.jpg",
-  },
-  {
-    en: "history",
-    ru: "Историческое",
-    img: "src/assets/images/genres/history.jpg",
-  },
-  {
-    en: "thriller",
-    ru: "Триллер",
-    img: "src/assets/images/genres/thriller.jpg",
-  },
-  {
-    en: "fantasy",
-    ru: "Фантастика",
-    img: "src/assets/images/genres/fantasy.jpg",
-  },
-  {
-    en: "adventure",
-    ru: "Приключения",
-    img: "src/assets/images/genres/adventure.jpg",
-  },
-  {
-    en: "horror",
-    ru: "Ужасы",
-    img: "src/assets/images/genres/horror.jpg",
-  },
-  {
-    en: "scifi",
-    ru: "Научная фантастика",
-    img: "src/assets/images/genres/scifi.jpg",
-  },
-  {
-    en: "stand-up",
-    ru: "Стендап",
-    img: "src/assets/images/genres/stand-up.jpg",
-  },
-  {
-    en: "mystery",
-    ru: "Мистика",
-    img: "src/assets/images/genres/mystery.jpg",
-  },
-  {
-    en: "romance",
-    ru: "Мелодрама",
-    img: "src/assets/images/genres/romance.jpg",
-  },
-  {
-    en: "music",
-    ru: "Музыкальное",
-    img: "src/assets/images/genres/music.jpg",
-  },
-  {
-    en: "tv-movie",
-    ru: "Телефильм",
-    img: "src/assets/images/genres/tv-movie.jpg",
-  },
-  {
-    en: "documentary",
-    ru: "Документальное",
-    img: "src/assets/images/genres/documentary.jpg",
-  },
-  {
-    en: "action",
-    ru: "Боевик",
-    img: "src/assets/images/genres/action.jpg",
-  },
-  {
-    en: "western",
-    ru: "Вестерны",
-    img: "src/assets/images/genres/western.jpg",
-  },
-  {
-    en: "animation",
-    ru: "Мультфильм",
-    img: "src/assets/images/genres/animation.jpg",
-  },
-  {
-    en: "war",
-    ru: "Военные",
-    img: "src/assets/images/genres/war.jpg",
-  },
-];
+const genresBase = [
+  { en: "drama", ru: "Драма" },
+  { en: "comedy", ru: "Комедия" },
+  { en: "crime", ru: "Детектив" },
+  { en: "family", ru: "Семейное" },
+  { en: "history", ru: "Историческое" },
+  { en: "thriller", ru: "Триллер" },
+  { en: "fantasy", ru: "Фантастика" },
+  { en: "adventure", ru: "Приключения" },
+  { en: "horror", ru: "Ужасы" },
+  { en: "scifi", ru: "Научная фантастика" },
+  { en: "stand-up", ru: "Стендап" },
+  { en: "mystery", ru: "Мистика" },
+  { en: "romance", ru: "Мелодрама" },
+  { en: "music", ru: "Музыкальное" },
+  { en: "tv-movie", ru: "Телефильм" },
+  { en: "documentary", ru: "Документальное" },
+  { en: "action", ru: "Боевик" },
+  { en: "western", ru: "Вестерны" },
+  { en: "animation", ru: "Мультфильм" },
+  { en: "war", ru: "Военные" },
+] as const;
+
+export const GENRES: Genre[] = genresBase.map((genre) => ({
+  ...genre,
+  img: genresImages[genre.en],
+}));

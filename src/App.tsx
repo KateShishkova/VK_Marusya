@@ -29,7 +29,8 @@ function App() {
             element={<FavoriteMoviesPage />}
           />
 
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path={PATHS.NOT_FOUND} element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to={PATHS.NOT_FOUND} replace />} />
         </Routes>
       </Layout>
     </BrowserRouter>

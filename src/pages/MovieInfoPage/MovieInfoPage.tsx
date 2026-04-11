@@ -1,10 +1,11 @@
 import clsx from "clsx";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 import { useGetMovieByIdQuery } from "@api/movieApi";
 import { MovieBanner } from "@components/Movie/MovieBanner";
 import { MovieDetails } from "@components/Movie/MovieDetails";
 import { PageView } from "@components/UI/PageView";
+import { PATHS } from "@config/paths";
 import { usePageRequestState } from "@hooks/usePageRequestState";
 
 import bannerStyles from "./MovieBanner.module.scss";
@@ -13,7 +14,9 @@ import aboutStyles from "./MovieAbout.module.scss";
 export const MovieInfoPage = () => {
   const { movieId } = useParams();
 
-  if (!movieId) return null;
+  if (!movieId) {
+    return <Navigate to={PATHS.NOT_FOUND} replace />;
+  }
 
   const {
     data: movie,
