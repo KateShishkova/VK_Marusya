@@ -11,7 +11,7 @@ import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 import moviesStyles from "./FavoriteMovies.module.scss";
 
-export const FavoriteMoviesPage = () => {
+export const ProfileFavoritesPage = () => {
   const {
     data: movies,
     isFetching: isMoviesFetching,

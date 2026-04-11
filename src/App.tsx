@@ -4,7 +4,8 @@ import { Layout } from "@components/Layout/Layout";
 import { MainPage } from "@pages/MainPage";
 import { GenresPage } from "@pages/GenresPage";
 import { GenreMoviesPage } from "@pages/GenreMoviesPage";
-import { FavoriteMoviesPage } from "@pages/FavoriteMoviesPage";
+import { ProfileFavoritesPage } from "@pages/ProfilePage/ProfileFavoritesPage";
+
 import { PATHS } from "@config/paths";
 import { MovieInfoPage } from "@pages/MovieInfoPage";
 import { NotFoundPage } from "@pages/NotFoundPage";
@@ -26,7 +27,7 @@ function App() {
           <Route path={PATHS.MOVIES.BY_ID} element={<MovieInfoPage />} />
           <Route
             path={PATHS.PROFILE.FAVORITES}
-            element={<FavoriteMoviesPage />}
+            element={<ProfileFavoritesPage />}
           />
 
           <Route path={PATHS.NOT_FOUND} element={<NotFoundPage />} />
