@@ -6,6 +6,9 @@ import { Icon } from "@components/UI/Icon";
 import type { MovieResponse } from "@schemas/movie.schema";
 
 import styles from "./MovieCard.module.scss";
+import { CustomLink } from "@components/UI/CustomLink";
+import { generatePath } from "react-router-dom";
+import { PATHS } from "@config/paths";
 
 interface MovieCardProps {
   movie: MovieResponse;
@@ -72,11 +75,11 @@ export const MovieCard: FC<MovieCardProps> = ({
   }
 
   return (
-    <a
+    <CustomLink
       className={clsx(styles.card, hasError && styles["card--error"])}
-      href={`https://cinemaguide.skillbox.cc/movie/${movie.id}`}
+      to={generatePath(PATHS.MOVIES.BY_ID, { movieId: String(movie.id) })}
     >
       {cardContent}
-    </a>
+    </CustomLink>
   );
 };

@@ -1,9 +1,11 @@
 import clsx from "clsx";
 import { useState, type FC } from "react";
+import { generatePath } from "react-router-dom";
 
 import { Button } from "@components/UI/Button";
 import { CustomLink } from "@components/UI/CustomLink";
 import { Icon } from "@components/UI/Icon";
+import { PATHS } from "@config/paths";
 import { useAuthModal } from "@hooks/useAuthModal";
 import { useFavoriteMovie } from "@hooks/useFavoriteMovie";
 import { useModal } from "@hooks/useModal";
@@ -54,7 +56,7 @@ export const MovieBanner: FC<MovieBannerProps> = ({
   );
 
   const aboutAction = (
-    <CustomLink href="#" kind="btn">
+    <CustomLink to={generatePath(PATHS.MOVIES.BY_ID, { movieId })} kind="btn">
       О&nbsp;фильме
     </CustomLink>
   );

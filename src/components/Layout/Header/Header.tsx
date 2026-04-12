@@ -2,11 +2,12 @@ import clsx from "clsx";
 import { type FC } from "react";
 import { useSelector } from "react-redux";
 
-import logoMd from '@assets/images/logo--md.png'
+import logoMd from "@assets/images/logo--md.png";
 
 import { Button } from "@components/UI/Button";
-import { CustomLink } from "@components/UI/CustomLink";
+import { CustomLink, CustomNavLink } from "@components/UI/CustomLink";
 import { SearchBar } from "@components/Search/SearchBar";
+import { PATHS } from "@config/paths";
 import { useAuthModal } from "@hooks/useAuthModal";
 import type { RootState } from "@store/store";
 
@@ -21,7 +22,7 @@ export const Header: FC = () => {
       <div className="container">
         <div className={styles.header__wrapper}>
           <CustomLink
-            href="#"
+            to={PATHS.HOME}
             kind="img"
             className={styles["header__logo-link"]}
             aria-label="На главную"
@@ -35,16 +36,19 @@ export const Header: FC = () => {
             />
           </CustomLink>
           <nav className={styles.header__nav}>
-            <CustomLink
+            <CustomNavLink
+              to={PATHS.HOME}
+              end={true}
               className={styles["header__nav-item"]}
-              isActive={true}
-              href="#"
             >
               Главная
-            </CustomLink>
-            <CustomLink className={styles["header__nav-item"]} href="#">
+            </CustomNavLink>
+            <CustomNavLink
+              to={PATHS.GENRES.ROOT}
+              className={styles["header__nav-item"]}
+            >
               Жанры
-            </CustomLink>
+            </CustomNavLink>
             <div
               className={clsx(
                 styles["header__nav-item"],
@@ -55,15 +59,15 @@ export const Header: FC = () => {
             </div>
 
             {isAuth ? (
-              <CustomLink
+              <CustomNavLink
+                to={PATHS.PROFILE.ROOT}
                 className={clsx(
                   styles["header__nav-item"],
                   styles["header__nav-item--end"],
                 )}
-                href="#"
               >
                 {user?.name ?? "Профиль"}
-              </CustomLink>
+              </CustomNavLink>
             ) : (
               <>
                 <Button

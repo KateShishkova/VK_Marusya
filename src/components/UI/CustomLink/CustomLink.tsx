@@ -1,52 +1,52 @@
 import clsx from "clsx";
-import type { AnchorHTMLAttributes, FC } from "react";
+import type { FC } from "react";
 import { Link as RouterLink } from "react-router-dom";
+
+import type { ExternalLinkProps, InternalLinkProps } from "./types";
 import styles from "./CustomLink.module.scss";
 
-interface CustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  href: string;
-  kind?: "text" | "icon" | "img" | "icon-text" | "btn";
-  isActive?: boolean;
-}
+type CustomLinkProps = InternalLinkProps | ExternalLinkProps;
 
-const isInternalLink = (href: string) => {
-  return /^\/(?!\/)/.test(href);
-};
+export const CustomLink: FC<CustomLinkProps> = (props) => {
+  // Internal link
+  if (props.to !== undefined) {
+    const { to, children, kind, className, ...rest } = props;
 
-export const CustomLink: FC<CustomLinkProps> = ({
-  href,
-  children,
-  kind = "text",
-  isActive = false,
-  className,
-  ...props
-}) => {
-  const isText = kind === "text";
+    const finalClassName = clsx(
+      styles.link,
+      kind !== "text" && styles[`link--${kind}`],
+      className,
+    );
 
-  const finalClassName = clsx(
-    styles.link,
-    !isText && styles[`link--${kind}`],
-    isActive && styles[`link--active`],
-    className,
-  );
-
-  if (isInternalLink(href)) {
     return (
-      <RouterLink to={href} className={finalClassName} {...props}>
+      <RouterLink to={to} {...rest} className={finalClassName}>
         {children}
       </RouterLink>
     );
-  } else {
+  }
+
+  // External link
+  if (props.href !== undefined) {
+    const { href, children, kind, className, ...rest } = props;
+
+    const finalClassName = clsx(
+      styles.link,
+      kind !== "text" && styles[`link--${kind}`],
+      className,
+    );
+
     return (
       <a
         href={href}
+        {...rest}
         target="_blank"
         rel="noopener noreferrer"
         className={finalClassName}
-        {...props}
       >
         {children}
       </a>
     );
   }
+
+  return null;
 };
