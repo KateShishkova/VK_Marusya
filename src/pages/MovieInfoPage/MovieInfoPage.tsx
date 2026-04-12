@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Navigate, useParams } from "react-router-dom";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 import { useGetMovieByIdQuery } from "@api/movieApi";
 import { MovieBanner } from "@components/Movie/MovieBanner";
@@ -13,31 +14,34 @@ import aboutStyles from "./MovieAbout.module.scss";
 
 export const MovieInfoPage = () => {
   const { movieId } = useParams();
+  const hasMovieId = movieId !== undefined;
 
-  if (!movieId) {
-    return <Navigate to={PATHS.NOT_FOUND} replace />;
-  }
+  const queryArg = movieId ?? skipToken;
 
   const {
     data: movie,
     isFetching: isMovieFetching,
     isError: isMovieError,
     refetch: movieRefetch,
-  } = useGetMovieByIdQuery(movieId);
+  } = useGetMovieByIdQuery(queryArg);
 
   const pageState = usePageRequestState(
     [
       {
         hasData: movie !== undefined,
-        isFetching: isMovieFetching,
-        isError: isMovieError,
-        refetch: movieRefetch,
+        isFetching: hasMovieId && isMovieFetching,
+        isError: hasMovieId && isMovieError,
+        refetch: hasMovieId ? movieRefetch : () => undefined,
       },
     ],
     {
       errorMessage: `Не удалось загрузить страницу с информацией о фильме.`,
     },
   );
+
+  if (!hasMovieId) {
+    return <Navigate to={PATHS.NOT_FOUND} replace />;
+  }
 
   const pageContent = movie && (
     <>

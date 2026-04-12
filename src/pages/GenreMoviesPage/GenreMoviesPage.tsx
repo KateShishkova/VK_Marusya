@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 import { useGetMoviesQuery } from "@api/movieApi";
 import { MovieList } from "@components/Movie/MovieList";
@@ -19,12 +20,11 @@ export const GenreMoviesPage = () => {
   const navigate = useNavigate();
 
   const genreObj = GENRES.find((genre) => genre.en === genreEn);
+  const hasGenreObj = genreObj !== undefined;
 
-  if (!genreObj) {
-    return <Navigate to={PATHS.NOT_FOUND} replace />;
-  }
+  const title = genreObj?.ru ?? genreEn;
 
-  const title = genreObj.ru;
+  const queryArg = hasGenreObj ? { genre: genreObj.en } : skipToken;
 
   const {
     data: movies,
@@ -32,21 +32,25 @@ export const GenreMoviesPage = () => {
     isError: isMoviesError,
     error: moviesError,
     refetch: moviesRefetch,
-  } = useGetMoviesQuery({ genre: genreEn });
+  } = useGetMoviesQuery(queryArg);
 
   const pageState = usePageRequestState(
     [
       {
         hasData: movies !== undefined,
-        isFetching: isMoviesFetching,
-        isError: isMoviesError,
-        refetch: moviesRefetch,
+        isFetching: hasGenreObj && isMoviesFetching,
+        isError: hasGenreObj && isMoviesError,
+        refetch: hasGenreObj ? moviesRefetch : () => undefined,
       },
     ],
     {
       errorMessage: `Не удалось загрузить страницу со списком фильмов выбранного жанра (${title}).`,
     },
   );
+
+  if (!genreObj) {
+    return <Navigate to={PATHS.NOT_FOUND} replace />;
+  }
 
   const pageContent = (
     <section className={clsx("section", moviesStyles.section)}>
