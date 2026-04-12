@@ -10,9 +10,13 @@ export const PATHS = {
   },
   PROFILE: {
     ROOT: "/profile",
+    SEGMENTS: {
+      FAVORITES: "favorites",
+      SETTINGS: "settings",
+    },
     FAVORITES: "/profile/favorites",
     SETTINGS: "/profile/settings",
   },
 
   NOT_FOUND: "/404",
-};
+} as const;

@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
+import { usePageTitle } from "@hooks/usePageTitle";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
-import { usePageTitle } from "@hooks/usePageTitle";
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout = () => {
   const pageTitle = usePageTitle();
 
   return (
@@ -11,7 +11,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       <Header />
       <main>
         <h1 className="visually-hidden">{pageTitle}</h1>
-        {children}
+        <Outlet />
       </main>
       <Footer />
     </>

@@ -15,8 +15,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
+      <Routes>
+        <Route element={<Layout />}>
           <Route path={PATHS.HOME} element={<MainPage />} />
           <Route path={PATHS.GENRES.ROOT} element={<GenresPage />} />
           <Route path={PATHS.GENRES.BY_GENRE} element={<GenreMoviesPage />} />
@@ -32,8 +32,8 @@ function App() {
 
           <Route path={PATHS.NOT_FOUND} element={<NotFoundPage />} />
           <Route path="*" element={<Navigate to={PATHS.NOT_FOUND} replace />} />
-        </Routes>
-      </Layout>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
