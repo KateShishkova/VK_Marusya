@@ -12,7 +12,7 @@ import { usePageRequestState } from "@hooks/usePageRequestState";
 import bannerStyles from "./MovieBanner.module.scss";
 import aboutStyles from "./MovieAbout.module.scss";
 
-export const MovieInfoPage = () => {
+const MovieInfoPage = () => {
   const { movieId } = useParams();
   const hasMovieId = movieId !== undefined;
 
@@ -69,3 +69,5 @@ export const MovieInfoPage = () => {
     </PageView>
   );
 };
+
+export default MovieInfoPage;

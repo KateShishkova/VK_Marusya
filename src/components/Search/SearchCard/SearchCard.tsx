@@ -1,22 +1,26 @@
-import { useState, type FC } from "react";
-import { MovieInfo } from "@components/Movie/MovieInfo";
-import type { MovieResponse } from "@schemas/movie.schema";
-import styles from "./SearchCard.module.scss";
-import { CustomLink } from "@components/UI/CustomLink";
+import { memo, useState, type FC } from "react";
 import { generatePath } from "react-router-dom";
+
+import { MovieInfo } from "@components/Movie/MovieInfo";
+import { CustomLink } from "@components/UI/CustomLink";
 import { PATHS } from "@config/paths";
+import type { MovieResponse } from "@schemas/movie.schema";
+
+import styles from "./SearchCard.module.scss";
 
 interface SearchCardProps {
   movie: MovieResponse;
+  onSelectMovie?: () => void;
 }
 
-export const SearchCard: FC<SearchCardProps> = ({ movie }) => {
+const SearchCardBase: FC<SearchCardProps> = ({ movie, onSelectMovie }) => {
   const [imgError, setImgError] = useState(false);
 
   return (
     <CustomLink
       className={styles.card}
       to={generatePath(PATHS.MOVIES.BY_ID, { movieId: String(movie.id) })}
+      onClick={onSelectMovie}
     >
       <div className={styles.card__poster}>
         {!imgError && movie.posterUrl && (
@@ -34,3 +38,5 @@ export const SearchCard: FC<SearchCardProps> = ({ movie }) => {
     </CustomLink>
   );
 };
+
+export const SearchCard = memo(SearchCardBase);

@@ -1,8 +1,9 @@
 import clsx from "clsx";
+import { useEffect } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { skipToken } from "@reduxjs/toolkit/query";
 
-import { useGetMoviesQuery } from "@api/movieApi";
+import { useGetMoviesInfiniteQuery } from "@api/movieApi";
 import { MovieList } from "@components/Movie/MovieList";
 import { Button } from "@components/UI/Button";
 import { Icon } from "@components/UI/Icon";
@@ -11,36 +12,75 @@ import { PageView } from "@components/UI/PageView";
 import { GENRES } from "@config/genres";
 import { PATHS } from "@config/paths";
 import { usePageRequestState } from "@hooks/usePageRequestState";
+import { usePageSearchParam } from "@hooks/usePageSearchParam";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 import moviesStyles from "./GenreMovies.module.scss";
 
-export const GenreMoviesPage = () => {
+const GenreMoviesPage = () => {
   const { genreEn } = useParams();
   const navigate = useNavigate();
+  const { page: targetPage, setPage } = usePageSearchParam();
 
   const genreObj = GENRES.find((genre) => genre.en === genreEn);
   const hasGenreObj = genreObj !== undefined;
-
   const title = genreObj?.ru ?? genreEn;
-
-  const queryArg = hasGenreObj ? { genre: genreObj.en } : skipToken;
+  const queryArg = genreObj ? { genre: genreObj.en } : skipToken;
 
   const {
-    data: movies,
-    isFetching: isMoviesFetching,
-    isError: isMoviesError,
-    error: moviesError,
-    refetch: moviesRefetch,
-  } = useGetMoviesQuery(queryArg);
+    data,
+    isLoading,
+    isFetching,
+    isError,
+    error,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetMoviesInfiniteQuery(queryArg);
+
+  const loadedPagesCount = data?.pages.length ?? 0;
+  const shownPagesCount = targetPage || 1;
+  const allMovies = data?.pages.slice(0, shownPagesCount).flat() ?? [];
+  const hasMovies = allMovies.length > 0 || (!isLoading && !isError);
+
+  useEffect(() => {
+    if (
+      !hasGenreObj ||
+      loadedPagesCount >= shownPagesCount ||
+      !hasNextPage ||
+      isFetching ||
+      isFetchingNextPage
+    ) {
+      return;
+    }
+
+    fetchNextPage();
+  }, [
+    hasGenreObj,
+    loadedPagesCount,
+    shownPagesCount,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+  ]);
+
+  const handleShowMoreMovies = async () => {
+    if (!hasNextPage || isFetchingNextPage) {
+      return;
+    }
+    await fetchNextPage();
+    setPage(shownPagesCount + 1, false);
+  };
 
   const pageState = usePageRequestState(
     [
       {
-        hasData: movies !== undefined,
-        isFetching: hasGenreObj && isMoviesFetching,
-        isError: hasGenreObj && isMoviesError,
-        refetch: hasGenreObj ? moviesRefetch : () => undefined,
+        hasData: hasMovies,
+        isFetching: hasGenreObj && isLoading,
+        isError: hasGenreObj && isError,
+        refetch: hasGenreObj ? refetch : () => undefined,
       },
     ],
     {
@@ -68,12 +108,21 @@ export const GenreMoviesPage = () => {
             <h2 className={moviesStyles.section__title}>{title}</h2>
           </div>
           <ListView
-            list={movies ?? []}
-            isLoading={!movies && isMoviesFetching}
-            error={isMoviesError ? getRtkErrorMessage(moviesError) : undefined}
-            onRetry={moviesRefetch}
+            list={allMovies}
+            isLoading={!hasMovies && isFetching}
+            error={isError ? getRtkErrorMessage(error) : undefined}
+            onRetry={refetch}
             renderList={(list) => <MovieList list={list} />}
           />
+          {hasNextPage && !isError && (
+            <Button
+              background="accent"
+              disabled={isFetchingNextPage}
+              onClick={handleShowMoreMovies}
+            >
+              {isFetchingNextPage ? "Загружаю..." : "Показать ещё"}
+            </Button>
+          )}
         </div>
       </div>
     </section>
@@ -89,3 +138,5 @@ export const GenreMoviesPage = () => {
     </PageView>
   );
 };
+
+export default GenreMoviesPage;

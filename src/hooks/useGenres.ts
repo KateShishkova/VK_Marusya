@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useGetMovieGenresQuery } from "@api/movieApi";
 import { GENRES } from "@config/genres";
 import type { Genre } from "@schemas/genre.schema";
@@ -7,13 +6,11 @@ export const useGenres = () => {
   const { data, isLoading, isFetching, error, isError, refetch } =
     useGetMovieGenresQuery();
 
-  const genres: Genre[] = useMemo(() => {
-    if (!data) return [];
-
-    return data
-      .map((genreEn) => GENRES.find((genre) => genre.en === genreEn))
-      .filter(Boolean) as Genre[];
-  }, [data]);
+  const genres: Genre[] = !data
+    ? []
+    : (data
+        .map((genreEn) => GENRES.find((genre) => genre.en === genreEn))
+        .filter(Boolean) as Genre[]);
 
   return { genres, isLoading, isFetching, error, isError, refetch };
 };

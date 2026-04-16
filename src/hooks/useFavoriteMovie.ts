@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 
 import {
@@ -11,8 +11,8 @@ import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 type FavoriteErrors = Partial<Record<MovieId, string>>;
 
-export const useFavoriteMovie = (onAuthRequired: () => void) => {
-  const isAuth = useSelector((state: RootState) => state.user.isAuth);
+export const useFavoriteMovie = (onAuthRequired?: () => void) => {
+  const { isAuth, authStatus } = useSelector((state: RootState) => state.user);
   const favorites =
     useSelector((state: RootState) => state.user.user?.favorites) || [];
 
@@ -21,8 +21,10 @@ export const useFavoriteMovie = (onAuthRequired: () => void) => {
 
   const [errors, setErrors] = useState<FavoriteErrors>({});
 
+  const isAuthPending = authStatus === "loading";
+
   // Internal methods
-  const clearError = (movieId: MovieId) => {
+  const clearError = useCallback((movieId: MovieId) => {
     setErrors((prev) => {
       if (!prev[movieId]) {
         return prev;
@@ -32,27 +34,30 @@ export const useFavoriteMovie = (onAuthRequired: () => void) => {
       delete next[movieId];
       return next;
     });
-  };
+  }, []);
 
-  const setFavoriteError = (
-    movieId: MovieId,
-    error: unknown,
-    message: string,
-  ) => {
-    setErrors((prev) => ({
-      ...prev,
-      [movieId]: getRtkErrorMessage(error, message),
-    }));
-  };
+  const setFavoriteError = useCallback(
+    (movieId: MovieId, error: unknown, message: string) => {
+      setErrors((prev) => ({
+        ...prev,
+        [movieId]: getRtkErrorMessage(error, message),
+      }));
+    },
+    [],
+  );
 
-  const checkAuth = () => {
+  const checkAuth = useCallback(() => {
+    if (isAuthPending) {
+      return false;
+    }
+
     if (!isAuth) {
       onAuthRequired?.();
       return false;
     }
 
     return true;
-  };
+  }, [isAuthPending, isAuth, onAuthRequired]);
 
   // External methods
   const isFavorite = (movieId: MovieId) => {
@@ -71,45 +76,54 @@ export const useFavoriteMovie = (onAuthRequired: () => void) => {
     return errors[movieId];
   };
 
-  const handleAddFavorite = async (movieId: MovieId) => {
-    clearError(movieId);
+  const handleAddFavorite = useCallback(
+    async (movieId: MovieId) => {
+      clearError(movieId);
 
-    if (!checkAuth()) return;
+      if (!checkAuth()) return;
 
-    try {
-      await postFavoriteMovie({ id: movieId }).unwrap();
-    } catch (error) {
-      setFavoriteError(
-        movieId,
-        error,
-        "Ошибка при добавлении фильма в избранное.",
-      );
-    }
-  };
+      try {
+        await postFavoriteMovie({ id: movieId }).unwrap();
+      } catch (error) {
+        setFavoriteError(
+          movieId,
+          error,
+          "Ошибка при добавлении фильма в избранное.",
+        );
+      }
+    },
+    [clearError, checkAuth, postFavoriteMovie, setFavoriteError],
+  );
 
-  const handleDeleteFavorite = async (movieId: MovieId) => {
-    clearError(movieId);
+  const handleDeleteFavorite = useCallback(
+    async (movieId: MovieId) => {
+      clearError(movieId);
 
-    if (!checkAuth()) return;
+      if (!checkAuth()) return;
 
-    try {
-      await deleteFavoriteMovie(movieId).unwrap();
-    } catch (error) {
-      setFavoriteError(
-        movieId,
-        error,
-        "Ошибка при удалении фильма из избранного.",
-      );
-    }
-  };
+      try {
+        await deleteFavoriteMovie(movieId).unwrap();
+      } catch (error) {
+        setFavoriteError(
+          movieId,
+          error,
+          "Ошибка при удалении фильма из избранного.",
+        );
+      }
+    },
+    [clearError, checkAuth, deleteFavoriteMovie, setFavoriteError],
+  );
 
   const handleToggleFavorite = async (movieId: MovieId) => {
-    isFavorite(movieId)
-      ? await handleDeleteFavorite(movieId)
-      : await handleAddFavorite(movieId);
+    if (isFavorite(movieId)) {
+      await handleDeleteFavorite(movieId);
+    } else {
+      await handleAddFavorite(movieId);
+    }
   };
 
   return {
+    isAuthPending,
     isFavorite,
     hasFavoriteError,
     hasAnyFavoriteErrors,

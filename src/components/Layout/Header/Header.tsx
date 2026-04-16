@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 
 import logoMd from "@assets/images/logo--md.png";
 
+import { SearchBar } from "@components/Search/SearchBar";
 import { Button } from "@components/UI/Button";
 import { CustomLink, CustomNavLink } from "@components/UI/CustomLink";
-import { SearchBar } from "@components/Search/SearchBar";
+import { Loader } from "@components/UI/Loader";
 import { PATHS } from "@config/paths";
 import { useAuthModal } from "@hooks/useAuthModal";
 import type { RootState } from "@store/store";
@@ -14,11 +15,53 @@ import type { RootState } from "@store/store";
 import styles from "./Header.module.scss";
 
 export const Header: FC = () => {
-  const { isAuth, user } = useSelector((state: RootState) => state.user);
+  const { user, authStatus } = useSelector((state: RootState) => state.user);
   const { openAuthModal, AuthModal } = useAuthModal();
 
+  let authContent;
+  const authContentClassName = clsx(
+    styles["header__nav-item"],
+    styles["header__nav-item--end"],
+  );
+
+  switch (authStatus) {
+    case "loading":
+      authContent = (
+        <div className={authContentClassName}>
+          <Loader size="small" />
+        </div>
+      );
+      break;
+
+    case "authenticated":
+      authContent = (
+        <CustomNavLink to={PATHS.PROFILE.ROOT} className={authContentClassName}>
+          {user?.name ?? "Профиль"}
+        </CustomNavLink>
+      );
+      break;
+
+    case "guest":
+      authContent = (
+        <>
+          <Button
+            kind="plain"
+            className={clsx(
+              styles["header__nav-item"],
+              styles["header__nav-item--end"],
+            )}
+            onClick={openAuthModal}
+          >
+            Войти
+          </Button>
+          {AuthModal}
+        </>
+      );
+      break;
+  }
+
   return (
-    <header className={styles.header}>
+    <header className={clsx("section", styles.header)}>
       <div className="container">
         <div className={styles.header__wrapper}>
           <CustomLink
@@ -58,31 +101,7 @@ export const Header: FC = () => {
               <SearchBar />
             </div>
 
-            {isAuth ? (
-              <CustomNavLink
-                to={PATHS.PROFILE.ROOT}
-                className={clsx(
-                  styles["header__nav-item"],
-                  styles["header__nav-item--end"],
-                )}
-              >
-                {user?.name ?? "Профиль"}
-              </CustomNavLink>
-            ) : (
-              <>
-                <Button
-                  kind="plain"
-                  className={clsx(
-                    styles["header__nav-item"],
-                    styles["header__nav-item--end"],
-                  )}
-                  onClick={openAuthModal}
-                >
-                  Войти
-                </Button>
-                {AuthModal}
-              </>
-            )}
+            {authContent}
           </nav>
         </div>
       </div>

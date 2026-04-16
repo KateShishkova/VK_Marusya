@@ -1,5 +1,3 @@
-import { useCallback } from "react";
-
 interface PageRequestStateItem {
   hasData: boolean;
   isFetching: boolean;
@@ -25,9 +23,9 @@ export const usePageRequestState = (
       ? (options?.errorMessage ?? "Не удалось загрузить страницу.")
       : undefined;
 
-  const retryAll = useCallback(() => {
+  const retryAll = () => {
     requests.forEach((request) => request.refetch());
-  }, [requests]);
+  };
 
   return {
     hasPageData,

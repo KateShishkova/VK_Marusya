@@ -9,15 +9,41 @@ import {
   type GenreListResponse,
 } from "@schemas/genre.schema";
 import { baseApi } from "./baseApi";
-import type { GetMoviesParams, MovieId } from "./types";
+import type { GetMoviesInfiniteParams, MovieId } from "./types";
 
 export const movieApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getMovies: builder.query<MovieListResponse, GetMoviesParams>({
-      query: (params = {}) => ({
+    // getMovies: builder.query<MovieListResponse, GetMoviesParams>({
+    //   query: (params = {}) => ({
+    //     url: API_CONFIG.PATHS.MOVIE.ROOT,
+    //     params,
+    //     method: "GET",
+    //   }),
+    //   transformResponse: (response: unknown) =>
+    //     movieResponseSchema.array().parse(response),
+    // }),
+
+    getMovies: builder.infiniteQuery<
+      MovieListResponse,
+      GetMoviesInfiniteParams,
+      number
+    >({
+      infiniteQueryOptions: {
+        initialPageParam: 1,
+        getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+          return lastPage.length === API_CONFIG.MOVIES_LIMIT
+            ? lastPageParam + 1
+            : undefined;
+        },
+      },
+      query: ({ queryArg, pageParam }) => ({
         url: API_CONFIG.PATHS.MOVIE.ROOT,
-        params,
         method: "GET",
+        params: {
+          count: API_CONFIG.MOVIES_LIMIT,
+          ...queryArg,
+          page: pageParam,
+        },
       }),
       transformResponse: (response: unknown) =>
         movieResponseSchema.array().parse(response),
@@ -62,7 +88,8 @@ export const movieApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useGetMoviesQuery,
+  // useGetMoviesQuery,
+  useGetMoviesInfiniteQuery,
   useGetTop10MoviesQuery,
   useGetMovieGenresQuery,
   useGetMovieByIdQuery,

@@ -9,7 +9,7 @@ import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 import genresStyles from "./Genres.module.scss";
 
-export const GenresPage = () => {
+const GenresPage = () => {
   const {
     genres,
     isFetching: isGenresFetching,
@@ -60,3 +60,5 @@ export const GenresPage = () => {
     </PageView>
   );
 };
+
+export default GenresPage;

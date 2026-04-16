@@ -6,17 +6,24 @@ type PopupKind = PopupProps["kind"];
 export const useModal = (
   modalContent: ReactNode = null,
   kind: PopupKind = "default",
+  onUserCancel?: () => void,
 ) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = useCallback(() => setIsOpen(true), []);
+
   const closeModal = useCallback(() => setIsOpen(false), []);
 
+  const userCancelModal = useCallback(() => {
+    setIsOpen(false);
+    onUserCancel?.();
+  }, [onUserCancel]);
+
   const Modal = isOpen ? (
-    <Popup kind={kind} onClose={closeModal}>
+    <Popup kind={kind} onClose={userCancelModal}>
       {modalContent}
     </Popup>
   ) : null;
 
-  return { openModal, closeModal, Modal };
+  return { openModal, closeModal, userCancelModal, Modal };
 };

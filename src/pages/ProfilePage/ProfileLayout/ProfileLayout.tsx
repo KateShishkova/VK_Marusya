@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { ProfileNavList } from "@components/Profile/ProfileNavList";
 import styles from "./ProfileLayout.module.scss";
 
-export const ProfileLayout = () => {
+const ProfileLayout = () => {
   return (
     <>
       <section className={clsx("section", styles.section)}>
@@ -19,3 +19,5 @@ export const ProfileLayout = () => {
     </>
   );
 };
+
+export default ProfileLayout;

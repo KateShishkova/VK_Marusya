@@ -1,1 +1,1 @@
-export * from "./GenresPage.tsx";
+export { default } from "./GenresPage.tsx";

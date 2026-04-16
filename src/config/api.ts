@@ -19,6 +19,8 @@ export const API_CONFIG = {
       RANDOM: "/movie/random", // GET
     },
   },
-  MOVIES_LIMIT: 50,
   TIMEOUT: 10000,
+  SEARCH_TIMEOUT: 300,
+  MOVIES_LIMIT: 10,
+  SEARCH_MOVIES_LIMIT: 5,
 };

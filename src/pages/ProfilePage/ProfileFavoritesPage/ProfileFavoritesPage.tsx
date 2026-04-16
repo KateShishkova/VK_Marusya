@@ -4,14 +4,13 @@ import { useGetFavoritesQuery } from "@api/favoritesApi";
 import { MovieList } from "@components/Movie/MovieList";
 import { ListView } from "@components/UI/ListView";
 import { PageView } from "@components/UI/PageView";
-import { useAuthModal } from "@hooks/useAuthModal";
 import { useFavoriteMovie } from "@hooks/useFavoriteMovie";
 import { usePageRequestState } from "@hooks/usePageRequestState";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 
 import moviesStyles from "./FavoriteMovies.module.scss";
 
-export const ProfileFavoritesPage = () => {
+const ProfileFavoritesPage = () => {
   const {
     data: movies,
     isFetching: isMoviesFetching,
@@ -20,9 +19,8 @@ export const ProfileFavoritesPage = () => {
     refetch: moviesRefetch,
   } = useGetFavoritesQuery();
 
-  const { openAuthModal, AuthModal } = useAuthModal();
   const { handleDeleteFavorite, hasFavoriteError, hasAnyFavoriteErrors } =
-    useFavoriteMovie(openAuthModal);
+    useFavoriteMovie();
 
   const pageState = usePageRequestState(
     [
@@ -63,8 +61,6 @@ export const ProfileFavoritesPage = () => {
               />
             )}
           />
-
-          {AuthModal}
         </div>
       </div>
     </section>
@@ -80,3 +76,5 @@ export const ProfileFavoritesPage = () => {
     </PageView>
   );
 };
+
+export default ProfileFavoritesPage;

@@ -1,23 +1,24 @@
 import clsx from "clsx";
-import { useState, type FC, type MouseEvent } from "react";
+import { memo, useState, type FC, type MouseEvent } from "react";
+import { generatePath } from "react-router-dom";
 
+import type { MovieId } from "@api/types";
 import { Button } from "@components/UI/Button";
+import { CustomLink } from "@components/UI/CustomLink";
 import { Icon } from "@components/UI/Icon";
+import { PATHS } from "@config/paths";
 import type { MovieResponse } from "@schemas/movie.schema";
 
 import styles from "./MovieCard.module.scss";
-import { CustomLink } from "@components/UI/CustomLink";
-import { generatePath } from "react-router-dom";
-import { PATHS } from "@config/paths";
 
 interface MovieCardProps {
   movie: MovieResponse;
   kind?: "default" | "favorite";
-  onRemoveFavorite?: () => void;
+  onRemoveFavorite?: (movieId: MovieId) => void;
   hasError?: boolean;
 }
 
-export const MovieCard: FC<MovieCardProps> = ({
+const MovieCardBase: FC<MovieCardProps> = ({
   movie,
   kind = "default",
   onRemoveFavorite,
@@ -29,7 +30,7 @@ export const MovieCard: FC<MovieCardProps> = ({
     e.preventDefault();
     e.stopPropagation();
 
-    if (onRemoveFavorite) onRemoveFavorite();
+    onRemoveFavorite?.(String(movie.id));
   };
 
   const baseContent = (
@@ -83,3 +84,5 @@ export const MovieCard: FC<MovieCardProps> = ({
     </CustomLink>
   );
 };
+
+export const MovieCard = memo(MovieCardBase);

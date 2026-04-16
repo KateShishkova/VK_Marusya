@@ -25,6 +25,7 @@ export const PAGE_TITLES: Record<string, PageTitleResolver> = {
       ? `${BASE_TITLE} | ${movieTitle}`
       : `${BASE_TITLE} | Информация о фильме`,
 
+  [PATHS.PROFILE.ROOT]: `${BASE_TITLE} | Аккаунт`,
   [PATHS.PROFILE.FAVORITES]: `${BASE_TITLE} | Список избранных фильмов`,
   [PATHS.PROFILE.SETTINGS]: `${BASE_TITLE} | Настройки аккаунта`,
 };

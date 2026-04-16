@@ -12,7 +12,7 @@ import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
 import randomMovieStyles from "./RandomMovie.module.scss";
 import topMoviesStyles from "./TopMovies.module.scss";
 
-export const MainPage = () => {
+const MainPage = () => {
   const {
     data: randomMovie,
     isFetching: isRandomFetching,
@@ -101,3 +101,5 @@ export const MainPage = () => {
     </PageView>
   );
 };
+
+export default MainPage;

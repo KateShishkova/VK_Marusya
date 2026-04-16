@@ -1,1 +1,1 @@
-export * from "./ProfileFavoritesPage.tsx";
+export { default } from "./ProfileFavoritesPage.tsx";

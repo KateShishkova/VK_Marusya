@@ -28,7 +28,7 @@ export const MovieList: FC<MovieListProps> = ({
             <MovieCard
               kind={cardKind}
               movie={movie}
-              onRemoveFavorite={() => onRemoveFavorite?.(String(movie.id))}
+              onRemoveFavorite={onRemoveFavorite}
               hasError={hasFavoriteError?.(String(movie.id))}
             />
             {kind === "rating" && (
