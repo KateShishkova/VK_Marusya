@@ -1,1 +1,1 @@
-export * from "./ProfileLayout.tsx";
+export { default } from "./ProfileLayout.tsx";
