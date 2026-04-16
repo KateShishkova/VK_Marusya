@@ -5,6 +5,7 @@ import { generatePath } from "react-router-dom";
 import { Button } from "@components/UI/Button";
 import { CustomLink } from "@components/UI/CustomLink";
 import { Icon } from "@components/UI/Icon";
+import { Loader } from "@components/UI/Loader";
 import { PATHS } from "@config/paths";
 import { useAuthModal } from "@hooks/useAuthModal";
 import { useFavoriteMovie } from "@hooks/useFavoriteMovie";
@@ -37,7 +38,7 @@ export const MovieBanner: FC<MovieBannerProps> = ({
 
   const { openAuthModal, AuthModal } = useAuthModal();
 
-  const { isFavorite, handleToggleFavorite, getFavoriteError } =
+  const { isAuthPending, isFavorite, handleToggleFavorite, getFavoriteError } =
     useFavoriteMovie(openAuthModal);
 
   const [imgError, setImgError] = useState(false);
@@ -66,15 +67,20 @@ export const MovieBanner: FC<MovieBannerProps> = ({
       <Button
         shape="rectangle-small"
         onClick={() => handleToggleFavorite(movieId)}
-        aria-label="Добавить в избранные"
+        aria-label={favorite ? "Удалить из избранных" : "Добавить в избранные"}
+        disabled={isAuthPending}
       >
-        <Icon
-          name={favorite ? "heart-filled" : "heart"}
-          className={clsx(
-            styles["banner__favorite-icon"],
-            favorite && styles["banner__favorite-icon--active"],
-          )}
-        />
+        {isAuthPending ? (
+          <Loader size="small" />
+        ) : (
+          <Icon
+            name={favorite ? "heart-filled" : "heart"}
+            className={clsx(
+              styles["banner__favorite-icon"],
+              favorite && styles["banner__favorite-icon--active"],
+            )}
+          />
+        )}
       </Button>
       {AuthModal}
     </>
