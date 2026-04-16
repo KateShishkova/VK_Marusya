@@ -8,7 +8,7 @@ export const ProfileNavList = () => {
     <nav className={styles.nav}>
       {PROFILE_TABS.map((tab) => {
         return (
-          <CustomNavLink to={tab.linkTo} key={tab.label}>
+          <CustomNavLink to={tab.linkTo} kind="icon-text" key={tab.label}>
             <Icon name={tab.iconName} />
             {tab.label}
           </CustomNavLink>

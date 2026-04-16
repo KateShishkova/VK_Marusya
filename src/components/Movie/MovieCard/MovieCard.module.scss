@@ -39,6 +39,10 @@
     transition: border-color vars.$transition;
   }
 
+  &__img {
+    height: 100%;
+  }
+
   &__error {
     flex-grow: 1;
     display: flex;
