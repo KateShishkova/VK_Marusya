@@ -15,14 +15,19 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Favorites"],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
         url: API_CONFIG.PATHS.AUTH.LOGOUT,
         method: "GET",
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+        },
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Favorites"],
     }),
     registerUser: builder.mutation<void, UserRegister>({
       query: (body) => ({
