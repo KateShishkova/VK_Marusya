@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useState, type FC } from "react";
 import { Loader } from "@components/UI/Loader";
+import { API_CONFIG } from "@config/api";
 import type { MovieResponse } from "@schemas/movie.schema";
 import styles from "./YoutubePlayer.module.scss";
 
@@ -14,31 +15,42 @@ export const YoutubePlayer: FC<YoutubePlayerProps> = ({ movie }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (loading) setError(true);
-    }, 8000);
+      if (loading) {
+        setLoading(false);
+        setError(true);
+      }
+    }, API_CONFIG.TIMEOUT);
     return () => clearTimeout(timer);
   }, [loading]);
 
+  if (!movie.trailerYouTubeId) {
+    return (
+      <div className={styles.player}>
+        <span>Видео недоступно.</span>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.player}>
-      {loading && !error && (
+      {!error && loading && (
         <div className={styles.player__loader}>
           <Loader size="medium" />
         </div>
       )}
 
-      {error && <span>Видео недоступно.</span>}
+      {error && !loading && <span>Видео недоступно.</span>}
 
       <iframe
-        className={clsx(
-          styles.player__iframe,
-          (loading || error) && "visually-hidden",
-        )}
+        className={clsx(styles.player__iframe, loading && "visually-hidden")}
         src={`https://www.youtube.com/embed/${movie.trailerYouTubeId}?autoplay=1`}
         allow="autoplay; encrypted-media"
         allowFullScreen
         title={movie.title}
-        onLoad={() => setLoading(false)}
+        onLoad={() => {
+          setLoading(false);
+          setError(false);
+        }}
         onError={() => {
           setLoading(false);
           setError(true);
