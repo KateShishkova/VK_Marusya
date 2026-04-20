@@ -1,13 +1,12 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .info {
   display: grid;
   grid-template-columns: 60px 1fr;
   align-items: flex-start;
   gap: 16px;
-  font-size: vars.$fz-md;
-  line-height: vars.$lh-md;
-  font-weight: vars.$fw-bold;
+  @include mixins.font-md-bold;
   color: vars.$color-white;
 
   &__icon-wrapper {
@@ -34,8 +33,6 @@
   }
 
   &__label {
-    font-size: vars.$fz-sm;
-    line-height: vars.$lh-md;
-    font-weight: vars.$fw-normal;
+    @include mixins.font-sm;
   }
 }

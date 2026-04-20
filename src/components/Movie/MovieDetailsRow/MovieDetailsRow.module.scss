@@ -1,12 +1,11 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .row {
   display: flex;
   align-items: flex-end;
   gap: 8px;
-  font-size: vars.$fz-sm;
-  font-weight: vars.$fw-normal;
-  line-height: vars.$lh-md;
+  @include mixins.font-sm;
   color: vars.$color-white;
 
   &__label-wrapper {

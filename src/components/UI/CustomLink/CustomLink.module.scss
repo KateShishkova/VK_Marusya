@@ -1,13 +1,12 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .link {
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: inherit;
-  font-size: vars.$fz-md;
-  font-weight: vars.$fw-normal;
-  line-height: vars.$lh-md;
+  @include mixins.font-md;
   color: vars.$color-white;
   transition: color vars.$transition;
 
@@ -74,9 +73,7 @@
     align-items: center;
     justify-content: center;
     font-family: inherit;
-    font-size: vars.$fz-sm;
-    font-weight: vars.$fw-bold;
-    line-height: vars.$lh-md;
+    @include mixins.font-sm-bold;
     color: vars.$color-white;
     background-color: vars.$color-gray-dark;
     cursor: pointer;

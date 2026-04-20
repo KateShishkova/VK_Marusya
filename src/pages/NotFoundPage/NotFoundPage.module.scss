@@ -1,4 +1,5 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .section {
   flex-grow: 1;
@@ -23,18 +24,14 @@
 
   &__title {
     margin: 0;
-    font-size: vars.$fz-xxl;
-    font-weight: vars.$fw-bold;
-    line-height: vars.$lh-xs;
+    @include mixins.font-xxl-bold;
     color: vars.$color-white;
     text-align: center;
   }
 
   &__desc {
     margin: 0;
-    font-size: vars.$fz-md;
-    font-weight: vars.$fw-normal;
-    line-height: vars.$lh-md;
+    @include mixins.font-md;
     color: vars.$color-white-70;
     text-align: center;
   }

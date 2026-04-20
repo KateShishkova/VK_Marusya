@@ -76,8 +76,9 @@ $lh-md: 1.33;
 $lh-lg: 1.43;
 
 // Viewport
-// $vp-tablet: 1023px;
-// $vp-mobile: 767px;
+$vp-desktop-sm: 1199px;
+$vp-tablet: 1023px;
+$vp-mobile: 767px;
 
 // Transition
 $transition: ease-in 0.3s;

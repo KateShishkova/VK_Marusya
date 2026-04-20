@@ -1,4 +1,5 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .section {
   padding: 64px 0 160px;
@@ -11,9 +12,7 @@
 
   &__title {
     margin: 0;
-    font-size: vars.$fz-xxl;
-    line-height: vars.$lh-xs;
-    font-weight: vars.$fw-bold;
+    @include mixins.font-xxl-bold;
     color: vars.$color-white;
   }
 }

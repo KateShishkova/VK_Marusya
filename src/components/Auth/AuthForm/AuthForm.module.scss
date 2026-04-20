@@ -1,4 +1,4 @@
-@use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .auth {
   display: flex;
@@ -23,16 +23,13 @@
 
   &__title {
     margin: 0;
-    font-size: vars.$fz-md;
-    font-weight: vars.$fw-bold;
-    line-height: vars.$lh-md;
+    @include mixins.font-md-bold;
     color: inherit;
   }
 
   &__text {
     margin: 0;
-    font-size: vars.$fz-sm;
-    line-height: vars.$lh-md;
+    @include mixins.font-sm;
     color: inherit;
   }
 }

@@ -1,4 +1,5 @@
-@use "./variables";
+@use "./variables" as vars;
+@use "./mixins" as mixins;
 
 *,
 *::after,
@@ -9,13 +10,10 @@
 body {
   margin: 0;
   padding: 0;
-  font-size: variables.$fz-md;
-  font-family: variables.$ff-play;
-  font-style: normal;
-  font-weight: 400;
-  line-height: variables.$lh-md;
-  color: variables.$color-white;
-  background: variables.$bg-gradient-main;
+  font-family: vars.$ff-play;
+  @include mixins.font-md;
+  color: vars.$color-white;
+  background: vars.$bg-gradient-main;
 }
 
 #root {
@@ -39,7 +37,7 @@ img {
 }
 
 a {
-  color: variables.$color-white;
+  color: vars.$color-white;
   text-decoration: none;
 }
 

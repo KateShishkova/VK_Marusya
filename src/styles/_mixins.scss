@@ -1,0 +1,105 @@
+@use "./variables" as vars;
+
+// Typography
+@mixin font-xxs {
+  font-size: vars.$fz-xxs;
+  line-height: vars.$lh-md;
+  font-weight: vars.$fw-normal;
+  font-style: normal;
+}
+
+@mixin font-xxs-bold {
+  font-size: vars.$fz-xxs;
+  line-height: vars.$lh-md;
+  font-weight: vars.$fw-bold;
+  font-style: normal;
+}
+
+@mixin font-xs {
+  font-size: vars.$fz-xs;
+  line-height: vars.$lh-lg;
+  font-weight: vars.$fw-normal;
+  font-style: normal;
+}
+
+@mixin font-xs-bold {
+  font-size: vars.$fz-xs;
+  line-height: vars.$lh-lg;
+  font-weight: vars.$fw-bold;
+  font-style: normal;
+}
+
+@mixin font-sm {
+  font-size: vars.$fz-sm;
+  line-height: vars.$lh-md;
+  font-weight: vars.$fw-normal;
+  font-style: normal;
+}
+
+@mixin font-sm-bold {
+  font-size: vars.$fz-sm;
+  line-height: vars.$lh-md;
+  font-weight: vars.$fw-bold;
+  font-style: normal;
+}
+
+@mixin font-md {
+  font-size: vars.$fz-md;
+  line-height: vars.$lh-md;
+  font-weight: vars.$fw-normal;
+  font-style: normal;
+}
+
+@mixin font-md-bold {
+  font-size: vars.$fz-md;
+  line-height: vars.$lh-md;
+  font-weight: vars.$fw-bold;
+  font-style: normal;
+}
+
+@mixin font-xl {
+  font-size: vars.$fz-xl;
+  line-height: vars.$lh-sm;
+  font-weight: vars.$fw-normal;
+  font-style: normal;
+}
+
+@mixin font-xl-bold {
+  font-size: vars.$fz-xl;
+  line-height: vars.$lh-sm;
+  font-weight: vars.$fw-bold;
+  font-style: normal;
+}
+
+@mixin font-xxl {
+  font-size: vars.$fz-xxl;
+  line-height: vars.$lh-xs;
+  font-weight: vars.$fw-normal;
+  font-style: normal;
+}
+
+@mixin font-xxl-bold {
+  font-size: vars.$fz-xxl;
+  line-height: vars.$lh-xs;
+  font-weight: vars.$fw-bold;
+  font-style: normal;
+}
+
+// Viewport
+@mixin vp-1199 {
+  @media (max-width: vars.$vp-desktop-sm) {
+    @content;
+  }
+}
+
+@mixin vp-1023 {
+  @media (max-width: vars.$vp-tablet) {
+    @content;
+  }
+}
+
+@mixin vp-767 {
+  @media (max-width: vars.$vp-mobile) {
+    @content;
+  }
+}

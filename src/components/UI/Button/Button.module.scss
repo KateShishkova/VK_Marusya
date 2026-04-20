@@ -1,4 +1,5 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .btn {
   border: 1px solid vars.$color-black-40;
@@ -8,9 +9,7 @@
   align-items: center;
   justify-content: center;
   font-family: inherit;
-  font-size: vars.$fz-sm;
-  font-weight: vars.$fw-bold;
-  line-height: vars.$lh-md;
+  @include mixins.font-sm-bold;
   color: vars.$color-white;
   background-color: vars.$color-gray-dark;
   cursor: pointer;
@@ -36,11 +35,11 @@
 
   // Font size
   &--font-medium {
-    font-size: vars.$fz-md;
+    @include mixins.font-md;
   }
 
   &--font-small {
-    font-size: vars.$fz-sm;
+    @include mixins.font-sm;
   }
 
   // Shape

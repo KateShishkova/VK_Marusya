@@ -1,4 +1,5 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .custom-input {
   position: relative;
@@ -14,8 +15,7 @@
     border-radius: vars.$radius-sm;
     padding: 16px;
     font-family: inherit;
-    font-size: vars.$fz-sm;
-    line-height: vars.$lh-md;
+    @include mixins.font-sm;
     color: vars.$color-white;
     background-color: vars.$color-gray-dark;
     transition: border-color vars.$transition;
@@ -36,8 +36,7 @@
   }
 
   &__error-text {
-    font-size: vars.$fz-sm;
-    line-height: vars.$lh-md;
+    @include mixins.font-sm;
     color: vars.$color-red-light;
   }
 
