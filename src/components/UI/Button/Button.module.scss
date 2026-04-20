@@ -39,7 +39,7 @@
   }
 
   &--font-small {
-    @include mixins.font-sm;
+    @include mixins.font-sm-bold;
   }
 
   // Shape
