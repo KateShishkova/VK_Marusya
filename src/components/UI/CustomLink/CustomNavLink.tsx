@@ -8,16 +8,16 @@ import styles from "./CustomLink.module.scss";
 export const CustomNavLink: FC<CustomNavLinkProps> = ({
   children,
   kind = "text",
+  color = "white",
   className,
   end = false,
   ...props
 }) => {
-  const isText = kind === "text";
-
   const getFinalClassName = ({ isActive }: NavLinkRenderProps) => {
     return clsx(
       styles.link,
-      !isText && styles[`link--${kind}`],
+      kind !== "text" && styles[`link--${kind}`],
+      color !== "white" && styles[`link--${color}`],
       isActive && styles[`link--active`],
       className,
     );

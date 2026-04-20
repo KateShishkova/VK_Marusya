@@ -4,6 +4,7 @@ import type { LinkProps, NavLinkProps, To } from "react-router-dom";
 interface BaseLinkProps {
   children: ReactNode;
   kind?: "text" | "icon" | "img" | "icon-text" | "btn";
+  color?: "white" | "light";
   className?: string;
 }
 

@@ -16,6 +16,7 @@
     color: vars.$color-purple-pale;
   }
 
+  // is Active
   &--active {
     position: relative;
 
@@ -30,9 +31,8 @@
     }
   }
 
+  // Link kind
   &--icon {
-    color: vars.$color-white-80;
-
     svg {
       width: 36px;
       height: 36px;
@@ -85,5 +85,10 @@
       color: vars.$color-white;
       background-color: vars.$color-gray;
     }
+  }
+
+  // Link color
+  &--light {
+    color: vars.$color-white-80;
   }
 }

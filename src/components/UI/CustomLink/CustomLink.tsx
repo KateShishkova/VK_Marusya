@@ -10,11 +10,12 @@ type CustomLinkProps = InternalLinkProps | ExternalLinkProps;
 export const CustomLink: FC<CustomLinkProps> = (props) => {
   // Internal link
   if (props.to !== undefined) {
-    const { to, children, kind, className, ...rest } = props;
+    const { to, children, kind, color, className, ...rest } = props;
 
     const finalClassName = clsx(
       styles.link,
       kind !== "text" && styles[`link--${kind}`],
+      color !== "white" && styles[`link--${color}`],
       className,
     );
 
@@ -27,11 +28,12 @@ export const CustomLink: FC<CustomLinkProps> = (props) => {
 
   // External link
   if (props.href !== undefined) {
-    const { href, children, kind, className, ...rest } = props;
+    const { href, children, kind, color, className, ...rest } = props;
 
     const finalClassName = clsx(
       styles.link,
       kind !== "text" && styles[`link--${kind}`],
+      color !== "white" && styles[`link--${color}`],
       className,
     );
 

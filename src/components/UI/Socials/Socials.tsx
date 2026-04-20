@@ -20,7 +20,12 @@ export const Socials: FC<SocialsProps> = ({ className, ...props }) => {
       {SOCIALS.map((item) => {
         return (
           <li key={item.id}>
-            <CustomLink kind="icon" href={item.url} aria-label={item.name}>
+            <CustomLink
+              kind="icon"
+              color="light"
+              href={item.url}
+              aria-label={item.name}
+            >
               <Icon name={item.iconName} />
             </CustomLink>
           </li>
