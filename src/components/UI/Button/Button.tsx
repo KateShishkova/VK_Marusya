@@ -22,15 +22,17 @@ type RegularButtonProps = {
 type ButtonProps = PlainButtonProps | RegularButtonProps;
 
 export const Button: FC<ButtonProps> = (props) => {
+  const { kind, ...rest } = props;
+
   // Kind === "plain"
-  if (props.kind === "plain") {
+  if (kind === "plain") {
     const {
       type = "button",
       fontSize = "medium",
       children,
       className,
-      ...rest
-    } = props;
+      ...buttonProps
+    } = rest as PlainButtonProps;
 
     const finalClassName = clsx(
       styles.btn,
@@ -40,7 +42,7 @@ export const Button: FC<ButtonProps> = (props) => {
     );
 
     return (
-      <button className={finalClassName} type={type} {...rest}>
+      <button className={finalClassName} type={type} {...buttonProps}>
         {children}
       </button>
     );
@@ -53,8 +55,8 @@ export const Button: FC<ButtonProps> = (props) => {
     background = "primary",
     children,
     className,
-    ...rest
-  } = props;
+    ...buttonProps
+  } = rest as RegularButtonProps;
 
   const finalClassName = clsx(
     styles.btn,
@@ -64,7 +66,7 @@ export const Button: FC<ButtonProps> = (props) => {
   );
 
   return (
-    <button className={finalClassName} type={type} {...rest}>
+    <button className={finalClassName} type={type} {...buttonProps}>
       {children}
     </button>
   );
