@@ -103,3 +103,9 @@
     @content;
   }
 }
+
+@mixin vp-479 {
+  @media (max-width: vars.$vp-mobile-sm) {
+    @content;
+  }
+}

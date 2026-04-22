@@ -1,108 +1,70 @@
 import clsx from "clsx";
 import { type FC } from "react";
-import { useSelector } from "react-redux";
 
-import logoMd from "@assets/images/logo--md.png";
+import logoHeader from "@assets/images/logo-header.png";
+import logoHeaderMobile from "@assets/images/logo-header--mobile.png";
 
-import { SearchBar } from "@components/Search/SearchBar";
-import { Button } from "@components/UI/Button";
-import { CustomLink, CustomNavLink } from "@components/UI/CustomLink";
-import { Loader } from "@components/UI/Loader";
+import { CustomLink } from "@components/UI/CustomLink";
 import { PATHS } from "@config/paths";
 import { useAuthModal } from "@hooks/useAuthModal";
-import type { RootState } from "@store/store";
+import { useMediaQuery } from "@hooks/useMediaQuery";
+import { useSearchModal } from "@hooks/useSearchModal";
 
+import { HeaderNav } from "./HeaderNav";
 import styles from "./Header.module.scss";
 
 export const Header: FC = () => {
-  const { user, authStatus } = useSelector((state: RootState) => state.user);
+  const { isOpenSearchModal, openSearchModal, SearchModal } = useSearchModal();
   const { openAuthModal, AuthModal } = useAuthModal();
 
-  let authContent;
-  const authContentClassName = clsx(
-    styles["header__nav-item"],
-    styles["header__nav-item--end"],
+  const isMobileSm = useMediaQuery("mobile-sm");
+
+  // Logo
+  const logoContent = (
+    <CustomLink
+      to={PATHS.HOME}
+      kind="img"
+      className={styles["header__logo-link"]}
+      aria-label="На главную"
+    >
+      {isMobileSm ? (
+        <img
+          className={styles["header__logo-image"]}
+          src={logoHeaderMobile}
+          alt="Логотип ВK Маруся"
+          width={81}
+          height={18}
+        />
+      ) : (
+        <img
+          className={styles["header__logo-image"]}
+          src={logoHeader}
+          alt="Логотип ВK Маруся"
+          width={144}
+          height={32}
+        />
+      )}
+    </CustomLink>
   );
 
-  switch (authStatus) {
-    case "loading":
-      authContent = (
-        <div className={authContentClassName}>
-          <Loader size="small" />
-        </div>
-      );
-      break;
-
-    case "authenticated":
-      authContent = (
-        <CustomNavLink to={PATHS.PROFILE.ROOT} className={authContentClassName}>
-          {user?.name ?? "Профиль"}
-        </CustomNavLink>
-      );
-      break;
-
-    case "guest":
-      authContent = (
-        <>
-          <Button
-            kind="plain"
-            className={clsx(
-              styles["header__nav-item"],
-              styles["header__nav-item--end"],
-            )}
-            onClick={openAuthModal}
-          >
-            Войти
-          </Button>
-          {AuthModal}
-        </>
-      );
-      break;
-  }
+  const finalClassName = clsx(
+    "section",
+    styles.header,
+    isOpenSearchModal && styles["header--open-modal"],
+  );
 
   return (
-    <header className={clsx("section", styles.header)}>
+    <header className={finalClassName}>
       <div className="container">
         <div className={styles.header__wrapper}>
-          <CustomLink
-            to={PATHS.HOME}
-            kind="img"
-            className={styles["header__logo-link"]}
-            aria-label="На главную"
-          >
-            <img
-              className={styles["header__logo-image"]}
-              src={logoMd}
-              alt="Логотип ВK Маруся"
-              width={144}
-              height={32}
-            />
-          </CustomLink>
-          <nav className={styles.header__nav}>
-            <CustomNavLink
-              to={PATHS.HOME}
-              end={true}
-              className={styles["header__nav-item"]}
-            >
-              Главная
-            </CustomNavLink>
-            <CustomNavLink
-              to={PATHS.GENRES.ROOT}
-              className={styles["header__nav-item"]}
-            >
-              Жанры
-            </CustomNavLink>
-            <div
-              className={clsx(
-                styles["header__nav-item"],
-                styles["header__nav-item--search"],
-              )}
-            >
-              <SearchBar />
-            </div>
+          {logoContent}
+          <HeaderNav
+            openSearchModal={openSearchModal}
+            openAuthModal={openAuthModal}
+          />
 
-            {authContent}
-          </nav>
+          {SearchModal}
+          {AuthModal}
         </div>
       </div>
     </header>

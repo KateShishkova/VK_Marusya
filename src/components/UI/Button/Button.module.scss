@@ -31,6 +31,16 @@
     &:focus-visible {
       color: vars.$color-purple-pale;
     }
+
+    & svg {
+      width: 36px;
+      height: 36px;
+
+      @include mixins.vp-479 {
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
 
   // Font size

@@ -27,6 +27,10 @@ main {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+
+  @include mixins.vp-479 {
+    padding: 64px 0 0 0;
+  }
 }
 
 img {
