@@ -1,8 +1,11 @@
+@use "@styles/variables" as vars;
+
 .search {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
+  $root: &;
 
   &__form {
     display: flex;
@@ -15,6 +18,16 @@
   }
 
   &__dropdown {
-    width: calc(559 / 655 * 100%);
+    width: 100%;
+    max-width: 559px;
+  }
+
+  &--popup {
+
+    #{$root}__dropdown {
+      position: relative;
+      top: 0;
+      margin-left: auto;
+    }
   }
 }

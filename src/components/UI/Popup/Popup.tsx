@@ -1,21 +1,32 @@
 import clsx from "clsx";
-import { useRef, useEffect, useState } from "react";
-import type { FC, ReactNode, MouseEvent, SyntheticEvent } from "react";
+import {
+  useRef,
+  useEffect,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
+import type { ReactNode, MouseEvent, SyntheticEvent } from "react";
+
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import styles from "./Popup.module.scss";
 
 export interface PopupProps {
-  children: ReactNode;
-  kind?: "default" | "video";
+  children: ReactNode | ((popupHandle: PopupHandle) => ReactNode);
+  kind?: "default" | "video" | "search";
   onClose?: () => void;
 }
 
-export const Popup: FC<PopupProps> = ({
-  children,
-  kind = "default",
-  onClose,
-}) => {
+export interface PopupHandle {
+  startClosing: () => void;
+  isMounted: boolean;
+}
+
+export const Popup = forwardRef<PopupHandle, PopupProps>(function Popup(
+  { children, kind = "default", onClose },
+  ref,
+) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -62,9 +73,19 @@ export const Popup: FC<PopupProps> = ({
     startClosing();
   };
 
+  // Export the Popup close function
+  useImperativeHandle(ref, () => ({
+    startClosing,
+    isMounted,
+  }));
+
+  const popupHandle: PopupHandle = { startClosing, isMounted };
+  const popupContent =
+    typeof children === "function" ? children(popupHandle) : children;
+
   const finalClassName = clsx(
     styles.popup,
-    kind === "video" && styles["popup--video"],
+    kind !== "default" && styles[`popup--${kind}`],
     isClosing && styles["popup--close"],
   );
 
@@ -79,7 +100,7 @@ export const Popup: FC<PopupProps> = ({
       data-mounted={isMounted || undefined}
       data-closing={isClosing || undefined}
     >
-      <div className={styles.popup__wrapper}>{children}</div>
+      <div className={styles.popup__wrapper}>{popupContent}</div>
       <Button
         shape="circle"
         background="white"
@@ -91,4 +112,4 @@ export const Popup: FC<PopupProps> = ({
       </Button>
     </dialog>
   );
-};
+});

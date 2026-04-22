@@ -1,4 +1,5 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .popup {
   position: fixed;
@@ -16,21 +17,13 @@
   animation: popupFadeIn 0.5s forwards;
   $root: &;
 
-  &--video {
-    width: 1104px;
-
-    #{$root}__wrapper {
-      padding: 0;
-      border: 1px solid vars.$color-white-50;
-      border-radius: 0;
-      color: vars.$color-white;
-      background-color: vars.$color-gray-dark;
-      overflow: hidden;
-    }
-  }
-
+  // Popup animation
   &--close {
     animation: popupFadeOut 0.5s forwards;
+  }
+
+  &--search#{$root}--close {
+    animation: popupFadeOutTop 0.5s forwards;
   }
 
   &::backdrop {
@@ -70,8 +63,44 @@
     top: 0;
     right: 0;
   }
+
+  // Popup kind
+  &--video {
+    width: 1104px;
+
+    #{$root}__wrapper {
+      padding: 0;
+      border: 1px solid vars.$color-white-50;
+      border-radius: 0;
+      color: vars.$color-white;
+      background-color: vars.$color-gray-dark;
+      overflow: hidden;
+    }
+  }
+
+  &--search {
+    top: 0;
+    left: 0;
+    transform: translateY(30px);
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    padding: 16px 50px 0;
+    background-color: transparent;
+    animation: popupFadeInTop 0.5s forwards;
+
+    #{$root}__wrapper {
+      padding: 0;
+      background-color: transparent;
+    }
+
+    #{$root}__close {
+      display: none;
+    }
+  }
 }
 
+// Animation for default & video popup
 @keyframes popupFadeIn {
   0% {
     opacity: 0;
@@ -95,5 +124,32 @@
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, calc(-50% + 30px)) scale(0.95);
+  }
+}
+
+// Animation for search popup
+@keyframes popupFadeInTop {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(0, 0.95);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+@keyframes popupFadeOutTop {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1, 1);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px) scale(0, 0.95);
   }
 }

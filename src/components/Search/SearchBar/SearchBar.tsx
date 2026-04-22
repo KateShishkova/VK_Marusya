@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import {
   useCallback,
   useEffect,
@@ -5,22 +6,43 @@ import {
   useRef,
   useState,
   type ChangeEvent,
+  type FC,
 } from "react";
+import { skipToken } from "@reduxjs/toolkit/query";
+
+import { useGetMoviesInfiniteQuery } from "@api/movieApi";
 import { CustomInput } from "@components/UI/CustomInput";
 import { Dropdown } from "@components/UI/Dropdown";
-import styles from "./SearchBar.module.scss";
-import { API_CONFIG } from "@config/api";
-import { skipToken } from "@reduxjs/toolkit/query";
-import { useGetMoviesInfiniteQuery } from "@api/movieApi";
 import { ListView } from "@components/UI/ListView";
+import { API_CONFIG } from "@config/api";
 import { getRtkErrorMessage } from "@utils/getRtkErrorMessage";
-import { SearchList } from "../SearchList";
 
-export const SearchBar = () => {
+import { SearchList } from "../SearchList";
+import styles from "./SearchBar.module.scss";
+
+interface SearchBarProps {
+  kind?: "default" | "popup";
+  onResetSearch?: () => void;
+  isOpen?: boolean;
+}
+
+export const SearchBar: FC<SearchBarProps> = ({
+  kind = "default",
+  onResetSearch,
+  isOpen,
+}) => {
   const [searchValue, setSearchValue] = useState("");
   const [debouncedSearchValue, setDebouncedSearchValue] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen]);
 
   const normalizedSearchValue = searchValue.trim().toLowerCase();
   const hasSearchValue = normalizedSearchValue !== "";
@@ -66,15 +88,25 @@ export const SearchBar = () => {
   };
 
   const handleReset = useCallback(() => {
-    setSearchValue("");
-    setDebouncedSearchValue("");
-    setDropdownOpen(false);
-  }, []);
+    if (onResetSearch) {
+      onResetSearch();
+    } else {
+      setSearchValue("");
+      setDebouncedSearchValue("");
+      setDropdownOpen(false);
+    }
+  }, [onResetSearch]);
+
+  const finalClassName = clsx(
+    styles.search,
+    kind !== "default" && styles[`search--${kind}`],
+  );
 
   return (
-    <div ref={wrapperRef} className={styles.search}>
+    <div ref={wrapperRef} className={finalClassName}>
       <form className={styles.search__form} onReset={handleReset}>
         <CustomInput
+          ref={inputRef}
           className={styles.search__input}
           name="search"
           type="search"
