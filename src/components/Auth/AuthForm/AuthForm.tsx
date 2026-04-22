@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import logoLg from "@assets/images/logo--lg.png";
+import logoAuth from "@assets/images/logo-auth.png";
 
 import { Button } from "@components/UI/Button";
 
@@ -63,7 +63,7 @@ export const AuthForm = () => {
     <div className={styles.auth}>
       <img
         className={styles.auth__logo}
-        src={logoLg}
+        src={logoAuth}
         alt="Логотип ВK Маруся"
         width={132}
         height={29}
