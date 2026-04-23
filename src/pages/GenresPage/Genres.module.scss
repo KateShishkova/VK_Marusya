@@ -4,15 +4,31 @@
 .section {
   padding: 64px 0 160px;
 
+  @include mixins.vp-1023 {
+    padding: 16px 0 40px;
+  }
+
   &__wrapper {
     display: flex;
     flex-direction: column;
     gap: 64px;
+
+    @include mixins.vp-1023 {
+      gap: 40px;
+    }
   }
 
   &__title {
     margin: 0;
     @include mixins.font-xxl-bold;
     color: vars.$color-white;
+
+    @include mixins.vp-1023 {
+      @include mixins.font-xl-bold;
+    }
+
+    @include mixins.vp-767 {
+      @include mixins.font-md-bold;
+    }
   }
 }

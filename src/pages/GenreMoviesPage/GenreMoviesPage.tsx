@@ -116,6 +116,7 @@ const GenreMoviesPage = () => {
           />
           {hasNextPage && !isError && (
             <Button
+              className={moviesStyles["section__more-btn"]}
               background="accent"
               disabled={isFetchingNextPage}
               onClick={handleShowMoreMovies}

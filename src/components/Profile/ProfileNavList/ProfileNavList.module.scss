@@ -1,6 +1,12 @@
+@use "@styles/mixins" as mixins;
+
 .nav {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 40px 54px;
+
+  @include mixins.vp-1023 {
+    gap: 24px;
+  }
 }

@@ -32,6 +32,7 @@ const ProfileSettingsPage = () => {
           <UserInfoList user={user} />
           <div className={detailsStyles["section__logout-wrapper"]}>
             <Button
+              className={detailsStyles["section__btn-logout"]}
               background="accent"
               disabled={isLoading}
               onClick={handleLogout}

@@ -7,6 +7,8 @@
   left: 50%;
   transform: translate(-50%, calc(-50% + 30px));
   display: flex;
+  max-width: none;
+  max-height: none;
   width: 564px;
   margin: 0;
   padding: 0 72px;
@@ -16,6 +18,11 @@
   visibility: hidden;
   animation: popupFadeIn 0.5s forwards;
   $root: &;
+
+  @include mixins.vp-767 {
+    width: 335px;
+    padding: 0;
+  }
 
   // Popup animation
   &--close {
@@ -56,17 +63,35 @@
     border-radius: vars.$radius-lg;
     color: vars.$color-black;
     background-color: vars.$color-white;
+
+    @include mixins.vp-767 {
+      padding: 64px 20px 32px;
+    }
   }
 
   &__close {
     position: absolute;
     top: 0;
     right: 0;
+
+    @include mixins.vp-767 {
+      top: 8px;
+      right: 8px;
+    }
   }
 
   // Popup kind
   &--video {
     width: 1104px;
+
+    @include mixins.vp-1199 {
+      width: 663px;
+      padding: 0;
+    }
+
+    @include mixins.vp-767 {
+      width: 375px;
+    }
 
     #{$root}__wrapper {
       padding: 0;
@@ -76,18 +101,28 @@
       background-color: vars.$color-gray-dark;
       overflow: hidden;
     }
+
+    #{$root}__close {
+      @include mixins.vp-1199 {
+        top: 8px;
+        right: 8px;
+      }
+    }
   }
 
   &--search {
     top: 0;
-    left: 0;
-    transform: translateY(30px);
-    max-width: none;
-    max-height: none;
+    left: 50%;
+    transform: translate(50%, 30px);
     width: 100%;
-    padding: 16px 50px 0;
+    max-width: 1380px;
+    padding: 24px 50px 0;
     background-color: transparent;
     animation: popupFadeInTop 0.5s forwards;
+
+    @include mixins.vp-1199 {
+      padding: 16px 20px 0;
+    }
 
     #{$root}__wrapper {
       padding: 0;
@@ -132,12 +167,12 @@
   0% {
     opacity: 0;
     visibility: hidden;
-    transform: translateY(30px) scale(0, 0.95);
+    transform: translate(-50%, 30px) scale(0, 0.95);
   }
   100% {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1, 1);
+    transform: translate(-50%, 0) scale(1, 1);
   }
 }
 
@@ -145,11 +180,11 @@
   0% {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1, 1);
+    transform: translate(-50%, 0) scale(1, 1);
   }
   100% {
     opacity: 0;
     visibility: hidden;
-    transform: translateY(30px) scale(0, 0.95);
+    transform: translate(-50%, 30px) scale(0, 0.95);
   }
 }

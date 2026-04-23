@@ -13,7 +13,7 @@ export const GenreList: FC<GenreListProps> = ({ list }) => {
     <ul className={styles.list}>
       {list.map((genre) => {
         return (
-          <li className={styles.list__item} key={genre.en}>
+          <li key={genre.en}>
             <GenreCard genre={genre} />
           </li>
         );

@@ -5,11 +5,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 304px;
   border: 1px solid vars.$color-white-25;
   border-radius: vars.$radius-lg;
   box-shadow: vars.$box-shadow-default;
-  background-color: vars.$color-gray-black;
+  background-color: vars.$color-gray-base;
   overflow: hidden;
   transition: border-color vars.$transition;
 
@@ -22,8 +22,8 @@
   &__poster {
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: 220px;
-    background-color: vars.$color-gray-base;
   }
 
   &__img {
@@ -45,8 +45,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    width: 100%;
+    margin: auto 0 0 0;
     padding: 22px 22px 30px;
     text-align: center;
+    background-color: vars.$color-gray-black;
   }
 
   &__title {

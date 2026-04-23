@@ -4,6 +4,7 @@ import type { MovieResponse } from "@schemas/movie.schema";
 
 import { MovieCard } from "../MovieCard";
 import styles from "./MovieList.module.scss";
+import clsx from "clsx";
 
 interface MovieListProps {
   list: MovieResponse[];
@@ -20,8 +21,13 @@ export const MovieList: FC<MovieListProps> = ({
 }) => {
   const cardKind = kind === "rating" ? "default" : kind;
 
+  const finalClassName = clsx(
+    styles.list,
+    kind !== "default" && styles[`list--${kind}`],
+  );
+
   return (
-    <ul className={styles.list}>
+    <ul className={finalClassName}>
       {list.map((movie, index) => {
         return (
           <li className={styles.list__item} key={movie.id}>

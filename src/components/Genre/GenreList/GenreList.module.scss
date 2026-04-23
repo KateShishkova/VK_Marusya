@@ -1,3 +1,5 @@
+@use "@styles/mixins" as mixins;
+
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, auto));
@@ -7,9 +9,7 @@
   padding: 0;
   list-style: none;
 
-  &__item {
-    display: flex;
-    min-height: 304px;
-    height: 100%;
+  @include mixins.vp-1023 {
+    gap: 24px;
   }
 }

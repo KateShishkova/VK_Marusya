@@ -1,12 +1,21 @@
 @use "@styles/variables" as vars;
+@use "@styles/mixins" as mixins;
 
 .section {
   padding: 64px 0 160px;
+
+  @include mixins.vp-1023 {
+    padding: 40px 0;
+  }
 
   &__wrapper {
     display: flex;
     flex-direction: column;
     gap: 64px;
+
+    @include mixins.vp-1023 {
+      gap: 40px;
+    }
   }
 
   &__error {

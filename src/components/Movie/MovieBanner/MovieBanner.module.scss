@@ -3,21 +3,32 @@
 
 .banner {
   display: grid;
-  grid-template-columns: 1fr 680px;
+  grid-template-columns: 45% calc(680 / 1280 * 100%);
+  justify-content: space-between;
+  $root: &;
+
+  @include mixins.vp-1023 {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
 
   &__left {
     align-self: center;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 60px;
     min-height: 404px;
+
+    @include mixins.vp-1023 {
+      gap: 32px;
+      min-height: auto;
+    }
   }
 
   &__actions-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 16px;
   }
 
@@ -26,6 +37,11 @@
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 16px;
+
+    @include mixins.vp-767 {
+      display: grid;
+      grid-template-columns: 1fr auto
+    }
   }
 
   &__error {
@@ -37,10 +53,23 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 552px;
+    aspect-ratio: 680 / 552;
     border-radius: vars.$radius-md;
     background-color: vars.$color-gray-medium;
     overflow: hidden;
+
+    @include mixins.vp-1023 {
+      height: 360px;
+    }
+
+    @include mixins.vp-767 {
+      height: 300px;
+    }
+
+    @include mixins.vp-479 {
+      height: auto;
+      aspect-ratio: 335 / 234;
+    }
   }
 
   &__img {
@@ -69,6 +98,32 @@
 
   &__favorite-icon--active {
     color: vars.$color-purple-pale;
+  }
+
+  // Kind banner
+  &--banner {
+    #{$root}__actions-content {
+      @include mixins.vp-1199 {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+      }
+
+      @include mixins.vp-1023 {
+        display: flex;
+      }
+
+      @include mixins.vp-767 {
+        display: grid;
+      }
+    }
+
+    #{$root}__btn {
+      &--main {
+        @include mixins.vp-1199 {
+          grid-column: 1 / -1;
+        }
+      }
+    }
   }
 }
 

@@ -55,6 +55,7 @@ const MainPage = () => {
           {randomMovie ? (
             <MovieBanner
               movie={randomMovie}
+              kind="banner"
               onRefetchMovie={randomRefetch}
               isFetching={isRandomFetching}
             />

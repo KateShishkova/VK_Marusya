@@ -4,28 +4,61 @@
 .section {
   padding: 64px 0 160px;
 
+  @include mixins.vp-1023 {
+    padding: 16px 0 40px;
+  }
+
   &__wrapper {
     display: flex;
     flex-direction: column;
     gap: 64px;
+
+    @include mixins.vp-1023 {
+      gap: 40px;
+    }
   }
 
   &__top {
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @include mixins.vp-1023 {
+      gap: 8px;
+    }
   }
 
   &__back {
     svg {
       width: 40px;
       height: 40px;
+
+      @include mixins.vp-479 {
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 
   &__title {
     margin: 0;
-    @include mixins.font-xl-bold;
+    @include mixins.font-xxl-bold;
     color: vars.$color-white;
+
+    @include mixins.vp-1023 {
+      @include mixins.font-xl-bold;
+    }
+
+    @include mixins.vp-767 {
+      @include mixins.font-md-bold;
+    }
+  }
+
+  &__more-btn {
+    align-self: center;
+
+    @include mixins.vp-767 {
+      align-self: stretch;
+    } 
   }
 }

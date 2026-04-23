@@ -1,10 +1,21 @@
+@use "@styles/mixins" as mixins;
+
 .footer {
   padding: 40px 0;
   width: 100%;
+
+  @include mixins.vp-1023 {
+    padding: 24px 0;
+  }
 
   &__wrapper {
     display: flex;
     align-items: center;
     justify-content: end;
+
+    @include mixins.vp-1023 {
+      justify-content: flex-start;
+      padding: 0 0 12px 0;
+    }
   }
 }

@@ -18,7 +18,7 @@ import styles from "./MovieBanner.module.scss";
 
 interface MovieBannerProps {
   movie: MovieResponse;
-  kind?: "banner" | "page";
+  kind?: "page" | "banner";
   isFetching?: boolean;
   fetchingError?: string;
   onRefetchMovie?: () => void;
@@ -26,7 +26,7 @@ interface MovieBannerProps {
 
 export const MovieBanner: FC<MovieBannerProps> = ({
   movie,
-  kind = "banner",
+  kind = "page",
   isFetching = false,
   fetchingError,
   onRefetchMovie,
@@ -49,7 +49,11 @@ export const MovieBanner: FC<MovieBannerProps> = ({
   // Actions
   const trailerAction = (
     <>
-      <Button background="accent" onClick={openTrailer}>
+      <Button
+        className={clsx(styles.banner__btn, styles["banner__btn--main"])}
+        background="accent"
+        onClick={openTrailer}
+      >
         Трейлер
       </Button>
       {TrailerModal}
@@ -126,8 +130,13 @@ export const MovieBanner: FC<MovieBannerProps> = ({
   }
   const errorMessage = getFavoriteError(movieId) || fetchingError;
 
+  const finalClassName = clsx(
+    styles.banner,
+    kind !== "page" && styles[`banner--${kind}`],
+  );
+
   return (
-    <div className={styles.banner}>
+    <div className={finalClassName}>
       <div className={styles.banner__left}>
         <MovieInfo movie={movie} />
         <div className={styles["banner__actions-wrapper"]}>

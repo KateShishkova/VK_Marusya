@@ -47,7 +47,7 @@ const MovieInfoPage = () => {
     <>
       <section className={clsx("section", bannerStyles.section)}>
         <div className="container">
-          <MovieBanner movie={movie} kind="page" />
+          <MovieBanner movie={movie} />
         </div>
       </section>
 
