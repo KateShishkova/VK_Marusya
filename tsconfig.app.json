@@ -29,7 +29,7 @@
       "@store/*": ["store/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@schemas/*": ["schemas/*"],
+      "@schemas/*": ["schemas/*"]
     },
 
     /* Linting */
