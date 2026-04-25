@@ -1,3 +1,9 @@
 export const getFormatCurrency = (amount: string): string => {
-  return `${Number(amount).toLocaleString("ru-RU")} руб.`;
+  const num = Number(amount);
+
+  if (isNaN(num)) {
+    return "NaN руб.";
+  }
+
+  return `${Number(num).toLocaleString("ru-RU")} руб.`;
 };
