@@ -99,6 +99,7 @@ export const Popup = forwardRef<PopupHandle, PopupProps>(function Popup(
       data-video={kind === "video" || undefined}
       data-mounted={isMounted || undefined}
       data-closing={isClosing || undefined}
+      data-testid="modal"
     >
       <div className={styles.popup__wrapper}>{popupContent}</div>
       <Button
