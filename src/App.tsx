@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { useFetchProfileQuery } from "@api/authApi";
 import { ProtectedRoute } from "@components/Auth/ProtectedRoute";
@@ -23,7 +23,7 @@ function App() {
   useFetchProfileQuery();
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path={PATHS.HOME} element={<MainPage />} />
@@ -58,7 +58,7 @@ function App() {
           <Route path="*" element={<Navigate to={PATHS.NOT_FOUND} replace />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

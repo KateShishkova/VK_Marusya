@@ -10,8 +10,12 @@ export const Icon = ({
   width = 24,
   height = 24,
   className,
-}: IconProps) => (
-  <svg width={width} height={height} className={className} aria-hidden="true">
-    <use xlinkHref={`/icons.svg#${name}`} />
-  </svg>
-);
+}: IconProps) => {
+  const iconHref = `${import.meta.env.BASE_URL}icons.svg#${name}`;
+
+  return (
+    <svg width={width} height={height} className={className} aria-hidden="true">
+      <use href={iconHref} />
+    </svg>
+  );
+};
