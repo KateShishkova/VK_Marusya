@@ -1,73 +1,169 @@
-# React + TypeScript + Vite
+# ВК Маруся
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Учебный проект [Skillbox](https://skillbox.by/) по ТЗ от VK. Это SPA-приложение на React и TypeScript, в котором можно искать фильмы, выбирать случайный фильм, смотреть трейлеры и добавлять фильмы в избранное. Приложение работает с внешним API `https://cinemaguide.skillbox.cc`.
 
-Currently, two official plugins are available:
+## О проекте
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Проект выполнен как финальная работа по React/TypeScript. При разработке использовались макеты Figma и требования ТЗ.
 
-## React Compiler
+### Ключевые особенности реализации
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **SPA-архитектура** с ленивой загрузкой страниц;
+- **Pixel-perfect** верстка по макетам Figma;
+- **Адаптивная верстка** для desktop, tablet и mobile;
+- **Анимации интерфейса** — hover-эффекты для интерактивных элементов, плавное появление секций и анимация модальных окон;
+- **Авторизация с сессиями** через cookies;
+- **Пагинация с накоплением** списка фильмов на страницах жанров;
+- **Модальные окна** для авторизации, регистрации, поиска и просмотра трейлера, реализованные на нативном теге _dialog_;
+- **Валидация форм** с отображением ошибок.
 
-## Expanding the ESLint configuration
+## Функционал
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Для всех пользователей
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Случайный фильм с возможностью его обновления;
+- Топ-10 фильмов по рейтингу;
+- Жанры и переход к фильмам выбранного жанра;
+- Поиск фильмов по названию из навигации;
+- Трейлеры — просмотр в модальном окне;
+- Страница фильма с подробной информацией и рейтингом.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Для авторизованных пользователей
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Добавление фильма в избранное;
+- Избранное — список избранных фильмов с возможностью удаления фильма из списка;
+- Настройки профиля — информация пользователя и выход из аккаунта;
+- Сохранение авторизации после перезагрузки страницы, пока активна серверная сессия.
+
+## Технологии
+
+- **React 19 + TypeScript 5** — основа приложения;
+- **Vite 8** — сборка и локальный запуск;
+- **Redux Toolkit + RTK Query** — состояние приложения и работа с API;
+- **React Router 7** — маршрутизация;
+- **React Hook Form + Zod** — формы и валидация;
+- **Sass Modules** — стили компонентов и адаптив;
+- **Jest + Testing Library** — тесты;
+- **MSW** — моки API для тестов.
+
+## Быстрый старт
+
+Проект запускается как обычное Vite-приложение. Для локальной разработки нужно установить зависимости и запустить dev-сервер.
+
+### Требования
+
+- Node.js 20+
+- npm 10+
+
+### Установка
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Локальный запуск
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+По умолчанию Vite поднимет приложение на локальном адресе вида `http://localhost:5173`.
+
+## Скрипты
+
+- `npm run dev` — запуск локального dev-сервера;
+- `npm run build` — сборка проекта и проверка TypeScript;
+- `npm run preview` — локальный просмотр production-сборки;
+- `npm run lint` — проверка проекта через ESLint;
+- `npm test` — запуск тестов Jest.
+
+## Архитектура проекта
+
+```text
+src/
+├── api/                 # RTK Query endpoints и типы для работы с API
+│   ├── authApi.ts       # Авторизация, регистрация, профиль
+│   ├── baseApi.ts       # Базовая настройка API
+│   ├── favoritesApi.ts  # Избранные фильмы
+│   ├── movieApi.ts      # Запросы, связанные с фильмами и жанрами
+│   └── types.ts         # Общие типы API
+├── app-types/           # Типы для данных приложения и UI-конфигурации
+├── assets/              # Шрифты, изображения и другие статические ресурсы
+├── components/          # Переиспользуемые React-компоненты
+│   ├── Auth/            # Формы и логика авторизации
+│   ├── Genre/           # Компоненты жанров
+│   ├── Layout/          # Шапка, футер и общий layout
+│   ├── Movie/           # Компоненты для отображения фильмов
+│   ├── Profile/         # Компоненты профиля пользователя
+│   ├── Search/          # Поиск и результаты поиска
+│   └── UI/              # Базовые UI-компоненты
+├── config/              # Константы, пути, настройки и справочники
+├── hooks/               # Кастомные хуки
+├── pages/               # Страницы приложения
+├── schemas/             # Zod-схемы для форм и ответов API
+├── store/               # Redux store и user slice
+├── styles/              # Глобальные стили и SCSS-переменные
+├── utils/               # Вспомогательные функции
+├── App.tsx              # Корневой компонент с маршрутизацией
+├── main.tsx             # Точка входа приложения
+└── setupTests.ts        # Настройка тестового окружения
+```
+
+- запросы к API собраны в RTK Query;
+- авторизация работает через серверную сессию и cookies;
+- UI-компоненты и бизнес-компоненты разделены по папкам;
+- логика модальных окон вынесена в кастомные хуки;
+- страницы верхнего уровня загружаются лениво;
+- формы и ответы API валидируются через Zod.
+
+## Маршруты
+
+- `/` — главная страница со случайным фильмом и списком топ-10 фильмов по рейтингу;
+- `/genres` — страница со списком жанров в виде карточек;
+- `/genres/:genreEn` — страница выбранного жанра со списком фильмов в виде карточек;
+- `/movies/:movieId` — страница фильма с подробной информацией, трейлером и работой с избранным;
+- `/profile/favorites` — защищённая страница со списком избранных фильмов пользователя;
+- `/profile/settings` — защищённая страница с данными профиля и кнопкой выхода из аккаунта;
+- `/404` — страница, которая показывается для несуществующих маршрутов.
+
+## API
+
+Базовый URL задаётся в `src/config/api.ts`. Все запросы выполняются через RTK Query с `credentials: "include"`, т.к. авторизация в API построена на сессиях и cookie.
+
+Ключевые endpoints, используемые в приложении:
+
+**Auth**
+
+- `POST /auth/login`
+- `GET /auth/logout`
+- `GET /profile`
+- `POST /user`
+
+**Movie**
+
+- `GET /movie`
+- `GET /movie/top10`
+- `GET /movie/genres`
+- `GET /movie/random`
+- `GET /movie/:id`
+
+**Favorites**
+
+- `GET /favorites`
+- `POST /favorites`
+- `DELETE /favorites/:id`
+
+## Тестирование
+
+Проект использует Jest, Testing Library и MSW. Тесты покрывают утилиты и несколько кастомных хуков, включая модальные окна, избранное и обработку ошибок RTK Query.
+
+- `npm test` — запуск тестов;
+- `src/setupTests.ts` — инициализация тестового окружения и MSW.
+
+## Локальная проверка
+
+На момент последнего обновления проект проходит базовую локальную проверку:
+
+- `npm run lint`
+- `npm test -- --runInBand`
+- `npm run build`
