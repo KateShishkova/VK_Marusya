@@ -4,8 +4,8 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/VK_Marusya/',
   plugins: [react()],
-
   resolve: {
     alias: {
       "@api": path.resolve(__dirname, "src/api"),
