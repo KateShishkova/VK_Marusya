@@ -52,7 +52,6 @@
       // Horizontal scroll
       margin: -80px -20px; // 80px - for correct displaying box-shadow
       padding: 80px 20px;
-      pointer-events: none;
       overflow-x: auto;
       -ms-overflow-style: none;
       scroll-snap-type: x mandatory;
