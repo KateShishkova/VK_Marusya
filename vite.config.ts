@@ -1,10 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { APP_BASE_PATH } from './appBase';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/VK_Marusya/',
+  base: APP_BASE_PATH,
   plugins: [react()],
   resolve: {
     alias: {
